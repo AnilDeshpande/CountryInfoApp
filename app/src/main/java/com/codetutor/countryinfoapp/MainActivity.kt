@@ -21,8 +21,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Canvas
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
@@ -123,13 +125,8 @@ fun CountryCard() {
                     .padding(2.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically) {
-                    Box(modifier = Modifier
-                        .padding(2.dp)
-                        .fillMaxWidth(0.3f)){
-                        val imageResId = R.drawable.`in` // Replace with your PNG image resource ID
-                        val imagePainter: Painter = painterResource(id = imageResId)
-                        Image(painter = imagePainter, contentDescription = "Country Flag")
-                    }
+
+                    CircularText(text = "₹")
 
                     Text(text ="Indian Rupee",
                         fontSize = 15.sp,
@@ -152,6 +149,22 @@ fun CountryCard() {
             }
         }
     }
+}
+
+
+@Composable
+fun CircularText(text: String){
+    Text(
+        modifier = Modifier
+            .padding(2.dp)
+            .drawBehind {
+                drawCircle(
+                    color = Color.LightGray,
+                    radius = this.size.maxDimension
+                )
+            },
+        text = text,
+    )
 }
 
 
