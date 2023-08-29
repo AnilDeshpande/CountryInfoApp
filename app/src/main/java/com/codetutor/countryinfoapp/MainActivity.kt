@@ -15,7 +15,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Icon
@@ -39,13 +41,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstrainScope
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.codetutor.countryinfoapp.ui.theme.CountryInfoAppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CountryCard()
+            CountryCardWithConstraintLayout()
         }
     }
 }
@@ -160,6 +164,8 @@ fun CountryCard() {
 }
 
 
+
+
 @Composable
 fun CircularText(text: String){
     Text(
@@ -176,8 +182,60 @@ fun CircularText(text: String){
 }
 
 
+@Composable
+fun CountryCardWithConstraintLayout(){
+    ConstraintLayout(modifier = Modifier
+        .wrapContentHeight()
+        .fillMaxWidth()) {
+        val (flag, commonName, capital) = createRefs()
+        Column(modifier = Modifier.wrapContentWidth()) {
+
+        }
+        val imageResId = R.drawable.`in` // Replace with your PNG image resource ID
+        val imagePainter: Painter = painterResource(id = imageResId)
+
+        Image(painter = imagePainter,
+            contentDescription = "Country Flag",
+            contentScale = ContentScale.Crop,
+            modifier  = Modifier
+                .width(80.dp)
+                .height(50.dp)
+                .padding(2.dp)
+                .constrainAs(flag) {
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+                })
+
+
+        Text(text ="India",
+            modifier = Modifier
+                .padding(2.dp)
+                .constrainAs(commonName) {
+                    top.linkTo(flag.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(flag.end)
+                },
+            fontFamily = FontFamily.SansSerif,
+            textAlign = TextAlign.Center,
+            fontSize = 20.sp)
+
+        Text(text ="New Delhi",
+            fontSize = 15.sp,
+            textAlign = TextAlign.Left,
+            modifier = Modifier
+                .padding(2.dp)
+                .constrainAs(capital) {
+                    start.linkTo(parent.start)
+                    top.linkTo(commonName.bottom)
+                    end.linkTo(flag.end)
+                })
+
+    }
+}
+
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    CountryCard()
+    CountryCardWithConstraintLayout()
 }
