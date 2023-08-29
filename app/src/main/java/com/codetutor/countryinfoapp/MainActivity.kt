@@ -187,7 +187,7 @@ fun CountryCardWithConstraintLayout(){
     ConstraintLayout(modifier = Modifier
         .wrapContentHeight()
         .fillMaxWidth()) {
-        val (flag, commonName, capital) = createRefs()
+        val (flag, commonName, capital, officialName, region, subregion ) = createRefs()
         val imageResId = R.drawable.`in` // Replace with your PNG image resource ID
         val imagePainter: Painter = painterResource(id = imageResId)
 
@@ -226,6 +226,36 @@ fun CountryCardWithConstraintLayout(){
                     top.linkTo(commonName.bottom)
                     end.linkTo(flag.end)
                 })
+
+        Text(text ="Republic of India",
+            fontSize = 18.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.constrainAs(officialName) {
+                top.linkTo(parent.top)
+                start.linkTo(flag.end)
+                end.linkTo(parent.end)
+            }.padding(2.dp))
+
+        Text(text ="Asia",
+            fontSize = 15.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.constrainAs(region) {
+                start.linkTo(flag.end)
+                end.linkTo(parent.end)
+                top.linkTo(officialName.bottom)
+            }.padding(2.dp))
+
+        Text(text ="South Asia",
+            fontSize = 12.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.constrainAs(subregion) {
+                start.linkTo(flag.end)
+                end.linkTo(parent.end)
+                top.linkTo(region.bottom)
+                bottom.linkTo(parent.bottom)
+            }.padding(2.dp))
+
+
 
     }
 }
