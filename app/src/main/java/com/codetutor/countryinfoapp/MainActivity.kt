@@ -188,9 +188,6 @@ fun CountryCardWithConstraintLayout(){
         .wrapContentHeight()
         .fillMaxWidth()) {
         val (flag, commonName, capital) = createRefs()
-        Column(modifier = Modifier.wrapContentWidth()) {
-
-        }
         val imageResId = R.drawable.`in` // Replace with your PNG image resource ID
         val imagePainter: Painter = painterResource(id = imageResId)
 
