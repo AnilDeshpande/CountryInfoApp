@@ -13,8 +13,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -68,7 +72,7 @@ fun CountryCard() {
         Row(modifier = Modifier.fillMaxWidth(1.0f)) {
             Column(modifier = Modifier
                 .wrapContentSize()
-                .fillMaxWidth(0.3f),
+                .weight(0.3f),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally){
                 Box(modifier = Modifier
@@ -95,7 +99,7 @@ fun CountryCard() {
             }
 
             Column(modifier = Modifier
-                .fillMaxWidth(0.85f)
+                .weight(0.6f)
                 .wrapContentSize(),
                 verticalArrangement = Arrangement.SpaceEvenly) {
                 Text(text ="Republic of India",
@@ -147,6 +151,14 @@ fun CountryCard() {
                             modifier = Modifier)
                     }
                 }
+            }
+
+            Column(modifier = Modifier.weight(0.1f)) {
+                Icon(
+                    imageVector = Icons.Default.ArrowForward,
+                    contentDescription = "Arrow Icon",
+                    modifier = Modifier.size(48.dp),
+                    tint = MaterialTheme.colorScheme.primary)
             }
         }
     }
