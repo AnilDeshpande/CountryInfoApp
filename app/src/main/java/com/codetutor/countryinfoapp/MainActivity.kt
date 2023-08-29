@@ -97,7 +97,6 @@ fun CountryCard() {
             Column(modifier = Modifier
                 .fillMaxWidth(0.85f)
                 .wrapContentSize(),
-
                 verticalArrangement = Arrangement.SpaceEvenly) {
                 Text(text ="Republic of India",
                     fontSize = 30.sp,
@@ -107,14 +106,14 @@ fun CountryCard() {
                         .fillMaxWidth(1.0f))
 
                 Text(text ="Asia",
-                    fontSize = 25.sp,
+                    fontSize = 28.sp,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .padding(2.dp)
                         .fillMaxWidth(1.0f))
 
                 Text(text ="South Asia",
-                    fontSize = 25.sp,
+                    fontSize = 28.sp,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .padding(2.dp)
@@ -122,20 +121,22 @@ fun CountryCard() {
 
                 Row(modifier = Modifier
                     .fillMaxWidth(1.0f)
-                    .padding(2.dp),
+                    ,
                     horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically) {
 
                     CircularText(text = "₹")
 
                     Text(text ="Indian Rupee",
-                        fontSize = 15.sp,
+                        fontSize = 20.sp,
                         textAlign = TextAlign.Center,
                         modifier = Modifier
                             .padding(2.dp)
                             .fillMaxWidth(0.4f))
 
-                    Column(modifier = Modifier.fillMaxWidth(0.3f)) {
+                    Column(modifier = Modifier.fillMaxWidth(0.3f),
+                        horizontalAlignment = Alignment.End
+                    ) {
 
                         Text(text ="+91",
                             textAlign = TextAlign.Center,
