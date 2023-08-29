@@ -13,8 +13,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -27,6 +31,7 @@ import androidx.compose.ui.graphics.Canvas
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
@@ -65,17 +70,21 @@ fun CountryCard() {
             .padding(2.dp),
 
     ) {
-        Row(modifier = Modifier.fillMaxWidth(1.0f)) {
+        Row(modifier = Modifier.fillMaxWidth()) {
             Column(modifier = Modifier
-                .wrapContentSize()
-                .fillMaxWidth(0.3f),
-                verticalArrangement = Arrangement.Center,
+                .weight(0.2f),
+                verticalArrangement = Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.CenterHorizontally){
                 Box(modifier = Modifier
-                    .padding(2.dp)){
+                    .width(80.dp)
+                    .height(50.dp),
+                    contentAlignment = Alignment.Center
+                    ){
                     val imageResId = R.drawable.`in` // Replace with your PNG image resource ID
                     val imagePainter: Painter = painterResource(id = imageResId)
-                    Image(painter = imagePainter, contentDescription = "Country Flag")
+                    Image(painter = imagePainter,
+                        contentDescription = "Country Flag",
+                        contentScale = ContentScale.Crop)
                 }
 
                 Text(text ="India",
@@ -84,10 +93,10 @@ fun CountryCard() {
                         .fillMaxWidth(1.0f),
                     fontFamily = FontFamily.SansSerif,
                     textAlign = TextAlign.Center,
-                    fontSize = 50.sp)
+                    fontSize = 20.sp)
 
                 Text(text ="New Delhi",
-                    fontSize = 20.sp,
+                    fontSize = 15.sp,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .padding(2.dp)
@@ -95,40 +104,38 @@ fun CountryCard() {
             }
 
             Column(modifier = Modifier
-                .fillMaxWidth(0.85f)
-                .wrapContentSize(),
+                .weight(0.8f),
                 verticalArrangement = Arrangement.SpaceEvenly) {
                 Text(text ="Republic of India",
-                    fontSize = 30.sp,
+                    fontSize = 18.sp,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .padding(2.dp)
                         .fillMaxWidth(1.0f))
 
                 Text(text ="Asia",
-                    fontSize = 28.sp,
+                    fontSize = 15.sp,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .padding(2.dp)
                         .fillMaxWidth(1.0f))
 
                 Text(text ="South Asia",
-                    fontSize = 28.sp,
+                    fontSize = 12.sp,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .padding(2.dp)
                         .fillMaxWidth(1.0f))
 
                 Row(modifier = Modifier
-                    .fillMaxWidth(1.0f)
-                    ,
+                    .fillMaxWidth(1.0f),
                     horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically) {
+                    verticalAlignment = Alignment.CenterVertically) {
 
                     CircularText(text = "₹")
 
                     Text(text ="Indian Rupee",
-                        fontSize = 20.sp,
+                        fontSize = 15.sp,
                         textAlign = TextAlign.Center,
                         modifier = Modifier
                             .padding(2.dp)
