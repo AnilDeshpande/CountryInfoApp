@@ -40,137 +40,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CountryCard()
+
         }
     }
 }
-
-@Composable
-fun MainScreen() {
-    CountryInfoAppTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.surface
-        ) {
-            CountryCard()
-        }
-    }
-}
-
-@Composable
-fun CountryCard() {
-    Surface(
-        modifier = Modifier
-            .fillMaxWidth(1.0f)
-            .padding(2.dp),
-
-    ) {
-        Row(modifier = Modifier.fillMaxWidth(1.0f)) {
-            Column(modifier = Modifier
-                .wrapContentSize()
-                .fillMaxWidth(0.3f),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally){
-                Box(modifier = Modifier
-                    .padding(2.dp)){
-                    val imageResId = R.drawable.`in` // Replace with your PNG image resource ID
-                    val imagePainter: Painter = painterResource(id = imageResId)
-                    Image(painter = imagePainter, contentDescription = "Country Flag")
-                }
-
-                Text(text ="India",
-                    modifier = Modifier
-                        .padding(2.dp)
-                        .fillMaxWidth(1.0f),
-                    fontFamily = FontFamily.SansSerif,
-                    textAlign = TextAlign.Center,
-                    fontSize = 50.sp)
-
-                Text(text ="New Delhi",
-                    fontSize = 20.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .padding(2.dp)
-                        .fillMaxWidth(1.0f))
-            }
-
-            Column(modifier = Modifier
-                .fillMaxWidth(0.85f)
-                .wrapContentSize(),
-                verticalArrangement = Arrangement.SpaceEvenly) {
-                Text(text ="Republic of India",
-                    fontSize = 30.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .padding(2.dp)
-                        .fillMaxWidth(1.0f))
-
-                Text(text ="Asia",
-                    fontSize = 28.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .padding(2.dp)
-                        .fillMaxWidth(1.0f))
-
-                Text(text ="South Asia",
-                    fontSize = 28.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .padding(2.dp)
-                        .fillMaxWidth(1.0f))
-
-                Row(modifier = Modifier
-                    .fillMaxWidth(1.0f)
-                    ,
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically) {
-
-                    CircularText(text = "₹")
-
-                    Text(text ="Indian Rupee",
-                        fontSize = 20.sp,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .padding(2.dp)
-                            .fillMaxWidth(0.4f))
-
-                    Column(modifier = Modifier.fillMaxWidth(0.3f),
-                        horizontalAlignment = Alignment.End
-                    ) {
-
-                        Text(text ="+91",
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier)
-
-                        Text(text =".in",
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier)
-                    }
-                }
-            }
-        }
-    }
-}
-
-
-@Composable
-fun CircularText(text: String){
-    Text(
-        modifier = Modifier
-            .padding(2.dp)
-            .drawBehind {
-                drawCircle(
-                    color = Color.LightGray,
-                    radius = this.size.maxDimension
-                )
-            },
-        text = text,
-    )
-}
-
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    CountryCard()
+
 }
