@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
@@ -45,7 +47,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CountryCard()
+            MainScreen()
         }
     }
 }
@@ -67,7 +69,8 @@ fun CountryCard() {
     Surface(
         modifier = Modifier
             .fillMaxWidth(1.0f)
-            .padding(2.dp),
+            .padding(10.dp).wrapContentHeight(align = Alignment.Top).border(1.dp, Color.LightGray),
+            shadowElevation = 2.dp,
 
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
@@ -77,7 +80,7 @@ fun CountryCard() {
                 horizontalAlignment = Alignment.CenterHorizontally){
                 Box(modifier = Modifier
                     .width(80.dp)
-                    .height(50.dp),
+                    .height(50.dp).padding(2.dp),
                     contentAlignment = Alignment.Center
                     ){
                     val imageResId = R.drawable.`in` // Replace with your PNG image resource ID
@@ -179,5 +182,5 @@ fun CircularText(text: String){
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    CountryCard()
+    MainScreen()
 }
