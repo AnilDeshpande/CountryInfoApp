@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,6 +36,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -71,115 +73,19 @@ fun CountryCard() {
     Surface(
         modifier = Modifier
             .fillMaxWidth(1.0f)
-            .padding(2.dp),
+            .padding(2.dp).border(1.dp, Color.LightGray),
+        shadowElevation = 2.dp
 
     ) {
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Column(modifier = Modifier
-                .weight(0.2f),
-                verticalArrangement = Arrangement.SpaceBetween,
-                horizontalAlignment = Alignment.CenterHorizontally){
-                Box(modifier = Modifier
-                    .width(80.dp)
-                    .height(50.dp),
-                    contentAlignment = Alignment.Center
-                    ){
-                    val imageResId = R.drawable.`in` // Replace with your PNG image resource ID
-                    val imagePainter: Painter = painterResource(id = imageResId)
-                    Image(painter = imagePainter,
-                        contentDescription = "Country Flag",
-                        contentScale = ContentScale.Crop)
-                }
-
-                Text(text ="India",
-                    modifier = Modifier
-                        .padding(2.dp)
-                        .fillMaxWidth(1.0f),
-                    fontFamily = FontFamily.SansSerif,
-                    textAlign = TextAlign.Center,
-                    fontSize = 20.sp)
-
-                Text(text ="New Delhi",
-                    fontSize = 15.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .padding(2.dp)
-                        .fillMaxWidth(1.0f))
-            }
-
-            Column(modifier = Modifier
-                .weight(0.8f),
-                verticalArrangement = Arrangement.SpaceEvenly) {
-                Text(text ="Republic of India",
-                    fontSize = 18.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .padding(2.dp)
-                        .fillMaxWidth(1.0f))
-
-                Text(text ="Asia",
-                    fontSize = 15.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .padding(2.dp)
-                        .fillMaxWidth(1.0f))
-
-                Text(text ="South Asia",
-                    fontSize = 12.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .padding(2.dp)
-                        .fillMaxWidth(1.0f))
-
-                Row(modifier = Modifier
-                    .fillMaxWidth(1.0f),
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.CenterVertically) {
-
-                    CircularText(text = "₹")
-
-                    Text(text ="Indian Rupee",
-                        fontSize = 15.sp,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .padding(2.dp)
-                            .fillMaxWidth(0.4f))
-
-                    Column(modifier = Modifier.fillMaxWidth(0.3f),
-                        horizontalAlignment = Alignment.End
-                    ) {
-
-                        Text(text ="+91",
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier)
-
-                        Text(text =".in",
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier)
-                    }
-                }
-            }
-        }
+        CountryCardWithConstraintLayout()
     }
 }
 
 
 
 
-@Composable
-fun CircularText(text: String){
-    Text(
-        modifier = Modifier
-            .padding(2.dp)
-            .drawBehind {
-                drawCircle(
-                    color = Color.LightGray,
-                    radius = this.size.maxDimension
-                )
-            },
-        text = text,
-    )
-}
+
+
 
 
 @Composable
@@ -187,7 +93,7 @@ fun CountryCardWithConstraintLayout(){
     ConstraintLayout(modifier = Modifier
         .wrapContentHeight()
         .fillMaxWidth()) {
-        val (flag, commonName, capital, officialName, region, subregion ) = createRefs()
+        val (flag, commonName, capital, officialName, region, subregion, currencySymbol, currencyName, mobileCode, tld ) = createRefs()
         val imageResId = R.drawable.`in` // Replace with your PNG image resource ID
         val imagePainter: Painter = painterResource(id = imageResId)
 
@@ -230,34 +136,88 @@ fun CountryCardWithConstraintLayout(){
         Text(text ="Republic of India",
             fontSize = 18.sp,
             textAlign = TextAlign.Center,
-            modifier = Modifier.constrainAs(officialName) {
-                top.linkTo(parent.top)
-                start.linkTo(flag.end)
-                end.linkTo(parent.end)
-            }.padding(2.dp).fillMaxWidth(0.8f))
+            modifier = Modifier
+                .constrainAs(officialName) {
+                    top.linkTo(parent.top)
+                    start.linkTo(flag.end)
+                    end.linkTo(parent.end)
+                }
+                .padding(2.dp)
+                .fillMaxWidth(0.8f))
 
         Text(text ="Asia",
             fontSize = 15.sp,
             textAlign = TextAlign.Center,
-            modifier = Modifier.constrainAs(region) {
-                start.linkTo(flag.end)
-                end.linkTo(parent.end)
-                top.linkTo(officialName.bottom)
-            }.padding(2.dp).fillMaxWidth(0.8f))
+            modifier = Modifier
+                .constrainAs(region) {
+                    start.linkTo(flag.end)
+                    end.linkTo(parent.end)
+                    top.linkTo(officialName.bottom)
+                }
+                .padding(2.dp)
+                .fillMaxWidth(0.8f))
 
         Text(text ="South Asia",
             fontSize = 12.sp,
             textAlign = TextAlign.Center,
-            modifier = Modifier.constrainAs(subregion) {
-                start.linkTo(flag.end)
-                top.linkTo(region.bottom)
-            }.padding(2.dp).fillMaxWidth(0.8f))
+            modifier = Modifier
+                .constrainAs(subregion) {
+                    start.linkTo(flag.end)
+                    top.linkTo(region.bottom)
+                }
+                .padding(2.dp)
+                .fillMaxWidth(0.8f))
+
+        CircularText(text = "₹",
+            modifier = Modifier
+                .constrainAs(currencySymbol) {
+                    start.linkTo(flag.end, margin = 30.dp)
+                    bottom.linkTo(parent.bottom, margin = 8.dp)
+                })
+        Text(text = "Indian Rupee",
+            modifier = Modifier
+                .constrainAs(currencyName) {
+                    top.linkTo(subregion.bottom)
+                    start.linkTo(currencySymbol.end, margin = 12.dp)
+                    bottom.linkTo(parent.bottom, margin = 5.dp)
+                    end.linkTo(mobileCode.start)
+                }, textAlign = TextAlign.Center )
+
+        Text(
+            text = "+91",
+            modifier = Modifier.constrainAs(mobileCode) {
+                top.linkTo(subregion.bottom)
+                end.linkTo(parent.end)
+            }.width(50.dp))
+
+        Text(
+            text = ".in",
+            modifier = Modifier.constrainAs(tld) {
+                top.linkTo(mobileCode.bottom)
+                end.linkTo(parent.end)
+            }.width(50.dp))
+
     }
+}
+
+@Composable
+fun CircularText(text: String, modifier: Modifier){
+    Text(
+        modifier = modifier
+            .padding(2.dp)
+            .drawBehind {
+                drawCircle(
+                    color = Color.LightGray,
+                    radius = this.size.maxDimension
+                )
+            },
+        text = text,
+    )
 }
 
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    CountryCardWithConstraintLayout()
+    CountryCard()
 }
