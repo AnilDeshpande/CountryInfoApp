@@ -51,10 +51,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CountryCardWithConstraintLayout()
+            MainScreen()
         }
     }
 }
+
 
 @Composable
 fun MainScreen() {
@@ -73,7 +74,7 @@ fun CountryCard() {
     Surface(
         modifier = Modifier
             .fillMaxWidth(1.0f)
-            .padding(2.dp).border(1.dp, Color.LightGray),
+            .padding(5.dp).border(1.dp, Color.LightGray).wrapContentHeight(align = Alignment.Top),
         shadowElevation = 2.dp
 
     ) {
@@ -219,5 +220,5 @@ fun CircularText(text: String, modifier: Modifier){
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    CountryCard()
+    MainScreen()
 }
