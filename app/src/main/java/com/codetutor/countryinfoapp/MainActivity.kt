@@ -195,7 +195,7 @@ fun CountryCardWithConstraintLayout(){
             contentDescription = "Country Flag",
             contentScale = ContentScale.Crop,
             modifier  = Modifier
-                .width(80.dp)
+                .fillMaxWidth(0.2f)
                 .height(50.dp)
                 .padding(2.dp)
                 .constrainAs(flag) {
@@ -234,7 +234,7 @@ fun CountryCardWithConstraintLayout(){
                 top.linkTo(parent.top)
                 start.linkTo(flag.end)
                 end.linkTo(parent.end)
-            }.padding(2.dp))
+            }.padding(2.dp).fillMaxWidth(0.8f))
 
         Text(text ="Asia",
             fontSize = 15.sp,
@@ -243,20 +243,15 @@ fun CountryCardWithConstraintLayout(){
                 start.linkTo(flag.end)
                 end.linkTo(parent.end)
                 top.linkTo(officialName.bottom)
-            }.padding(2.dp))
+            }.padding(2.dp).fillMaxWidth(0.8f))
 
         Text(text ="South Asia",
             fontSize = 12.sp,
             textAlign = TextAlign.Center,
             modifier = Modifier.constrainAs(subregion) {
                 start.linkTo(flag.end)
-                end.linkTo(parent.end)
                 top.linkTo(region.bottom)
-                bottom.linkTo(parent.bottom)
-            }.padding(2.dp))
-
-
-
+            }.padding(2.dp).fillMaxWidth(0.8f))
     }
 }
 
