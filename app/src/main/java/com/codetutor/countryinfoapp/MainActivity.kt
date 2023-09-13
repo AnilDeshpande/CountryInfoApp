@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -18,36 +19,32 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codetutor.countryinfoapp.components.CountryCardWithConstraintLayout
 import com.codetutor.countryinfoapp.data.CountryInfo
+import com.codetutor.countryinfoapp.data.getCountryList
 import com.codetutor.countryinfoapp.ui.theme.CountryInfoAppTheme
 
 class MainActivity : ComponentActivity() {
 
-    private val indiaInfo = CountryInfo(R.drawable.`in`,
-        "India",
-        "New Delhi",
-        "Republic of India",
-        "Asia","South Asia",
-        "₹",
-        "Indian Rupee",
-        "+91",
-        ".in")
+    private val countryList = getCountryList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen(countryInfo = indiaInfo)
+            MainScreen(countryList = countryList)
         }
     }
 }
 
 
 @Composable
-fun MainScreen(countryInfo: CountryInfo) {
+fun MainScreen(countryList: List<CountryInfo>) {
     CountryInfoAppTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.surface
         ) {
-            CountryCard(countryInfo = countryInfo)
+            Column(modifier = Modifier.fillMaxSize()) {
+                countryList.forEach { CountryCard(countryInfo = it) }
+            }
         }
     }
 }
@@ -57,7 +54,9 @@ fun CountryCard(countryInfo: CountryInfo) {
     Surface(
         modifier = Modifier
             .fillMaxWidth(1.0f)
-            .padding(5.dp).border(1.dp, Color.LightGray).wrapContentHeight(align = Alignment.Top),
+            .padding(5.dp)
+            .border(1.dp, Color.LightGray)
+            .wrapContentHeight(align = Alignment.Top),
         shadowElevation = 2.dp
 
     ) {
@@ -66,17 +65,17 @@ fun CountryCard(countryInfo: CountryInfo) {
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    val indiaInfo = CountryInfo(R.drawable.`in`,
-        "India",
-        "New Delhi",
-        "Republic of India",
-        "Asia","South Asia",
-        "₹",
-        "Indian Rupee",
-        "+91",
-        ".in")
-    MainScreen(indiaInfo)
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun GreetingPreview() {
+//    val indiaInfo = CountryInfo(R.drawable.`in`,
+//        "India",
+//        "New Delhi",
+//        "Republic of India",
+//        "Asia","South Asia",
+//        "₹",
+//        "Indian Rupee",
+//        "+91",
+//        ".in")
+//    MainScreen(indiaInfo)
+//}
