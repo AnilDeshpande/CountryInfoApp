@@ -25,7 +25,7 @@ fun CountryCardWithConstraintLayout(countryInfo: CountryInfo){
     ConstraintLayout(
         modifier = Modifier
             .wrapContentHeight()
-            .fillMaxWidth()
+            .fillMaxWidth().padding(5.dp)
     ) {
         val (flag, commonName, capital, officialName, region, subregion, currencySymbol, currencyName, mobileCode, tld) = createRefs()
         val imageResId = countryInfo.flagId // Replace with your PNG image resource ID
@@ -110,7 +110,7 @@ fun CountryCardWithConstraintLayout(countryInfo: CountryInfo){
                 .constrainAs(currencySymbol) {
                     start.linkTo(flag.end, margin = 30.dp)
                     bottom.linkTo(parent.bottom, margin = 8.dp)
-                }.padding(3.dp))
+                })
         Text(text = countryInfo.currencyName,
             modifier = Modifier
                 .constrainAs(currencyName) {
