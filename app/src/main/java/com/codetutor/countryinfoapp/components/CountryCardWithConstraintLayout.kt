@@ -31,6 +31,11 @@ fun CountryCardWithConstraintLayout(countryInfo: CountryInfo){
         val imageResId = countryInfo.flagId // Replace with your PNG image resource ID
         val imagePainter: Painter = painterResource(id = imageResId)
 
+
+        val startGuideline = createGuidelineFromStart(2.dp)
+        val topGuidLine = createGuidelineFromTop(2.dp)
+        val bottomGuideline  = createGuidelineFromBottom(5.dp)
+
         Image(painter = imagePainter,
             contentDescription = "Country Flag",
             contentScale = ContentScale.Crop,
@@ -39,8 +44,8 @@ fun CountryCardWithConstraintLayout(countryInfo: CountryInfo){
                 .height(50.dp)
                 .padding(2.dp)
                 .constrainAs(flag) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
+                    top.linkTo(topGuidLine)
+                    start.linkTo(startGuideline)
                 })
 
 
@@ -50,7 +55,7 @@ fun CountryCardWithConstraintLayout(countryInfo: CountryInfo){
                 .padding(2.dp)
                 .constrainAs(commonName) {
                     top.linkTo(flag.bottom)
-                    start.linkTo(parent.start)
+                    start.linkTo(startGuideline)
                     end.linkTo(flag.end)
                 },
             fontFamily = FontFamily.SansSerif,
@@ -64,77 +69,11 @@ fun CountryCardWithConstraintLayout(countryInfo: CountryInfo){
             modifier = Modifier
                 .padding(2.dp)
                 .constrainAs(capital) {
-                    start.linkTo(parent.start)
+                    start.linkTo(startGuideline)
                     top.linkTo(commonName.bottom)
                     end.linkTo(flag.end)
+                    bottom.linkTo(bottomGuideline)
                 })
-
-        Text(text = countryInfo.officialName,
-            fontSize = 18.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .constrainAs(officialName) {
-                    top.linkTo(parent.top)
-                    start.linkTo(flag.end)
-                    end.linkTo(parent.end)
-                }
-                .padding(2.dp)
-                .fillMaxWidth(0.8f))
-
-        Text(text = countryInfo.region,
-            fontSize = 15.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .constrainAs(region) {
-                    start.linkTo(flag.end)
-                    end.linkTo(parent.end)
-                    top.linkTo(officialName.bottom)
-                }
-                .padding(2.dp)
-                .fillMaxWidth(0.8f))
-
-        Text(text = countryInfo.subRegion,
-            fontSize = 12.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .constrainAs(subregion) {
-                    start.linkTo(flag.end)
-                    top.linkTo(region.bottom)
-                }
-                .padding(2.dp)
-                .fillMaxWidth(0.8f))
-
-        CircularText(text = countryInfo.currencySymbol,
-            modifier = Modifier
-                .constrainAs(currencySymbol) {
-                    start.linkTo(flag.end, margin = 30.dp)
-                    bottom.linkTo(parent.bottom, margin = 8.dp)
-                })
-        Text(text = countryInfo.currencyName,
-            modifier = Modifier
-                .constrainAs(currencyName) {
-                    top.linkTo(subregion.bottom)
-                    start.linkTo(currencySymbol.end, margin = 12.dp)
-                    bottom.linkTo(parent.bottom, margin = 5.dp)
-                    end.linkTo(mobileCode.start)
-                }, textAlign = TextAlign.Center
-        )
-
-        Text(
-            text = countryInfo.mobileCode,
-            modifier = Modifier.constrainAs(mobileCode) {
-                top.linkTo(subregion.bottom)
-                end.linkTo(parent.end)
-            }.width(50.dp)
-        )
-
-        Text(
-            text = countryInfo.tld,
-            modifier = Modifier.constrainAs(tld) {
-                top.linkTo(mobileCode.bottom)
-                end.linkTo(parent.end)
-            }.width(50.dp)
-        )
 
     }
 }
