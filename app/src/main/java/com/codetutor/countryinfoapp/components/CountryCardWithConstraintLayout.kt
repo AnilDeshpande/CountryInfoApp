@@ -35,8 +35,8 @@ fun CountryCardWithConstraintLayout(countryInfo: CountryInfo){
             contentDescription = "Country Flag",
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .fillMaxWidth(0.2f)
-                .height(50.dp)
+                .fillMaxWidth(0.35f)
+                .height(70.dp)
                 .padding(2.dp)
                 .constrainAs(flag) {
                     top.linkTo(parent.top)
@@ -79,7 +79,7 @@ fun CountryCardWithConstraintLayout(countryInfo: CountryInfo){
                     end.linkTo(parent.end)
                 }
                 .padding(2.dp)
-                .fillMaxWidth(0.8f))
+                .fillMaxWidth(0.65f))
 
         Text(text = countryInfo.region,
             fontSize = 15.sp,
@@ -98,8 +98,9 @@ fun CountryCardWithConstraintLayout(countryInfo: CountryInfo){
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .constrainAs(subregion) {
-                    start.linkTo(flag.end)
+                    start.linkTo(officialName.start)
                     top.linkTo(region.bottom)
+                    end.linkTo(officialName.end)
                 }
                 .padding(2.dp)
                 .fillMaxWidth(0.8f))
@@ -109,7 +110,7 @@ fun CountryCardWithConstraintLayout(countryInfo: CountryInfo){
                 .constrainAs(currencySymbol) {
                     start.linkTo(flag.end, margin = 30.dp)
                     bottom.linkTo(parent.bottom, margin = 8.dp)
-                })
+                }.padding(3.dp))
         Text(text = countryInfo.currencyName,
             modifier = Modifier
                 .constrainAs(currencyName) {
