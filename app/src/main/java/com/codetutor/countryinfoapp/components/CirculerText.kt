@@ -12,14 +12,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CirculerText(text: String){
-    Text(text = text,
-        fontSize = 12.sp,
-        textAlign = TextAlign.Center,
-        modifier = Modifier
+fun CirculerText(text: String, modifier: Modifier){
+    Text(
+        modifier = modifier
             .padding(2.dp)
-            .fillMaxWidth(0.1f)
             .drawBehind {
-                drawCircle(color = Color.LightGray, radius = this.size.maxDimension)
-            })
+                drawCircle(
+                    color = Color.LightGray,
+                    radius = this.size.maxDimension
+                )
+            },
+        text = text,
+    )
 }

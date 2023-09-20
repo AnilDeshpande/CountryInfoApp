@@ -3,13 +3,20 @@ package com.codetutor.countryinfoapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.codetutor.countryinfoapp.components.CountryCard
+import androidx.compose.ui.unit.dp
+import com.codetutor.countryinfoapp.components.CountryCardWithConstraintLayout
 import com.codetutor.countryinfoapp.data.CountryInfo
 import com.codetutor.countryinfoapp.ui.theme.CountryInfoAppTheme
 
@@ -36,11 +43,16 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(countryInfo: CountryInfo){
-    CountryInfoAppTheme {
-        Surface(modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.surface) {
-            CountryCard(countryInfo)
-        }
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth(1.0f)
+            .padding(5.dp)
+            .border(1.dp, Color.LightGray)
+            .wrapContentHeight(align = Alignment.Top),
+        shadowElevation = 2.dp
+
+    ) {
+            CountryCardWithConstraintLayout(countryInfo)
     }
 }
 
