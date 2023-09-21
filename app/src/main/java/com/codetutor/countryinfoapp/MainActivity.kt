@@ -65,17 +65,8 @@ fun CountryCard(countryInfo: CountryInfo) {
 }
 
 
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    val indiaInfo = CountryInfo(R.drawable.`in`,
-//        "India",
-//        "New Delhi",
-//        "Republic of India",
-//        "Asia","South Asia",
-//        "₹",
-//        "Indian Rupee",
-//        "+91",
-//        ".in")
-//    MainScreen(indiaInfo)
-//}
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    MainScreen(getCountryList())
+}
