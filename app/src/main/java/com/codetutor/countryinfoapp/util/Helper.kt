@@ -1,11 +1,16 @@
-package com.codetutor.countryinfoapp.data
+package com.codetutor.countryinfoapp.util
 
+import android.content.Context
 import com.codetutor.countryinfoapp.R
+import com.codetutor.countryinfoapp.data.Country
+import com.codetutor.countryinfoapp.data.CountryInfo
+import org.json.JSONArray
 
 
 fun getCountryList(): MutableList<CountryInfo> {
     val countryList = mutableListOf<CountryInfo>()
-    countryList.add(CountryInfo(
+    countryList.add(
+        CountryInfo(
         R.drawable.`in`,
         "India",
         "New Delhi",
@@ -14,9 +19,11 @@ fun getCountryList(): MutableList<CountryInfo> {
         "₹",
         "Indian Rupee",
         "+91",
-        ".in"));
+        ".in")
+    );
 
-    countryList.add(CountryInfo(
+    countryList.add(
+        CountryInfo(
         R.drawable.us,
         "United States",
         "Washington, D.C.",
@@ -25,10 +32,12 @@ fun getCountryList(): MutableList<CountryInfo> {
         "$",
         "United States dollar",
         "+1",
-        ".us"))
+        ".us")
+    )
 
 
-    countryList.add(CountryInfo(
+    countryList.add(
+        CountryInfo(
         R.drawable.za,
         "Bangladesh",
         "Pretoria",
@@ -37,9 +46,11 @@ fun getCountryList(): MutableList<CountryInfo> {
         "R",
         "South African rand",
         "+27",
-        ".za"))
+        ".za")
+    )
 
-    countryList.add(CountryInfo(
+    countryList.add(
+        CountryInfo(
         R.drawable.pk,
         "Pakistan",
         "Islamabad",
@@ -48,10 +59,12 @@ fun getCountryList(): MutableList<CountryInfo> {
         "₨",
         "Pakistani rupee",
         "+92",
-        ".pk"))
+        ".pk")
+    )
 
 
-    countryList.add(CountryInfo(
+    countryList.add(
+        CountryInfo(
         R.drawable.my,
         "Malaysia",
         "Kuala Lumpur",
@@ -60,9 +73,11 @@ fun getCountryList(): MutableList<CountryInfo> {
         "RM",
         "Malaysian ringgit",
         "+60",
-        ".my"))
+        ".my")
+    )
 
-    countryList.add(CountryInfo(
+    countryList.add(
+        CountryInfo(
         R.drawable.nl,
         "Netherlands",
         "Amsterdam",
@@ -71,9 +86,11 @@ fun getCountryList(): MutableList<CountryInfo> {
         "€",
         "Euro",
         "+31",
-        ".nl"))
+        ".nl")
+    )
 
-    countryList.add(CountryInfo(
+    countryList.add(
+        CountryInfo(
         R.drawable.it,
         "Italy",
         "Rome",
@@ -82,9 +99,11 @@ fun getCountryList(): MutableList<CountryInfo> {
         "€",
         "Euro",
         "+39",
-        ".it"))
+        ".it")
+    )
 
-    countryList.add(CountryInfo(
+    countryList.add(
+        CountryInfo(
         R.drawable.es,
         "Spain",
         "Madrid",
@@ -93,9 +112,11 @@ fun getCountryList(): MutableList<CountryInfo> {
         "€",
         "Euro",
         "+34",
-        ".es"))
+        ".es")
+    )
 
-    countryList.add(CountryInfo(
+    countryList.add(
+        CountryInfo(
         R.drawable.np,
         "Nepal",
         "Dhaka",
@@ -104,7 +125,8 @@ fun getCountryList(): MutableList<CountryInfo> {
         "₨",
         "Nepalese rupee",
         "+593",
-        ".np"))
+        ".np")
+    )
 
 
     return countryList

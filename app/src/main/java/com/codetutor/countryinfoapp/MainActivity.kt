@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codetutor.countryinfoapp.components.CountryCardWithConstraintLayout
 import com.codetutor.countryinfoapp.data.CountryInfo
-import com.codetutor.countryinfoapp.data.getCountryList
+import com.codetutor.countryinfoapp.util.getCountryList
 import com.codetutor.countryinfoapp.ui.theme.CountryInfoAppTheme
 
 class MainActivity : ComponentActivity() {
