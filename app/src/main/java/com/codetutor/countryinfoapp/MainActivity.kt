@@ -46,7 +46,8 @@ fun MainScreen(countryList: List<CountryInfo>) {
 
     val context: Context = LocalContext.current
 
-    Log.i("MainActivity", "Countries: ${getCountryListFromJson(context)}")
+    val countries  = getCountryListFromJson(context)
+    Log.i("MainActivity", "Countries: $countries.size")
 
     CountryInfoAppTheme {
         Surface(
