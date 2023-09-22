@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Slk(
-    val common: String,
-    val official: String
+    val common: String? = null,
+    val official: String? = null
 )

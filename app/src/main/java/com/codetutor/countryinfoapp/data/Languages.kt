@@ -4,5 +4,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Languages(
-    val nor: String
+    val nor: String? = null
 )

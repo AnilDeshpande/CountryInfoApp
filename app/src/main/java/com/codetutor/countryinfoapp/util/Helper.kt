@@ -4,7 +4,7 @@ import android.content.Context
 import com.codetutor.countryinfoapp.R
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.data.CountryInfo
-import org.json.JSONArray
+import kotlinx.serialization.json.Json
 
 
 fun getCountryList(): MutableList<CountryInfo> {
@@ -130,4 +130,14 @@ fun getCountryList(): MutableList<CountryInfo> {
 
 
     return countryList
+}
+
+fun getJsonString(context: Context): String {
+    val inputStream = context.resources.openRawResource(R.raw.countries)
+    return inputStream.bufferedReader().use { it.readText() }
+}
+
+fun getCountryListFromJson(context: Context): MutableList<Country> {
+    val jsonStringFromRaw = getJsonString(context = context)
+    return Json{ignoreUnknownKeys = true}.decodeFromString<MutableList<Country>>(jsonStringFromRaw)
 }

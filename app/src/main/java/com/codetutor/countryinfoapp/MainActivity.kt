@@ -1,6 +1,8 @@
 package com.codetutor.countryinfoapp
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.border
@@ -16,12 +18,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codetutor.countryinfoapp.components.CountryCardWithConstraintLayout
 import com.codetutor.countryinfoapp.data.CountryInfo
 import com.codetutor.countryinfoapp.util.getCountryList
 import com.codetutor.countryinfoapp.ui.theme.CountryInfoAppTheme
+import com.codetutor.countryinfoapp.util.getCountryListFromJson
 
 class MainActivity : ComponentActivity() {
 
@@ -29,6 +33,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             MainScreen(countryList = countryList)
         }
@@ -38,6 +43,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(countryList: List<CountryInfo>) {
+
+    val context: Context = LocalContext.current
+
+    Log.i("MainActivity", "Countries: ${getCountryListFromJson(context)}")
+
     CountryInfoAppTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),

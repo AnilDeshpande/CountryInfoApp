@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Est(
-    val common: String,
-    val official: String
+    val common: String? = null,
+    val official: String? = null
 )

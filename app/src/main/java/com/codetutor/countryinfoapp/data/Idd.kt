@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Idd(
-    val root: String,
-    val suffixes: List<String>
+    val root: String? = null,
+    val suffixes: List<String>? = null
 )

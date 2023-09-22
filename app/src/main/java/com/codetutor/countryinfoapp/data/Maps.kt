@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Maps(
-    val googleMaps: String,
-    val openStreetMaps: String
+    val googleMaps: String? = null,
+    val openStreetMaps: String? = null
 )

@@ -4,5 +4,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class NativeName(
-    val nor: Nor
+    val nor: Nor? = null
 )

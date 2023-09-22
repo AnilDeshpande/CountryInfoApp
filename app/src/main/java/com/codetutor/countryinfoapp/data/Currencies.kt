@@ -4,5 +4,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Currencies(
-    val NOK: NOK
+    val NOK: NOK? = null
 )

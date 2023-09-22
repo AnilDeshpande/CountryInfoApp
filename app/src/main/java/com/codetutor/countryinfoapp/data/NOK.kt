@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class NOK(
-    val name: String,
-    val symbol: String
+    val name: String? = null,
+    val symbol: String? = null
 )
