@@ -1,5 +1,8 @@
 package com.codetutor.countryinfoapp.data
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Translations(
     val ara: Ara,
     val bre: Bre,
