@@ -22,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codetutor.countryinfoapp.components.CountryCardWithConstraintLayout
+import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.data.CountryInfo
 import com.codetutor.countryinfoapp.util.getCountryList
 import com.codetutor.countryinfoapp.ui.theme.CountryInfoAppTheme
@@ -55,7 +56,7 @@ fun MainScreen(countryList: List<CountryInfo>) {
             color = MaterialTheme.colorScheme.surface
         ) {
             LazyColumn {
-                items(countryList) {
+                items(countries) {
                     CountryCard(countryInfo = it)
                 }
             }
@@ -64,7 +65,7 @@ fun MainScreen(countryList: List<CountryInfo>) {
 }
 
 @Composable
-fun CountryCard(countryInfo: CountryInfo) {
+fun CountryCard(countryInfo: Country) {
     Surface(
         modifier = Modifier
             .fillMaxWidth(1.0f)

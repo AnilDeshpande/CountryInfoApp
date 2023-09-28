@@ -68,4 +68,5 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1'
+    implementation("io.coil-kt:coil:2.4.0")
 }

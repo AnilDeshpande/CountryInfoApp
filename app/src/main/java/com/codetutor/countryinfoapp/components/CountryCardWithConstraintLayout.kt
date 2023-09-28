@@ -18,17 +18,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.codetutor.countryinfoapp.R
+import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.data.CountryInfo
 
 @Composable
-fun CountryCardWithConstraintLayout(countryInfo: CountryInfo){
+fun CountryCardWithConstraintLayout(countryInfo: Country){
     ConstraintLayout(
         modifier = Modifier
             .wrapContentHeight()
             .fillMaxWidth().padding(5.dp)
     ) {
         val (flag, commonName, capital, officialName, region, subregion, currencySymbol, currencyName, mobileCode, tld) = createRefs()
-        val imageResId = countryInfo.flagId // Replace with your PNG image resource ID
+        val imageResId = R.drawable.`in` // Replace with your PNG image resource ID
         val imagePainter: Painter = painterResource(id = imageResId)
 
         Image(painter = imagePainter,
@@ -44,98 +45,118 @@ fun CountryCardWithConstraintLayout(countryInfo: CountryInfo){
                 })
 
 
-        Text(
-            text = countryInfo.commonName,
-            modifier = Modifier
-                .padding(2.dp)
-                .constrainAs(commonName) {
-                    top.linkTo(flag.bottom)
-                    start.linkTo(parent.start)
-                    end.linkTo(flag.end)
-                },
-            fontFamily = FontFamily.SansSerif,
-            textAlign = TextAlign.Center,
-            fontSize = 20.sp
-        )
 
-        Text(text = countryInfo.nationalCapital,
-            fontSize = 15.sp,
-            textAlign = TextAlign.Left,
-            modifier = Modifier
-                .padding(2.dp)
-                .constrainAs(capital) {
-                    start.linkTo(parent.start)
-                    top.linkTo(commonName.bottom)
-                    end.linkTo(flag.end)
-                })
 
-        Text(text = countryInfo.officialName,
-            fontSize = 18.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .constrainAs(officialName) {
-                    top.linkTo(parent.top)
-                    start.linkTo(flag.end)
-                    end.linkTo(parent.end)
-                }
-                .padding(2.dp)
-                .fillMaxWidth(0.65f))
+        countryInfo.name?.common?.let {
+            Text(
+                text = it,
+                modifier = Modifier
+                    .padding(2.dp)
+                    .constrainAs(commonName) {
+                        top.linkTo(flag.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(flag.end)
+                    },
+                fontFamily = FontFamily.SansSerif,
+                textAlign = TextAlign.Center,
+                fontSize = 20.sp
+            )
+        }
 
-        Text(text = countryInfo.region,
-            fontSize = 15.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .constrainAs(region) {
-                    start.linkTo(flag.end)
-                    end.linkTo(parent.end)
-                    top.linkTo(officialName.bottom)
-                }
-                .padding(2.dp)
-                .fillMaxWidth(0.8f))
+        countryInfo.capital?.get(0)?.let {
+            Text(text = it,
+                fontSize = 15.sp,
+                textAlign = TextAlign.Left,
+                modifier = Modifier
+                    .padding(2.dp)
+                    .constrainAs(capital) {
+                        start.linkTo(parent.start)
+                        top.linkTo(commonName.bottom)
+                        end.linkTo(flag.end)
+                    })
+        }
 
-        Text(text = countryInfo.subRegion,
-            fontSize = 12.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .constrainAs(subregion) {
-                    start.linkTo(officialName.start)
-                    top.linkTo(region.bottom)
-                    end.linkTo(officialName.end)
-                }
-                .padding(2.dp)
-                .fillMaxWidth(0.8f))
+        countryInfo.name?.official?.let {
+            Text(text = it,
+                fontSize = 18.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .constrainAs(officialName) {
+                        top.linkTo(parent.top)
+                        start.linkTo(flag.end)
+                        end.linkTo(parent.end)
+                    }
+                    .padding(2.dp)
+                    .fillMaxWidth(0.65f))
+        }
 
-        CircularText(text = countryInfo.currencySymbol,
-            modifier = Modifier
-                .constrainAs(currencySymbol) {
-                    start.linkTo(flag.end, margin = 30.dp)
-                    bottom.linkTo(parent.bottom, margin = 8.dp)
-                })
-        Text(text = countryInfo.currencyName,
-            modifier = Modifier
-                .constrainAs(currencyName) {
+        countryInfo?.region?.let {
+            Text(text = it,
+                fontSize = 15.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .constrainAs(region) {
+                        start.linkTo(flag.end)
+                        end.linkTo(parent.end)
+                        top.linkTo(officialName.bottom)
+                    }
+                    .padding(2.dp)
+                    .fillMaxWidth(0.8f))
+        }
+
+        countryInfo.subregion?.let {
+            Text(text = it,
+                fontSize = 12.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .constrainAs(subregion) {
+                        start.linkTo(officialName.start)
+                        top.linkTo(region.bottom)
+                        end.linkTo(officialName.end)
+                    }
+                    .padding(2.dp)
+                    .fillMaxWidth(0.8f))
+        }
+
+        countryInfo.currencies?.NOK?.symbol?.let {
+            CircularText(text = it,
+                modifier = Modifier
+                    .constrainAs(currencySymbol) {
+                        start.linkTo(flag.end, margin = 30.dp)
+                        bottom.linkTo(parent.bottom, margin = 8.dp)
+                    })
+        }
+        countryInfo.currencies?.NOK?.name?.let {
+            Text(text = it,
+                modifier = Modifier
+                    .constrainAs(currencyName) {
+                        top.linkTo(subregion.bottom)
+                        start.linkTo(currencySymbol.end, margin = 12.dp)
+                        bottom.linkTo(parent.bottom, margin = 5.dp)
+                        end.linkTo(mobileCode.start)
+                    }, textAlign = TextAlign.Center
+            )
+        }
+
+        countryInfo.idd?.let {
+            Text(
+                text = it.root+""+it.suffixes?.get(0),
+                modifier = Modifier.constrainAs(mobileCode) {
                     top.linkTo(subregion.bottom)
-                    start.linkTo(currencySymbol.end, margin = 12.dp)
-                    bottom.linkTo(parent.bottom, margin = 5.dp)
-                    end.linkTo(mobileCode.start)
-                }, textAlign = TextAlign.Center
-        )
+                    end.linkTo(parent.end)
+                }.width(50.dp)
+            )
+        }
 
-        Text(
-            text = countryInfo.mobileCode,
-            modifier = Modifier.constrainAs(mobileCode) {
-                top.linkTo(subregion.bottom)
-                end.linkTo(parent.end)
-            }.width(50.dp)
-        )
-
-        Text(
-            text = countryInfo.tld,
-            modifier = Modifier.constrainAs(tld) {
-                top.linkTo(mobileCode.bottom)
-                end.linkTo(parent.end)
-            }.width(50.dp)
-        )
+        countryInfo.tld?.get(0)?.let {
+            Text(
+                text = it,
+                modifier = Modifier.constrainAs(tld) {
+                    top.linkTo(mobileCode.bottom)
+                    end.linkTo(parent.end)
+                }.width(50.dp)
+            )
+        }
 
     }
 }
