@@ -75,7 +75,7 @@ fun CountryCard(countryInfo: Country) {
         shadowElevation = 2.dp
 
     ) {
-        CountryCardWithConstraintLayout(countryInfo = countryInfo)
+        CountryCardWithConstraintLayout(country = countryInfo)
     }
 }
 

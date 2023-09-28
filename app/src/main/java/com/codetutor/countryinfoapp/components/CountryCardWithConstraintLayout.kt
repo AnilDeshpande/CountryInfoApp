@@ -19,10 +19,9 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.codetutor.countryinfoapp.R
 import com.codetutor.countryinfoapp.data.Country
-import com.codetutor.countryinfoapp.data.CountryInfo
 
 @Composable
-fun CountryCardWithConstraintLayout(countryInfo: Country){
+fun CountryCardWithConstraintLayout(country: Country){
     ConstraintLayout(
         modifier = Modifier
             .wrapContentHeight()
@@ -47,7 +46,7 @@ fun CountryCardWithConstraintLayout(countryInfo: Country){
 
 
 
-        countryInfo.name?.common?.let {
+        country.name?.common?.let {
             Text(
                 text = it,
                 modifier = Modifier
@@ -63,7 +62,7 @@ fun CountryCardWithConstraintLayout(countryInfo: Country){
             )
         }
 
-        countryInfo.capital?.get(0)?.let {
+        country.capital?.get(0)?.let {
             Text(text = it,
                 fontSize = 15.sp,
                 textAlign = TextAlign.Left,
@@ -76,7 +75,7 @@ fun CountryCardWithConstraintLayout(countryInfo: Country){
                     })
         }
 
-        countryInfo.name?.official?.let {
+        country.name?.official?.let {
             Text(text = it,
                 fontSize = 18.sp,
                 textAlign = TextAlign.Center,
@@ -90,7 +89,7 @@ fun CountryCardWithConstraintLayout(countryInfo: Country){
                     .fillMaxWidth(0.65f))
         }
 
-        countryInfo?.region?.let {
+        country?.region?.let {
             Text(text = it,
                 fontSize = 15.sp,
                 textAlign = TextAlign.Center,
@@ -104,7 +103,7 @@ fun CountryCardWithConstraintLayout(countryInfo: Country){
                     .fillMaxWidth(0.8f))
         }
 
-        countryInfo.subregion?.let {
+        country.subregion?.let {
             Text(text = it,
                 fontSize = 12.sp,
                 textAlign = TextAlign.Center,
@@ -118,7 +117,7 @@ fun CountryCardWithConstraintLayout(countryInfo: Country){
                     .fillMaxWidth(0.8f))
         }
 
-        countryInfo.currencies?.NOK?.symbol?.let {
+        country.currencies?.NOK?.symbol?.let {
             CircularText(text = it,
                 modifier = Modifier
                     .constrainAs(currencySymbol) {
@@ -126,7 +125,7 @@ fun CountryCardWithConstraintLayout(countryInfo: Country){
                         bottom.linkTo(parent.bottom, margin = 8.dp)
                     })
         }
-        countryInfo.currencies?.NOK?.name?.let {
+        country.currencies?.NOK?.name?.let {
             Text(text = it,
                 modifier = Modifier
                     .constrainAs(currencyName) {
@@ -138,7 +137,7 @@ fun CountryCardWithConstraintLayout(countryInfo: Country){
             )
         }
 
-        countryInfo.idd?.let {
+        country.idd?.let {
             Text(
                 text = it.root+""+it.suffixes?.get(0),
                 modifier = Modifier.constrainAs(mobileCode) {
@@ -148,7 +147,7 @@ fun CountryCardWithConstraintLayout(countryInfo: Country){
             )
         }
 
-        countryInfo.tld?.get(0)?.let {
+        country.tld?.get(0)?.let {
             Text(
                 text = it,
                 modifier = Modifier.constrainAs(tld) {
