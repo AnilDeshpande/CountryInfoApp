@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CirculerText(text: String, modifier: Modifier){
+fun CircularText(text: String, modifier: Modifier){
     Text(
         modifier = modifier
             .padding(2.dp)
