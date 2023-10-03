@@ -17,6 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import coil.compose.AsyncImage
 import com.codetutor.countryinfoapp.R
 import com.codetutor.countryinfoapp.data.Country
 
@@ -25,25 +26,22 @@ fun CountryCardWithConstraintLayout(country: Country){
     ConstraintLayout(
         modifier = Modifier
             .wrapContentHeight()
-            .fillMaxWidth().padding(5.dp)
+            .fillMaxWidth()
+            .padding(5.dp)
     ) {
         val (flag, commonName, capital, officialName, region, subregion, currencySymbol, currencyName, mobileCode, tld) = createRefs()
-        val imageResId = R.drawable.`in` // Replace with your PNG image resource ID
-        val imagePainter: Painter = painterResource(id = imageResId)
 
-        Image(painter = imagePainter,
-            contentDescription = "Country Flag",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxWidth(0.35f)
+        country?.let {
+            AsyncImage(model = it?.flags?.png,
+                contentScale = ContentScale.Crop,
+                contentDescription = it?.flag, modifier =Modifier.fillMaxWidth(0.35f)
                 .height(70.dp)
                 .padding(2.dp)
                 .constrainAs(flag) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
                 })
-
-
+            }
 
 
         country.name?.common?.let {
@@ -140,20 +138,24 @@ fun CountryCardWithConstraintLayout(country: Country){
         country.idd?.let {
             Text(
                 text = it.root+""+it.suffixes?.get(0),
-                modifier = Modifier.constrainAs(mobileCode) {
-                    top.linkTo(subregion.bottom)
-                    end.linkTo(parent.end)
-                }.width(50.dp)
+                modifier = Modifier
+                    .constrainAs(mobileCode) {
+                        top.linkTo(subregion.bottom)
+                        end.linkTo(parent.end)
+                    }
+                    .width(50.dp)
             )
         }
 
         country.tld?.get(0)?.let {
             Text(
                 text = it,
-                modifier = Modifier.constrainAs(tld) {
-                    top.linkTo(mobileCode.bottom)
-                    end.linkTo(parent.end)
-                }.width(50.dp)
+                modifier = Modifier
+                    .constrainAs(tld) {
+                        top.linkTo(mobileCode.bottom)
+                        end.linkTo(parent.end)
+                    }
+                    .width(50.dp)
             )
         }
 
