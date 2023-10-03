@@ -3,6 +3,7 @@ package com.codetutor.countryinfoapp.data
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Currencies(
-    val NOK: NOK? = null
+data class Currency(
+    val name: String? = null,
+    val symbol: String? = null
 )

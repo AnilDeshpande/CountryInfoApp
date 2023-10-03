@@ -14,7 +14,7 @@ data class Country(
     val ccn3: String? = null,
     val coatOfArms: CoatOfArms? = null,
     val continents: List<String>? = null,
-    val currencies: Currencies? = null,
+    val currencies: Map<String, Currency>? = null,
     val demonyms: Demonyms? = null,
     val flag: String? = null,
     val flags: Flags? = null,

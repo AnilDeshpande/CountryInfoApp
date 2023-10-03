@@ -1,5 +1,6 @@
 package com.codetutor.countryinfoapp.components
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -115,16 +116,17 @@ fun CountryCardWithConstraintLayout(country: Country){
                     .fillMaxWidth(0.8f))
         }
 
-        country.currencies?.NOK?.symbol?.let {
-            CircularText(text = it,
+        country?.currencies?.entries?.first()?.let{
+            CircularText(text = it.value.symbol.toString(),
                 modifier = Modifier
                     .constrainAs(currencySymbol) {
                         start.linkTo(flag.end, margin = 30.dp)
                         bottom.linkTo(parent.bottom, margin = 8.dp)
                     })
         }
-        country.currencies?.NOK?.name?.let {
-            Text(text = it,
+
+        country?.currencies?.entries?.first()?.let{
+            Text(text = it.value.name.toString(),
                 modifier = Modifier
                     .constrainAs(currencyName) {
                         top.linkTo(subregion.bottom)
