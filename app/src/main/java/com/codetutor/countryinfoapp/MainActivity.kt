@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codetutor.countryinfoapp.components.CountryCardWithConstraintLayout
 import com.codetutor.countryinfoapp.data.CountryInfo
+import com.codetutor.countryinfoapp.data.getCountryList
 
 class MainActivity : ComponentActivity() {
 
@@ -31,19 +34,25 @@ class MainActivity : ComponentActivity() {
         "+91",
         ".in")
 
+    private val countries = getCountryList()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen(indiaInfo)
+            MainScreen(countries)
         }
     }
 }
 
 @Composable
-fun MainScreen(countryInfo: CountryInfo){
+fun MainScreen(countries: List<CountryInfo>){
     Surface (modifier = Modifier.fillMaxSize()) {
-        CountryCard(countryInfo = countryInfo)
+        LazyColumn {
+            items(countries) {
+                CountryCard(countryInfo = it)
+            }
+        }
     }
 }
 
@@ -67,15 +76,7 @@ fun CountryCard(countryInfo: CountryInfo){
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    val indiaInfo = CountryInfo(R.drawable.`in`,
-        "India",
-        "New Delhi",
-        "Republic of India",
-        "Asia","South Asia",
-        "₹",
-        "Indian Rupee",
-        "+91",
-        ".in")
 
-    MainScreen(indiaInfo)
+
+    MainScreen(getCountryList())
 }
