@@ -1,6 +1,7 @@
 package com.codetutor.countryinfoapp.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -25,7 +27,7 @@ fun CountryCardWithConstraintLayout(countryInfo: CountryInfo){
     ConstraintLayout(
         modifier = Modifier
             .wrapContentHeight()
-            .fillMaxWidth().padding(5.dp)
+            .fillMaxWidth().padding(5.dp).border(1.dp, Color.Black),
     ) {
         val (flag, commonName, capital, officialName, region, subregion, currencySymbol, currencyName, mobileCode, tld) = createRefs()
         val imageResId = countryInfo.flagId // Replace with your PNG image resource ID
@@ -106,7 +108,7 @@ fun CountryCardWithConstraintLayout(countryInfo: CountryInfo){
                 .fillMaxWidth(0.8f))
 
         CircularText(text = countryInfo.currencySymbol,
-            modifier = Modifier
+            modifier = Modifier.padding(5.dp)
                 .constrainAs(currencySymbol) {
                     start.linkTo(flag.end, margin = 30.dp)
                     bottom.linkTo(parent.bottom, margin = 8.dp)
