@@ -29,7 +29,7 @@ fun getCountryList(): MutableList<CountryInfo> {
 
 
     countryList.add(CountryInfo(
-        R.drawable.za,
+        R.drawable.bd,
         "Bangladesh",
         "Pretoria",
         "People's Republic of Bangladesh",
