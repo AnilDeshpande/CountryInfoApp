@@ -10,3 +10,4 @@ data class CountryInfo(val flagId: Int,
                        val currencyName: String,
                        val mobileCode: String,
                        val tld: String)
+
