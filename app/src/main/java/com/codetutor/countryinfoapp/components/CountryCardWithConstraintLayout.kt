@@ -34,22 +34,6 @@ fun CountryCardWithConstraintLayout(country: Country){
             .padding(5.dp)
     ) {
         val (flag, commonName, capital, officialName, region, subregion, currencySymbol, currencyName, mobileCode, tld) = createRefs()
-
-        country?.let {
-            AsyncImage(model = it?.flags?.png,
-                contentScale = ContentScale.Crop,
-                contentDescription = it?.flag, modifier =Modifier.fillMaxWidth(0.35f)
-
-
-@Composable
-fun CountryCardWithConstraintLayout(countryInfo: CountryInfo){
-    ConstraintLayout(
-        modifier = Modifier
-            .wrapContentHeight()
-            .fillMaxWidth().padding(5.dp).border(1.dp, Color.Black),
-    ) {
-        val (flag, commonName, capital, officialName, region, subregion, currencySymbol, currencyName, mobileCode, tld) = createRefs()
-        
         country?.let {
             AsyncImage(model = it?.flags?.png,
                 contentScale = ContentScale.Crop,
