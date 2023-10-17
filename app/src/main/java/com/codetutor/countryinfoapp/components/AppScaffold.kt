@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Filter
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Sort
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,7 +38,10 @@ fun CountryInfoAppScaffold() {
                         Icon(imageVector = Icons.Filled.Search, contentDescription ="Search")
                     }
                     IconButton(onClick = { /*TODO*/ }) {
-                        Icon(imageVector = Icons.Filled.Filter, contentDescription ="Search")
+                        Icon(imageVector = Icons.Filled.Filter, contentDescription ="Filter")
+                    }
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(imageVector = Icons.Filled.Sort, contentDescription ="Sort")
                     }
                     IconButton(onClick = { /*TODO*/ }) {
                         Icon(imageVector = Icons.Filled.MoreVert, contentDescription ="MoreOptions")
