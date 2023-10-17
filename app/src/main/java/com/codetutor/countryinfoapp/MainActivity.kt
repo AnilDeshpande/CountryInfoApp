@@ -30,22 +30,12 @@ import com.codetutor.countryinfoapp.util.getCountryListFromJson
 
 class MainActivity : ComponentActivity() {
 
-    private val indiaInfo = CountryInfo(R.drawable.`in`,
-        "India",
-        "New Delhi",
-        "Republic of India",
-        "Asia","South Asia",
-        "₹",
-        "Indian Rupee",
-        "+91",
-        ".in")
-
-    private val countryList = getCountryList()
-
+    private lateinit var countryList: MutableList<Country>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        countryList = getCountryListFromJson(context = this.application)
         setContent {
             MainScreen(countryList = countryList)
         }
@@ -53,12 +43,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainScreen(countryList: List<CountryInfo>) {
-
-    val context: Context = LocalContext.current
-
-    val countries  = getCountryListFromJson(context)
-    Log.i("MainActivity", "Countries: $countries.size")
+fun MainScreen(countryList: MutableList<Country>) {
 
     CountryInfoAppTheme {
         Surface(
@@ -66,7 +51,7 @@ fun MainScreen(countryList: List<CountryInfo>) {
             color = MaterialTheme.colorScheme.surface
         ) {
             LazyColumn {
-                items(countries) {
+                items(countryList) {
                     CountryCard(countryInfo = it)
                 }
             }
@@ -87,11 +72,4 @@ fun CountryCard(countryInfo: Country) {
     ) {
         CountryCardWithConstraintLayout(country = countryInfo)
     }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MainScreen(getCountryList())
 }
