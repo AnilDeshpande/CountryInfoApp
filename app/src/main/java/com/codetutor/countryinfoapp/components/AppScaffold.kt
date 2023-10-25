@@ -1,6 +1,7 @@
 package com.codetutor.countryinfoapp.components
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Filter
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
@@ -13,7 +14,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import com.codetutor.countryinfoapp.screens.MainScreen
 import com.codetutor.countryinfoapp.util.getCountryListFromJson
@@ -23,7 +27,9 @@ import com.codetutor.countryinfoapp.util.getCountryListFromJson
 fun CountryInfoAppScaffold() {
 
     var countryList = getCountryListFromJson(LocalContext.current)
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     Scaffold (
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.smallTopAppBarColors(
@@ -33,6 +39,12 @@ fun CountryInfoAppScaffold() {
                 title = {
                     Text(text = "CountryInfoApp")
                 },
+//                navigationIcon = {
+//                    IconButton(onClick = { /*TODO*/ }) {
+//                        Icon(imageVector = Icons.Filled.ArrowBack, contentDescription ="ArrowBack")
+//                    }
+//                }
+//                ,
                 actions = {
                     IconButton(onClick = { /*TODO*/ }) {
                         Icon(imageVector = Icons.Filled.Search, contentDescription ="Search")
@@ -46,7 +58,9 @@ fun CountryInfoAppScaffold() {
                     IconButton(onClick = { /*TODO*/ }) {
                         Icon(imageVector = Icons.Filled.MoreVert, contentDescription ="MoreOptions")
                     }
-                }
+                },
+
+                scrollBehavior = scrollBehavior
             )
         }
     ){ innerPadding ->
