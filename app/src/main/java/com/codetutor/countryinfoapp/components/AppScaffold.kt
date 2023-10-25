@@ -2,10 +2,12 @@ package com.codetutor.countryinfoapp.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Filter
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Sort
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -28,11 +30,11 @@ import com.codetutor.countryinfoapp.util.getCountryListFromJson
 fun CountryInfoAppScaffold() {
 
     var countryList = getCountryListFromJson(LocalContext.current)
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     Scaffold (
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            MediumTopAppBar(
+            TopAppBar(
                 colors = TopAppBarDefaults.smallTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.primary
@@ -50,19 +52,27 @@ fun CountryInfoAppScaffold() {
                     IconButton(onClick = { /*TODO*/ }) {
                         Icon(imageVector = Icons.Filled.Search, contentDescription ="Search")
                     }
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(imageVector = Icons.Filled.Filter, contentDescription ="Filter")
-                    }
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(imageVector = Icons.Filled.Sort, contentDescription ="Sort")
-                    }
+
                     IconButton(onClick = { /*TODO*/ }) {
                         Icon(imageVector = Icons.Filled.MoreVert, contentDescription ="MoreOptions")
                     }
                 },
-
                 scrollBehavior = scrollBehavior
             )
+        },
+
+        bottomBar = {
+            BottomAppBar {
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(imageVector = Icons.Filled.Edit, contentDescription ="Edit")
+                }
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(imageVector = Icons.Filled.Filter, contentDescription ="Filter")
+                }
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(imageVector = Icons.Filled.Sort, contentDescription ="Sort")
+                }
+            }
         }
     ){ innerPadding ->
         MainScreen( countryList, innerPadding = innerPadding)
