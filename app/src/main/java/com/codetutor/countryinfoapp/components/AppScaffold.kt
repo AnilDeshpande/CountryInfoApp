@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import com.codetutor.countryinfoapp.screens.MainScreen
 import com.codetutor.countryinfoapp.util.getCountryListFromJson
 
@@ -78,7 +79,12 @@ fun CountryInfoAppScaffold() {
         floatingActionButton = {
             FloatingActionButton(onClick = { /*TODO*/ },
                 containerColor = BottomAppBarDefaults.bottomAppBarFabColor,
-                elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation ()) {
+                elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation (
+                    defaultElevation = 5.dp,
+                    pressedElevation = 10.dp,
+                    focusedElevation = 10.dp,
+                    hoveredElevation = 8.dp
+                        )) {
                     Icon(imageVector = Icons.Filled.Filter, contentDescription ="Filter")
             }
         },
