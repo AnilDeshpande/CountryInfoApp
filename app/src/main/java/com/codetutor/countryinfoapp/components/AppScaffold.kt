@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.codetutor.countryinfoapp.screens.MainScreen
 import com.codetutor.countryinfoapp.util.getCountryListFromJson
@@ -91,4 +92,10 @@ fun CountryInfoAppScaffold() {
     ){ innerPadding ->
         MainScreen( countryList, innerPadding = innerPadding)
     }
+}
+
+@Preview
+@Composable
+fun SimpleComposablePreview() {
+    CountryInfoAppScaffold()
 }
