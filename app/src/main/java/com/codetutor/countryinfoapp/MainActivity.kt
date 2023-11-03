@@ -10,15 +10,10 @@ import com.codetutor.countryinfoapp.ui.theme.CountryInfoAppTheme
 import com.codetutor.countryinfoapp.util.getCountryListFromJson
 
 class MainActivity : ComponentActivity() {
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-           CountryInfoAppTheme {
-               CountryInfoAppScaffold()
-            }
+           CountryInfoAppScaffold()
         }
     }
 }
