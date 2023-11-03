@@ -1,5 +1,6 @@
 package com.codetutor.countryinfoapp.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,6 +18,8 @@ import com.codetutor.countryinfoapp.data.Country
 fun CountryCard(countryInfo: Country) {
     Surface(
         shape = MaterialTheme.shapes.small,
+//        border  = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.onSecondaryContainer) ,
+        border = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.outline),
         color = MaterialTheme.colorScheme.surfaceVariant,
         shadowElevation = 2.dp,
         modifier = Modifier
