@@ -17,6 +17,7 @@ import com.codetutor.countryinfoapp.data.Country
 fun CountryCard(countryInfo: Country) {
     Surface(
         shape = MaterialTheme.shapes.small,
+        color = MaterialTheme.colorScheme.surfaceVariant,
         shadowElevation = 2.dp,
         modifier = Modifier
             .fillMaxWidth(1.0f)

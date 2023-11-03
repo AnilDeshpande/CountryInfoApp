@@ -17,15 +17,12 @@ import com.codetutor.countryinfoapp.util.getCountryListFromJson
 
 @Composable
 fun MainScreen( countryList: MutableList<Country>, innerPadding: PaddingValues) {
-    CountryInfoAppTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize().padding(paddingValues = innerPadding),
-            color = MaterialTheme.colorScheme.surface
-        ) {
-            LazyColumn {
-                items(countryList) {
-                    CountryCard(countryInfo = it)
-                }
+    Surface(
+        modifier = Modifier.fillMaxSize().padding(paddingValues = innerPadding),
+    ) {
+        LazyColumn {
+            items(countryList) {
+                CountryCard(countryInfo = it)
             }
         }
     }
