@@ -71,6 +71,7 @@ fun CountryInfoAppTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
-        content = content
+        content = content,
+        shapes = replyShapes
     )
 }
