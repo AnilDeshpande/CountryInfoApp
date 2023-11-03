@@ -17,9 +17,6 @@ import com.codetutor.countryinfoapp.util.getCountryListFromJson
 
 @Composable
 fun MainScreen( countryList: MutableList<Country>, innerPadding: PaddingValues) {
-
-
-
     CountryInfoAppTheme {
         Surface(
             modifier = Modifier.fillMaxSize().padding(paddingValues = innerPadding),

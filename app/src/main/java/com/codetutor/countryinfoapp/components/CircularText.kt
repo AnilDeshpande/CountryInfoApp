@@ -1,6 +1,7 @@
 package com.codetutor.countryinfoapp.components
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,6 +12,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun CircularText(text: String, modifier: Modifier){
     Text(
+        style = MaterialTheme.typography.bodyMedium,
         modifier = modifier
             .padding(2.dp)
             .drawBehind {

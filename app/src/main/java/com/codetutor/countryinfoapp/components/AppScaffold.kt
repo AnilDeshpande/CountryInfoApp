@@ -45,7 +45,7 @@ fun CountryInfoAppScaffold() {
                     titleContentColor = MaterialTheme.colorScheme.primary
                 ),
                 title = {
-                    Text(text = "CountryInfoApp")
+                    Text(text = "CountryInfoApp", style = MaterialTheme.typography.headlineMedium)
                 },
 //                navigationIcon = {
 //                    IconButton(onClick = { /*TODO*/ }) {

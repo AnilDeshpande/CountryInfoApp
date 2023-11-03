@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -58,15 +60,14 @@ fun CountryCardWithConstraintLayout(country: Country){
                         start.linkTo(parent.start)
                         end.linkTo(flag.end)
                     },
-                fontFamily = FontFamily.SansSerif,
                 textAlign = TextAlign.Center,
-                fontSize = 20.sp
+                style = MaterialTheme.typography.titleLarge
             )
         }
 
         country.capital?.get(0)?.let {
             Text(text = it,
-                fontSize = 15.sp,
+                style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Left,
                 modifier = Modifier
                     .padding(2.dp)
@@ -79,7 +80,7 @@ fun CountryCardWithConstraintLayout(country: Country){
 
         country.name?.official?.let {
             Text(text = it,
-                fontSize = 18.sp,
+                style = MaterialTheme.typography.titleLarge,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .constrainAs(officialName) {
@@ -93,7 +94,7 @@ fun CountryCardWithConstraintLayout(country: Country){
 
         country?.region?.let {
             Text(text = it,
-                fontSize = 15.sp,
+                style = MaterialTheme.typography.titleMedium,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .constrainAs(region) {
@@ -107,7 +108,7 @@ fun CountryCardWithConstraintLayout(country: Country){
 
         country.subregion?.let {
             Text(text = it,
-                fontSize = 12.sp,
+                style = MaterialTheme.typography.titleSmall,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .constrainAs(subregion) {
@@ -130,6 +131,7 @@ fun CountryCardWithConstraintLayout(country: Country){
 
         country?.currencies?.entries?.first()?.let{
             Text(text = it.value.name.toString(),
+                style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier
                     .constrainAs(currencyName) {
                         top.linkTo(subregion.bottom)
@@ -143,6 +145,7 @@ fun CountryCardWithConstraintLayout(country: Country){
         country.idd?.let {
             Text(
                 text = it.root+""+it.suffixes?.get(0),
+                style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier
                     .constrainAs(mobileCode) {
                         top.linkTo(subregion.bottom)
@@ -155,6 +158,7 @@ fun CountryCardWithConstraintLayout(country: Country){
         country.tld?.get(0)?.let {
             Text(
                 text = it,
+                style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier
                     .constrainAs(tld) {
                         top.linkTo(mobileCode.bottom)
