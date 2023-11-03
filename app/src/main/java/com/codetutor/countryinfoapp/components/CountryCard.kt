@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -17,7 +18,8 @@ import com.codetutor.countryinfoapp.data.Country
 @Composable
 fun CountryCard(countryInfo: Country) {
     Surface(
-        shape = MaterialTheme.shapes.small,
+//        shape = MaterialTheme.shapes.small,
+        shape = CutCornerShape(bottomEndPercent = 20),
 //        border  = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.onSecondaryContainer) ,
         border = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.outline),
         color = MaterialTheme.colorScheme.surfaceVariant,
