@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.screens.MainScreen
 import com.codetutor.countryinfoapp.util.getCountryListFromJson
@@ -43,7 +44,7 @@ fun CountryInfoAppScaffold(countryList: MutableList<Country>){
                     titleContentColor = MaterialTheme.colorScheme.primary
                 ),
                 title = {
-                    Text(text = "CountryInfoApp")
+                    Text(text = "CountryInfoApp", style = MaterialTheme.typography.labelLarge)
                 },
 //                navigationIcon = {
 //                    IconButton(onClick = { /*TODO*/ }) {

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -57,15 +58,14 @@ fun CountryCardWithConstraintLayout(country: Country){
                         start.linkTo(parent.start)
                         end.linkTo(flag.end)
                     },
-                fontFamily = FontFamily.SansSerif,
                 textAlign = TextAlign.Center,
-                fontSize = 20.sp
+                style = MaterialTheme.typography.bodyLarge
             )
         }
 
         country.capital?.get(0)?.let {
             Text(text = it,
-                fontSize = 15.sp,
+                style = MaterialTheme.typography.titleSmall,
                 textAlign = TextAlign.Left,
                 modifier = Modifier
                     .padding(2.dp)
@@ -78,7 +78,7 @@ fun CountryCardWithConstraintLayout(country: Country){
 
         country.name?.official?.let {
             Text(text = it,
-                fontSize = 18.sp,
+                style = MaterialTheme.typography.titleLarge,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .constrainAs(officialName) {
