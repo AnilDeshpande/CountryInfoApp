@@ -3,6 +3,7 @@ package com.codetutor.countryinfoapp.components
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Filter
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Sort
@@ -46,6 +47,11 @@ fun CountryInfoAppScaffold() {
                 title = {
 
                     Text(text = "CountryInfoApp", style = MaterialTheme.typography.labelLarge)
+                },
+                navigationIcon = {
+                    IconButton(onClick = { /*TODO*/ }) {
+                        Icon(imageVector = Icons.Filled.Home, contentDescription = "Home")
+                    }
                 },
                 actions = {
                     IconButton(onClick = { /*TODO*/ }) {
