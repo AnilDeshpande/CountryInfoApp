@@ -25,6 +25,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.codetutor.countryinfoapp.CountryApplication
 import com.codetutor.countryinfoapp.screens.CountryListScreen
 import com.codetutor.countryinfoapp.util.getCountryListFromJson
 
@@ -86,7 +87,7 @@ fun CountryInfoAppScaffold() {
             }
         },
     ){ innerPadding ->
-        CountryListScreen( countryList, innerPadding = innerPadding)
+        CountryApplication(countryList = countryList, innerPadding)
     }
 }
 
