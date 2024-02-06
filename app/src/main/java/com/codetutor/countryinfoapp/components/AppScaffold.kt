@@ -43,15 +43,9 @@ fun CountryInfoAppScaffold() {
                     titleContentColor = MaterialTheme.colorScheme.primary
                 ),
                 title = {
-//                    Text(text = "CountryInfoApp", style = MaterialTheme.typography.headlineMedium)
+
                     Text(text = "CountryInfoApp", style = MaterialTheme.typography.labelLarge)
                 },
-//                navigationIcon = {
-//                    IconButton(onClick = { /*TODO*/ }) {
-//                        Icon(imageVector = Icons.Filled.ArrowBack, contentDescription ="ArrowBack")
-//                    }
-//                }
-//                ,
                 actions = {
                     IconButton(onClick = { /*TODO*/ }) {
                         Icon(imageVector = Icons.Filled.Search, contentDescription ="Search")
