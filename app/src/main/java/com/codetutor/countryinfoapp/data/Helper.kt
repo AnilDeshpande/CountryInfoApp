@@ -3,7 +3,8 @@ package com.codetutor.countryinfoapp.data
 import com.codetutor.countryinfoapp.R
 
 
-fun getCountryList(): MutableList<CountryInfo> {
+/*
+fun getCountryList(context: Any?): MutableList<CountryInfo> {
     val countryList = mutableListOf<CountryInfo>()
     countryList.add(CountryInfo(
         R.drawable.`in`,
@@ -108,4 +109,4 @@ fun getCountryList(): MutableList<CountryInfo> {
 
 
     return countryList
-}
+}*/
