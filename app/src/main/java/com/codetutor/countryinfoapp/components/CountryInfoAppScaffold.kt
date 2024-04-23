@@ -1,7 +1,6 @@
 package com.codetutor.countryinfoapp.components
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Filter
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
@@ -22,11 +21,7 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.TextStyle
-import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.screens.MainScreen
-import com.codetutor.countryinfoapp.util.getCountryListFromJson
 
 
 @OptIn(ExperimentalMaterial3Api::class)
