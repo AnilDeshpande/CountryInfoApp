@@ -35,3 +35,4 @@ data class Country(
     val translations: Translations? = null,
     val unMember: Boolean? = null
 )
+
