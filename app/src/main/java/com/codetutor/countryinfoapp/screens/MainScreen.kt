@@ -38,10 +38,6 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
     val viewModel: CountryViewModel = viewModel(factory = CountryViewModelFactory(repository))
     val countryList = viewModel.allCountries.observeAsState(initial = emptyList())
 
-
-
-
-
     CountryInfoAppTheme {
         Surface(
             modifier = Modifier

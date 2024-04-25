@@ -14,6 +14,8 @@ class CountryRepository(private val context: Context, private val countryDao: Co
 
     private val contextForRepo: Context = context
 
+    var allCountries: List<Country> = emptyList()
+
     suspend fun fetchAndInsertAll() = withContext(Dispatchers.IO) {
         if(getAllCountries() != null && getAllCountries().isNotEmpty()) {
             Log.i("Room", "Countries already exist in the database ${getAllCountries()}")
@@ -31,6 +33,11 @@ class CountryRepository(private val context: Context, private val countryDao: Co
     }
 
     suspend fun getAllCountries(): List<Country> = withContext(Dispatchers.IO) {
-        countryDao.getAllCountries()
+        if(allCountries.isNotEmpty()) {
+            return@withContext allCountries
+        } else {
+            allCountries = countryDao.getAllCountries()
+            return@withContext allCountries
+        }
     }
 }
