@@ -58,7 +58,7 @@ fun countryToEntity(country: Country): CountryEntity {
         subregion = country.subregion,
         timezones = country.timezones?.joinToString(),
         tld = country.tld?.joinToString(),
-        translations = country.translations,
+        //translations = country.translations,
         unMember = country.unMember
     )
 }

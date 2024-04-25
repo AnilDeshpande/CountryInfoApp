@@ -11,20 +11,21 @@ import kotlinx.coroutines.withContext
 
 class CountryRepository(private val context: Context, private val countryDao: CountryDao) {
 
-    suspend fun fetchAndInsertAll(context: Context) = withContext(Dispatchers.IO) {
+    private val contextForRepo: Context = context
+
+    suspend fun fetchAndInsertAll() = withContext(Dispatchers.IO) {
         if(getAllCountries() != null) {
             return@withContext
 
         } else {
-            val mutableCountryList: MutableList<Country> = getCountryList(context)
+            val mutableCountryList: MutableList<Country> = getCountryList(contextForRepo)
             val countryList: List<Country> = mutableCountryList.toList()
-            val countryEntityList: List<CountryEntity> = countryList.map { countryToEntity(it) }
-            countryDao.insertAll(countryEntityList)
+            countryDao.insertAll(countryList)
             return@withContext
         }
     }
 
-    suspend fun getAllCountries(): List<CountryEntity> = withContext(Dispatchers.IO) {
+    suspend fun getAllCountries(): List<Country> = withContext(Dispatchers.IO) {
         countryDao.getAllCountries()
     }
 }

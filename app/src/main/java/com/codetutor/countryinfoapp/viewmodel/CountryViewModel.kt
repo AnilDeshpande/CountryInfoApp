@@ -7,24 +7,26 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.repository.CountryRepository
 import kotlinx.coroutines.launch
 
-class CountryViewModel(private val repository: CountryRepository) : AndroidViewModel(application = Application()) {
+class CountryViewModel(private val repository: CountryRepository) : ViewModel() {
 
-    val allCountries: MutableLiveData<List<CountryEntity>> = MutableLiveData()
+    val allCountries: MutableLiveData<List<Country>> = MutableLiveData()
 
     init {
         viewModelScope.launch {
-            fetchAndInsertAll(getApplication<Application>().applicationContext)
+            fetchAndInsertAll()
             getAllCountries()
         }
     }
+
     private suspend fun getAllCountries() {
         allCountries.value = repository.getAllCountries()
     }
 
-    private suspend fun fetchAndInsertAll(context: Context) = viewModelScope.launch {
-        repository.fetchAndInsertAll(context)
+    private suspend fun fetchAndInsertAll() = viewModelScope.launch {
+        repository.fetchAndInsertAll()
     }
 }

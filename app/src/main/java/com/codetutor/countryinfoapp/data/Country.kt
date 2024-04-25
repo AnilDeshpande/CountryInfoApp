@@ -1,9 +1,15 @@
 package com.codetutor.countryinfoapp.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
 
+
+@Entity
 @Serializable
 data class Country(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val altSpellings: List<String>? = null,
     val area: Double? = null,
     val capital: List<String>? = null,
@@ -12,10 +18,10 @@ data class Country(
     val cca2: String? = null,
     val cca3: String? = null,
     val ccn3: String? = null,
-    val coatOfArms: CoatOfArms? = null,
+    //val coatOfArms: CoatOfArms? = null,
     val continents: List<String>? = null,
     val currencies: Map<String, Currency>? = null,
-    val demonyms: Demonyms? = null,
+    //val demonyms: Demonyms? = null,
     val flag: String? = null,
     val flags: Flags? = null,
     val idd: Idd? = null,
@@ -32,7 +38,7 @@ data class Country(
     val subregion: String? = null,
     val timezones: List<String>? = null,
     val tld: List<String>? = null,
-    val translations: Translations? = null,
+    //val translations: Translations? = null,
     val unMember: Boolean? = null
 )
 
