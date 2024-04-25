@@ -16,6 +16,7 @@ import kotlinx.coroutines.launch
 class CountryViewModel(private val repository: CountryRepository) : ViewModel() {
 
     val allCountries: MutableLiveData<List<Country>> = MutableLiveData()
+    val isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
 
     init {
         viewModelScope.launch {
@@ -36,5 +37,6 @@ class CountryViewModel(private val repository: CountryRepository) : ViewModel() 
         }
         job.join()
         getAllCountries()
+        isLoading.value = false
     }
 }
