@@ -14,7 +14,7 @@ class CountryRepository(private val context: Context, private val countryDao: Co
 
     private val contextForRepo: Context = context
 
-    var allCountries: List<Country> = emptyList()
+    private var allCountries: List<Country> = emptyList()
 
     suspend fun fetchAndInsertAll() = withContext(Dispatchers.IO) {
         if(getAllCountries() != null && getAllCountries().isNotEmpty()) {

@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.repository.CountryRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class CountryViewModel(private val repository: CountryRepository) : ViewModel() {
@@ -20,7 +21,6 @@ class CountryViewModel(private val repository: CountryRepository) : ViewModel() 
         viewModelScope.launch {
             Log.i("Room", "CountryViewModel init before fetched: ${allCountries.value}")
             fetchAndInsertAll()
-            getAllCountries()
             Log.i("Room", "CountryViewModel init after fetched: ${allCountries.value}")
         }
     }
@@ -30,8 +30,11 @@ class CountryViewModel(private val repository: CountryRepository) : ViewModel() 
         Log.i("Room", "getAllCountries init after fetched: ${allCountries.value}")
     }
 
-    private suspend fun fetchAndInsertAll() = viewModelScope.launch {
+    private suspend fun fetchAndInsertAll() {
+        val job = viewModelScope.launch {
         repository.fetchAndInsertAll()
-
     }
+    job.join()
+    getAllCountries()
+}
 }
