@@ -33,8 +33,8 @@ class CountryViewModel(private val repository: CountryRepository) : ViewModel() 
     private suspend fun fetchAndInsertAll() {
         val job = viewModelScope.launch {
         repository.fetchAndInsertAll()
+        }
+        job.join()
+        getAllCountries()
     }
-    job.join()
-    getAllCountries()
-}
 }
