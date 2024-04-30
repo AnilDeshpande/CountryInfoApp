@@ -1,6 +1,7 @@
 package com.codetutor.countryinfoapp.data
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
 
@@ -9,36 +10,36 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Country(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    val altSpellings: List<String>? = null,
-    val area: Double? = null,
-    val capital: List<String>? = null,
-    val capitalInfo: CapitalInfo? = null,
-    val car: Car? = null,
-    val cca2: String? = null,
-    val cca3: String? = null,
-    val ccn3: String? = null,
-    //val coatOfArms: CoatOfArms? = null,
-    val continents: List<String>? = null,
-    val currencies: Map<String, Currency>? = null,
-    //val demonyms: Demonyms? = null,
-    val flag: String? = null,
-    val flags: Flags? = null,
-    val idd: Idd? = null,
-    val independent: Boolean? = null,
-    val landlocked: Boolean? = null,
-    val languages: Languages? = null,
-    val latlng: List<Double>? = null,
-    val maps: Maps? = null,
-    val name: Name? = null,
-    val population: Int? = null,
-    val region: String? = null,
-    val startOfWeek: String? = null,
-    val status: String? = null,
-    val subregion: String? = null,
-    val timezones: List<String>? = null,
-    val tld: List<String>? = null,
-    //val translations: Translations? = null,
-    val unMember: Boolean? = null
+    var id: Int? = null,
+    var altSpellings: List<String>? = null,
+    var area: Double? = null,
+    var capital: List<String>? = null,
+    var capitalInfo: CapitalInfo? = null,
+    var car: Car? = null,
+    var cca2: String? = null,
+    var cca3: String? = null,
+    var ccn3: String? = null,
+    @Ignore var coatOfArms: CoatOfArms? = null,
+    var continents: List<String>? = null,
+    var currencies: Map<String, Currency>? = null,
+    @Ignore var demonyms: Demonyms? = null,
+    var flag: String? = null,
+    var flags: Flags? = null,
+    var idd: Idd? = null,
+    var independent: Boolean? = null,
+    var landlocked: Boolean? = null,
+    var languages: Languages? = null,
+    var latlng: List<Double>? = null,
+    var maps: Maps? = null,
+    var name: Name? = null,
+    var population: Int? = null,
+    var region: String? = null,
+    var startOfWeek: String? = null,
+    var status: String? = null,
+    var subregion: String? = null,
+    var timezones: List<String>? = null,
+    var tld: List<String>? = null,
+    @Ignore var translations: Translations? = null,
+    var unMember: Boolean? = null
 )
 
