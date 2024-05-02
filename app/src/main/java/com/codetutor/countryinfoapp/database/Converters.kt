@@ -107,30 +107,6 @@ class Converters {
         return json?.let { jsonFormat.decodeFromString(it) }
     }
 
-    /*@TypeConverter
-    fun fromTranslationsToJson(translations: Translations?): String? {
-        return translations?.let { jsonFormat.encodeToString(it) }
-    }
-
-    @TypeConverter
-    fun fromJsonToTranslations(json: String?): Translations? {
-        return json?.let { jsonFormat.decodeFromString(it) }
-    }
-
-    // Since all language-specific classes like Ara, Bre, Ces, etc., have the same structure,
-    // you can use a generic type converter if they are wrapped in a common interface or base class,
-    // or you can write individual converters for each if needed.
-    @TypeConverter
-    fun fromLanguageToJson(language: Language?): String? {  // Assuming all implement a 'Language' interface
-        return language?.let { jsonFormat.encodeToString(it) }
-    }
-
-    @OptIn(InternalSerializationApi::class)
-    @TypeConverter
-    fun <T> fromJsonToLanguage(json: String?, cls: Class<T>): T? where T : Language {
-        return json?.let { jsonFormat.decodeFromString(cls.kotlin.serializer(), it) }
-    }*/
-
     @TypeConverter
     fun fromNativeNameToJson(nativeName: NativeName?): String? {
         return nativeName?.let { jsonFormat.encodeToString(it) }
