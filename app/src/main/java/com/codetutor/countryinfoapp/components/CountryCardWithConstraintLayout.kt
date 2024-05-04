@@ -4,6 +4,7 @@ package com.codetutor.countryinfoapp.components
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -12,9 +13,11 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
@@ -22,29 +25,43 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.lifecycle.MutableLiveData
 import coil.compose.AsyncImage
+import com.codetutor.countryinfoapp.MyAlertDialog
 import com.codetutor.countryinfoapp.R
 import com.codetutor.countryinfoapp.data.Country
 
 @Composable
-fun CountryCardWithConstraintLayout(country: Country){
+fun CountryCardWithConstraintLayout(country: Country, showDeleteAlertDialog: MutableState<Boolean>){
     ConstraintLayout(
         modifier = Modifier
             .wrapContentHeight()
             .fillMaxWidth()
             .padding(5.dp)
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onDoubleTap = {
+
+
+                    }, onLongPress = {
+                        Log.i("CountryCard", "Country card long pressed")
+                        showDeleteAlertDialog.value = true
+                    })
+            }
+
     ) {
         val (flag, commonName, capital, officialName, region, subregion, currencySymbol, currencyName, mobileCode, tld) = createRefs()
         country?.let {
             AsyncImage(model = it?.flags?.png,
                 contentScale = ContentScale.Crop,
-                contentDescription = it?.flag, modifier =Modifier.fillMaxWidth(0.35f)
-                .height(70.dp)
-                .padding(2.dp)
-                .constrainAs(flag) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
-                })
+                contentDescription = it?.flag, modifier = Modifier
+                    .fillMaxWidth(0.35f)
+                    .height(70.dp)
+                    .padding(2.dp)
+                    .constrainAs(flag) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                    })
             }
 
 

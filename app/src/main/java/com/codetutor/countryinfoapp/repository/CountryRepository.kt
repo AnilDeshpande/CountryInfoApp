@@ -40,4 +40,8 @@ class CountryRepository(private val context: Context, private val countryDao: Co
             return@withContext allCountries
         }
     }
+
+    suspend fun deleteCountry(country: Country) = withContext(Dispatchers.IO) {
+        countryDao.delete(country)
+    }
 }

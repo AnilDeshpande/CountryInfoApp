@@ -1,6 +1,7 @@
 package com.codetutor.countryinfoapp.screens
 
 import CountryEntity
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,6 +30,7 @@ import com.codetutor.countryinfoapp.viewmodel.CountryViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
+import com.codetutor.countryinfoapp.MyAlertDialog
 
 
 @Composable
@@ -42,7 +44,7 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
     val countryList = viewModel.allCountries.observeAsState(initial = emptyList())
     val isLoading = viewModel.isLoading.observeAsState(initial = true)
 
-
+    val showDeleteAlertDialog = viewModel.showDeleteAlertDialog
 
     CountryInfoAppTheme {
         Surface(
@@ -60,12 +62,19 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
                 else -> {
                     LazyColumn {
                         items(countryList.value) {
-                            CountryCard(countryInfo = it)
+                            CountryCard(countryInfo = it,
+                                showDeleteAlertDialog = viewModel.showDeleteAlertDialog)
                         }
                     }
                 }
             }
         }
+    }
+
+    MyAlertDialog(showDialog = showDeleteAlertDialog,
+        title = "Delete confirmation",
+        message = "Do you want to delete this country?",) {
+        Log.i("MainScreen", "Delete dialog shown")
     }
 }
 

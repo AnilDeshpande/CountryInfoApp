@@ -4,6 +4,8 @@ import CountryEntity
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,6 +19,8 @@ class CountryViewModel(private val repository: CountryRepository) : ViewModel() 
 
     val allCountries: MutableLiveData<List<Country>> = MutableLiveData()
     val isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
+    val showDeleteAlertDialog: MutableState<Boolean> = mutableStateOf(false)
+
 
     init {
         viewModelScope.launch {
@@ -29,6 +33,11 @@ class CountryViewModel(private val repository: CountryRepository) : ViewModel() 
     private suspend fun getAllCountries() {
         allCountries.value = repository.getAllCountries()
         Log.i("Room", "getAllCountries init after fetched: ${allCountries.value}")
+    }
+
+    private suspend fun deleteCountry(country: Country) {
+        repository.deleteCountry(country)
+        getAllCountries()
     }
 
     private suspend fun fetchAndInsertAll() {
