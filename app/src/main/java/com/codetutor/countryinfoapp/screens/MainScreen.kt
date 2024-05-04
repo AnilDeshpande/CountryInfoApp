@@ -1,7 +1,5 @@
 package com.codetutor.countryinfoapp.screens
 
-import CountryEntity
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,25 +10,21 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.codetutor.countryinfoapp.components.CountryCard
-import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.database.AppDatabase
 import com.codetutor.countryinfoapp.repository.CountryRepository
 import com.codetutor.countryinfoapp.ui.theme.CountryInfoAppTheme
-import com.codetutor.countryinfoapp.util.getCountryList
 import com.codetutor.countryinfoapp.viewmodel.CountryViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
+import androidx.lifecycle.viewModelScope
 import com.codetutor.countryinfoapp.MyAlertDialog
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -63,6 +57,7 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
                     LazyColumn {
                         items(countryList.value) {
                             CountryCard(countryInfo = it,
+                                viewModel = viewModel,
                                 showDeleteAlertDialog = viewModel.showDeleteAlertDialog)
                         }
                     }
@@ -73,9 +68,10 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
 
     MyAlertDialog(showDialog = showDeleteAlertDialog,
         title = "Delete confirmation",
-        message = "Do you want to delete this country?",) {
-        Log.i("MainScreen", "Delete dialog shown")
-    }
+        message = "Do you want to delete this country?", positiveAction = {
+            viewModel.viewModelScope.launch { viewModel.deleteCountry()  }
+
+        })
 }
 
 class CountryViewModelFactory(private val repository: CountryRepository) : ViewModelProvider.Factory {

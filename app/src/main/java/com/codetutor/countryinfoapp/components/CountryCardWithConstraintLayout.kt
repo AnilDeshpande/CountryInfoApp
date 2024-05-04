@@ -2,8 +2,6 @@ package com.codetutor.countryinfoapp.components
 
 
 import android.util.Log
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,24 +13,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.lifecycle.MutableLiveData
 import coil.compose.AsyncImage
-import com.codetutor.countryinfoapp.MyAlertDialog
-import com.codetutor.countryinfoapp.R
 import com.codetutor.countryinfoapp.data.Country
+import com.codetutor.countryinfoapp.viewmodel.CountryViewModel
 
 @Composable
-fun CountryCardWithConstraintLayout(country: Country, showDeleteAlertDialog: MutableState<Boolean>){
+fun CountryCardWithConstraintLayout(country: Country, viewModel: CountryViewModel, showDeleteAlertDialog: MutableState<Boolean>){
     ConstraintLayout(
         modifier = Modifier
             .wrapContentHeight()
@@ -42,10 +34,10 @@ fun CountryCardWithConstraintLayout(country: Country, showDeleteAlertDialog: Mut
                 detectTapGestures(
                     onDoubleTap = {
 
-
                     }, onLongPress = {
                         Log.i("CountryCard", "Country card long pressed")
                         showDeleteAlertDialog.value = true
+                        viewModel.selectedCountryForDeletion.value = country
                     })
             }
 
