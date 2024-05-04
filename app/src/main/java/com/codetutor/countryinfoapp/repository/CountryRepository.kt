@@ -18,15 +18,15 @@ class CountryRepository(private val context: Context, private val countryDao: Co
 
     suspend fun fetchAndInsertAll() = withContext(Dispatchers.IO) {
         if(getAllCountries() != null && getAllCountries().isNotEmpty()) {
-            Log.i("Room", "Countries already exist in the database ${getAllCountries()}")
+            Log.i("Room", "Countries already exist in the database ${getAllCountries().size}")
             return@withContext
 
         } else {
             Log.i("Room", "Fetching and inserting countries")
             val mutableCountryList: MutableList<Country> = getCountryList(contextForRepo)
-            Log.i("Room", "Fetched countries: $mutableCountryList")
+            Log.i("Room", "Fetched countries: ${mutableCountryList.size}")
             val countryList: List<Country> = mutableCountryList.toList()
-            Log.i("Room", "Inserting Country list: $countryList")
+            Log.i("Room", "Inserting Country list: ${countryList.size}")
             countryDao.insertAll(countryList)
             return@withContext
         }
@@ -34,14 +34,19 @@ class CountryRepository(private val context: Context, private val countryDao: Co
 
     suspend fun getAllCountries(): List<Country> = withContext(Dispatchers.IO) {
         if(allCountries.isNotEmpty()) {
+            Log.i("Room", "getAllCountries : ${allCountries.size}")
             return@withContext allCountries
         } else {
             allCountries = countryDao.getAllCountries()
+            Log.i("Room", "getAllCountries else : ${allCountries.size}")
             return@withContext allCountries
         }
     }
 
     suspend fun deleteCountry(country: Country) = withContext(Dispatchers.IO) {
+        Log.i("Room", " deleteCountry Countries Size before Deletion: ${allCountries.size}")
         countryDao.delete(country)
+        allCountries = countryDao.getAllCountries()
+        Log.i("Room", "deleteCountry Countries Size after Deletion: ${allCountries.size}")
     }
 }
