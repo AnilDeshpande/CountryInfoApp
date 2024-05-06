@@ -10,15 +10,20 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.MutableLiveData
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.ui.theme.borderColorBlack
+import com.codetutor.countryinfoapp.viewmodel.CountryViewModel
 
 @Composable
-fun CountryCard(countryInfo: Country) {
+fun CountryCard(countryInfo: Country,
+                showDeleteAlertDialog: MutableState<Boolean>,
+                selectedCountry: MutableState<Country?>) {
     Surface(
         modifier = Modifier
             .fillMaxWidth(1.0f)
@@ -30,6 +35,8 @@ fun CountryCard(countryInfo: Country) {
         shape = MaterialTheme.shapes.medium
 
     ) {
-        CountryCardWithConstraintLayout(country = countryInfo)
+        CountryCardWithConstraintLayout(country = countryInfo,
+            showDeleteAlertDialog,
+            selectedCountry)
     }
 }
