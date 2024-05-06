@@ -24,7 +24,9 @@ import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.viewmodel.CountryViewModel
 
 @Composable
-fun CountryCardWithConstraintLayout(country: Country, viewModel: CountryViewModel, showDeleteAlertDialog: MutableState<Boolean>){
+fun CountryCardWithConstraintLayout(country: Country,
+                                    showDeleteAlertDialog: MutableState<Boolean>,
+                                    selectedCountry: MutableState<Country?>){
     ConstraintLayout(
         modifier = Modifier
             .wrapContentHeight()
@@ -35,9 +37,9 @@ fun CountryCardWithConstraintLayout(country: Country, viewModel: CountryViewMode
                     onDoubleTap = {
 
                     }, onLongPress = {
-                        Log.i("CountryCard", "Country card long pressed")
+                        Log.i("CountryCard", "Country card long pressed ${country.name?.common}")
                         showDeleteAlertDialog.value = true
-                        viewModel.selectedCountryForDeletion.value = country
+                        selectedCountry.value = country
                     })
             }
 

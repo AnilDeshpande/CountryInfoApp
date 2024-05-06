@@ -21,7 +21,9 @@ import com.codetutor.countryinfoapp.ui.theme.borderColorBlack
 import com.codetutor.countryinfoapp.viewmodel.CountryViewModel
 
 @Composable
-fun CountryCard(countryInfo: Country,viewModel: CountryViewModel, showDeleteAlertDialog: MutableState<Boolean>) {
+fun CountryCard(countryInfo: Country,
+                showDeleteAlertDialog: MutableState<Boolean>,
+                selectedCountry: MutableState<Country?>) {
     Surface(
         modifier = Modifier
             .fillMaxWidth(1.0f)
@@ -33,6 +35,8 @@ fun CountryCard(countryInfo: Country,viewModel: CountryViewModel, showDeleteAler
         shape = MaterialTheme.shapes.medium
 
     ) {
-        CountryCardWithConstraintLayout(country = countryInfo, viewModel, showDeleteAlertDialog)
+        CountryCardWithConstraintLayout(country = countryInfo,
+            showDeleteAlertDialog,
+            selectedCountry)
     }
 }

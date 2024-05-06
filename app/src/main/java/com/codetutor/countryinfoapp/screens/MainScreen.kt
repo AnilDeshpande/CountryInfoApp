@@ -39,6 +39,7 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
     val isLoading = viewModel.isLoading.observeAsState(initial = true)
 
     val showDeleteAlertDialog = viewModel.showDeleteAlertDialog
+    val selectedCountry = viewModel.selectedCountryForDeletion
 
     CountryInfoAppTheme {
         Surface(
@@ -57,8 +58,8 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
                     LazyColumn {
                         items(countryList.value) {
                             CountryCard(countryInfo = it,
-                                viewModel = viewModel,
-                                showDeleteAlertDialog = viewModel.showDeleteAlertDialog)
+                                showDeleteAlertDialog = showDeleteAlertDialog,
+                                selectedCountry = selectedCountry)
                         }
                     }
                 }
@@ -69,7 +70,10 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
     MyAlertDialog(showDialog = showDeleteAlertDialog,
         title = "Delete confirmation",
         message = "Do you want to delete this country?", positiveAction = {
-            viewModel.viewModelScope.launch { viewModel.deleteCountry()  }
+            viewModel.viewModelScope.launch {
+                viewModel.deleteCountry()
+                selectedCountry.value = null
+            }
 
         })
 }
