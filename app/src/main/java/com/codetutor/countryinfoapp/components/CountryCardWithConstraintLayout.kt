@@ -19,14 +19,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.lifecycle.viewModelScope
 import coil.compose.AsyncImage
 import com.codetutor.countryinfoapp.data.Country
+import com.codetutor.countryinfoapp.database.UpdateCountryInfo
 import com.codetutor.countryinfoapp.viewmodel.CountryViewModel
+import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
 
 @Composable
 fun CountryCardWithConstraintLayout(country: Country,
                                     showDeleteAlertDialog: MutableState<Boolean>,
-                                    selectedCountry: MutableState<Country?>){
+                                    selectedCountry: MutableState<Country?>,
+                                    viewModel: CountryViewModel){
     ConstraintLayout(
         modifier = Modifier
             .wrapContentHeight()
@@ -35,6 +40,12 @@ fun CountryCardWithConstraintLayout(country: Country,
             .pointerInput(Unit) {
                 detectTapGestures(
                     onDoubleTap = {
+                        Log.i("CountryCard", "Country card doubleTap pressed ${country?.id!!}")
+                        viewModel.viewModelScope.launch {
+
+                            viewModel.updateCountryInfo.value = UpdateCountryInfo(newCapital = "New Delhi", currentCountry = country)
+                            viewModel.updateCapital()
+                        }
 
                     }, onLongPress = {
                         Log.i("CountryCard", "Country card long pressed ${country?.id!!}")

@@ -5,10 +5,12 @@ import android.content.Context
 import android.util.Log
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.database.CountryDao
+import com.codetutor.countryinfoapp.database.UpdateCountryInfo
 import com.codetutor.countryinfoapp.util.getCountryList
 import countryToEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.json.Json
 
 class CountryRepository(private val context: Context, private val countryDao: CountryDao) {
 
@@ -48,5 +50,14 @@ class CountryRepository(private val context: Context, private val countryDao: Co
         countryDao.delete(country)
         allCountries = countryDao.getAllCountries()
         Log.i("Room", "deleteCountry Countries Size after Deletion: ${allCountries.size}")
+    }
+
+    suspend fun updateCapital(updateCountryInfo: UpdateCountryInfo) = withContext(Dispatchers.IO) {
+        val parsedString = "[\"${updateCountryInfo.newCapital}\"]"
+        val parsedArray = Json.decodeFromString<List<String>>(parsedString)
+        Log.i("Room", " updateCapital count: $parsedArray")
+        val count = countryDao.updateCapital(parsedArray, updateCountryInfo.currentCountry?.id!!)
+        allCountries = countryDao.getAllCountries()
+
     }
 }

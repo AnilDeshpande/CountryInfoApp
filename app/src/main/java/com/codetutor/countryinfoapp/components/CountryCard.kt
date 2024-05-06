@@ -17,13 +17,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.MutableLiveData
 import com.codetutor.countryinfoapp.data.Country
+import com.codetutor.countryinfoapp.database.UpdateCountryInfo
 import com.codetutor.countryinfoapp.ui.theme.borderColorBlack
 import com.codetutor.countryinfoapp.viewmodel.CountryViewModel
 
 @Composable
 fun CountryCard(countryInfo: Country,
                 showDeleteAlertDialog: MutableState<Boolean>,
-                selectedCountry: MutableState<Country?>) {
+                selectedCountry: MutableState<Country?>,
+                viewModel: CountryViewModel) {
     Surface(
         modifier = Modifier
             .fillMaxWidth(1.0f)
@@ -37,6 +39,7 @@ fun CountryCard(countryInfo: Country,
     ) {
         CountryCardWithConstraintLayout(country = countryInfo,
             showDeleteAlertDialog,
-            selectedCountry)
+            selectedCountry,
+            viewModel)
     }
 }

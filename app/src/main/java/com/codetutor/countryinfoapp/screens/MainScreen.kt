@@ -10,6 +10,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
@@ -41,6 +42,11 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
 
     val showDeleteAlertDialog = viewModel.showDeleteAlertDialog
     val selectedCountry = viewModel.selectedCountryForDeletion
+    val updateCountryInfo = viewModel.updateCountryInfo.observeAsState(initial = null)
+
+    LaunchedEffect(key1 = updateCountryInfo) {
+        viewModel.updateCapital()
+    }
 
     CountryInfoAppTheme {
         Surface(
@@ -60,7 +66,8 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
                         items(countryList.value, key = { country -> country?.id!! }) { country ->
                             CountryCard(countryInfo = country,
                                 showDeleteAlertDialog = showDeleteAlertDialog,
-                                selectedCountry = selectedCountry)
+                                selectedCountry = selectedCountry,
+                                viewModel = viewModel)
                         }
                     }
                 }

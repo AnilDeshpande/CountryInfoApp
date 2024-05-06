@@ -23,5 +23,5 @@ interface CountryDao {
     suspend fun delete(country: Country)
 
     @Query("Update Country set capital = :capital where id = :id")
-    suspend fun updateCapital(capital: String, id: Int)
+    suspend fun updateCapital(capital: List<String>, id: Int): Int
 }

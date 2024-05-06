@@ -7,8 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codetutor.countryinfoapp.data.Country
+import com.codetutor.countryinfoapp.database.UpdateCountryInfo
 import com.codetutor.countryinfoapp.repository.CountryRepository
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
 
 class CountryViewModel(private val repository: CountryRepository) : ViewModel() {
 
@@ -19,6 +21,8 @@ class CountryViewModel(private val repository: CountryRepository) : ViewModel() 
 
     //country selected for deletion
     var selectedCountryForDeletion: MutableState<Country?> = mutableStateOf(null)
+
+    var updateCountryInfo: MutableLiveData<UpdateCountryInfo?> = MutableLiveData(null)
 
 
     init {
@@ -49,5 +53,14 @@ class CountryViewModel(private val repository: CountryRepository) : ViewModel() 
         job.join()
         getAllCountries()
         isLoading.value = false
+    }
+
+    suspend fun updateCapital() {
+        Log.i("CountryViewModel", "updateCapital: ${updateCountryInfo.value}")
+        updateCountryInfo.value?.let {
+            repository.updateCapital(updateCountryInfo.value!!)
+        }
+        getAllCountries()
+        updateCountryInfo.value = null
     }
 }
