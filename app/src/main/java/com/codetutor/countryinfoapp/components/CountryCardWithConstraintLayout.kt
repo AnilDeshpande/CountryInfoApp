@@ -37,7 +37,7 @@ fun CountryCardWithConstraintLayout(country: Country,
                     onDoubleTap = {
 
                     }, onLongPress = {
-                        Log.i("CountryCard", "Country card long pressed ${country.name?.common}")
+                        Log.i("CountryCard", "Country card long pressed ${country?.id!!}")
                         showDeleteAlertDialog.value = true
                         selectedCountry.value = country
                     })

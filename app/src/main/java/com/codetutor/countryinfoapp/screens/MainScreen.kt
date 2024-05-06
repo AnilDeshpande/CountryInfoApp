@@ -21,6 +21,7 @@ import com.codetutor.countryinfoapp.ui.theme.CountryInfoAppTheme
 import com.codetutor.countryinfoapp.viewmodel.CountryViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.lifecycle.viewModelScope
 import com.codetutor.countryinfoapp.MyAlertDialog
@@ -56,8 +57,8 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
                 }
                 else -> {
                     LazyColumn {
-                        items(countryList.value) {
-                            CountryCard(countryInfo = it,
+                        items(countryList.value, key = { country -> country?.id!! }) { country ->
+                            CountryCard(countryInfo = country,
                                 showDeleteAlertDialog = showDeleteAlertDialog,
                                 selectedCountry = selectedCountry)
                         }
