@@ -56,7 +56,9 @@ class CountryRepository(private val context: Context, private val countryDao: Co
         val parsedString = "[\"${updateCountryInfo.newCapital}\"]"
         val parsedArray = Json.decodeFromString<List<String>>(parsedString)
         Log.i("Room", " updateCapital count: $parsedArray")
-        val count = countryDao.updateCapital(parsedArray, updateCountryInfo.currentCountry?.id!!)
+        //val count = countryDao.updateCapital(parsedArray, updateCountryInfo.currentCountry?.id!!)
+        val country = updateCountryInfo.currentCountry?.copy(capital = parsedArray)
+        countryDao.updateCountry(country!!)
         allCountries = countryDao.getAllCountries()
 
     }

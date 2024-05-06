@@ -6,6 +6,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.codetutor.countryinfoapp.data.Country
 
 @Dao
@@ -24,4 +25,7 @@ interface CountryDao {
 
     @Query("Update Country set capital = :capital where id = :id")
     suspend fun updateCapital(capital: List<String>, id: Int): Int
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateCountry(country: Country): Int
 }
