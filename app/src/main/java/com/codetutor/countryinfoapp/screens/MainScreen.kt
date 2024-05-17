@@ -20,11 +20,9 @@ import com.codetutor.countryinfoapp.database.AppDatabase
 import com.codetutor.countryinfoapp.repository.CountryRepository
 import com.codetutor.countryinfoapp.ui.theme.CountryInfoAppTheme
 import com.codetutor.countryinfoapp.viewmodel.CountryViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.codetutor.countryinfoapp.MyAlertDialog
 import kotlinx.coroutines.launch
 
@@ -37,12 +35,12 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
     val repository = CountryRepository(context,countryDao)
     val viewModel: CountryViewModel = viewModel(factory = CountryViewModelFactory(repository))
 
-    val countryList = viewModel.allCountries.observeAsState(initial = emptyList())
-    val isLoading = viewModel.isLoading.observeAsState(initial = true)
+    val countryList = viewModel.allCountries.value
+    val isLoading = viewModel.isLoading.value
 
     val showDeleteAlertDialog = viewModel.showDeleteAlertDialog
     val selectedCountry = viewModel.selectedCountryForDeletion
-    val updateCountryInfo = viewModel.updateCountryInfo.observeAsState(initial = null)
+    val updateCountryInfo = viewModel.updateCountryInfo.value
 
     LaunchedEffect(key1 = updateCountryInfo) {
         viewModel.updateCapital()
@@ -56,18 +54,20 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
             color = MaterialTheme.colorScheme.surface
         ) {
             when {
-                isLoading.value -> {
+                isLoading -> {
                     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                         CircularProgressIndicator()
                     }
                 }
                 else -> {
                     LazyColumn {
-                        items(countryList.value, key = { country -> country?.id!! }) { country ->
-                            CountryCard(countryInfo = country,
+                        items(items = countryList, key = { country -> country.id ?: 0 }) { country ->
+                            CountryCard(
+                                countryInfo = country,
                                 showDeleteAlertDialog = showDeleteAlertDialog,
                                 selectedCountry = selectedCountry,
-                                viewModel = viewModel)
+                                viewModel = viewModel
+                            )
                         }
                     }
                 }
