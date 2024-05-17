@@ -23,15 +23,15 @@ class CountryViewModel(private val repository: CountryRepository) : ViewModel() 
 
     init {
         viewModelScope.launch {
-            Log.i("CountryViewModel", "CountryViewModel init before fetched: ${allCountries.value}")
+            Log.i("CountryViewModel", "CountryViewModel init before fetched: ${allCountries.value.size}")
             fetchAndInsertAll()
-            Log.i("CountryViewModel", "CountryViewModel init after fetched: ${allCountries.value}")
+            Log.i("CountryViewModel", "CountryViewModel init after fetched: ${allCountries.value.size}")
         }
     }
 
     private suspend fun getAllCountries() {
         allCountries.value = repository.getAllCountries()
-        Log.i("CountryViewModel", "getAllCountries init after fetched: ${allCountries.value}")
+        Log.i("CountryViewModel", "getAllCountries init after fetched: ${allCountries.value.size}")
     }
 
     suspend fun deleteCountry() {
