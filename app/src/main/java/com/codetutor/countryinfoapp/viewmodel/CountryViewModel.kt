@@ -3,27 +3,23 @@ package com.codetutor.countryinfoapp.viewmodel
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.database.UpdateCountryInfo
 import com.codetutor.countryinfoapp.repository.CountryRepository
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.Json
 
 class CountryViewModel(private val repository: CountryRepository) : ViewModel() {
 
-    val allCountries: MutableLiveData<List<Country>> = MutableLiveData()
-    val isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
+    val allCountries: MutableState<List<Country>> = mutableStateOf(emptyList())
+    val isLoading: MutableState<Boolean> = mutableStateOf(true)
     val showDeleteAlertDialog: MutableState<Boolean> = mutableStateOf(false)
-
 
     //country selected for deletion
     var selectedCountryForDeletion: MutableState<Country?> = mutableStateOf(null)
 
-    var updateCountryInfo: MutableLiveData<UpdateCountryInfo?> = MutableLiveData(null)
-
+    var updateCountryInfo: MutableState<UpdateCountryInfo?> = mutableStateOf(null)
 
     init {
         viewModelScope.launch {
@@ -48,7 +44,7 @@ class CountryViewModel(private val repository: CountryRepository) : ViewModel() 
 
     private suspend fun fetchAndInsertAll() {
         val job = viewModelScope.launch {
-        repository.fetchAndInsertAll()
+            repository.fetchAndInsertAll()
         }
         job.join()
         getAllCountries()
