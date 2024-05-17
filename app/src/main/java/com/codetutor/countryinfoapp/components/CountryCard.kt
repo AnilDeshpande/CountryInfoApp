@@ -16,7 +16,7 @@ import com.codetutor.countryinfoapp.viewmodel.CountryViewModel
 
 @Composable
 fun CountryCard(
-    countryInfo: Int,
+    countryInfo: Country,
     showDeleteAlertDialog: MutableState<Boolean>,
     selectedCountry: MutableState<Country?>,
     viewModel: CountryViewModel) {
