@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,12 +31,12 @@ fun MyNewAlertDialog(
                 showDialog.value = false
             },
             title = {
-                Text(text = title)
+                Text(text = title, fontSize = 30.sp)
             },
             text = {
                 Column {
-                    Text(message)
-                    Text("Current Country Capital: $currentCapital")
+                    Text(message,fontSize = 25.sp)
+                    Text("Current Country Capital: $currentCapital", fontSize = 20.sp)
                     OutlinedTextField(
                         value = newCapital,
                         onValueChange = { newCapital = it },
