@@ -23,7 +23,7 @@ import com.codetutor.countryinfoapp.viewmodel.CountryViewModel
 import androidx.compose.ui.Alignment
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.codetutor.countryinfoapp.MyAlertDialog
+import com.codetutor.countryinfoapp.dialogs.MyAlertDialog
 import kotlinx.coroutines.launch
 
 
