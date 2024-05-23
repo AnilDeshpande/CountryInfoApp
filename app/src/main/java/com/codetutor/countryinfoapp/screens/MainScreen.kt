@@ -23,7 +23,9 @@ import com.codetutor.countryinfoapp.viewmodel.CountryViewModel
 import androidx.compose.ui.Alignment
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.codetutor.countryinfoapp.database.UpdateCountryInfo
 import com.codetutor.countryinfoapp.dialogs.MyAlertDialog
+import com.codetutor.countryinfoapp.dialogs.MyNewAlertDialog
 import kotlinx.coroutines.launch
 
 
@@ -39,6 +41,7 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
     val isLoading = viewModel.isLoading.value
 
     val showDeleteAlertDialog = viewModel.showDeleteAlertDialog
+    val showUpdateCapitalDialog = viewModel.showUpdateCapitalDialog
     val selectedCountry = viewModel.selectedCountryForDeletion
     val updateCountryInfo = viewModel.updateCountryInfo.value
 
@@ -81,9 +84,19 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
             viewModel.viewModelScope.launch {
                 viewModel.deleteCountry()
                 selectedCountry.value = null
-            }
+        }
 
-        })
+    })
+
+    MyNewAlertDialog(
+        showDialog = showUpdateCapitalDialog,
+        title = "Update Country Capital",
+        message = "Please enter the name of the new Capital",
+        positiveAction = (newCapital)->{
+
+    },
+        currentCapital = viewModel.updateCountryInfo.value?.currentCountry?.capital?.get(0) ?: ""
+    )
 }
 
 class CountryViewModelFactory(private val repository: CountryRepository) : ViewModelProvider.Factory {

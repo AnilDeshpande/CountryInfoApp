@@ -43,8 +43,8 @@ fun CountryCardWithConstraintLayout(country: Country,
                         Log.i("CountryCard", "Country card doubleTap pressed ${country?.id!!}")
                         viewModel.viewModelScope.launch {
 
-                            viewModel.updateCountryInfo.value = UpdateCountryInfo(newCapital = "New Delhi", currentCountry = country)
-                            viewModel.updateCapital()
+                            viewModel.updateCountryInfo.value = UpdateCountryInfo(newCapital = null, currentCountry = country)
+                            viewModel.showUpdateCapitalDialog.value = true
                         }
 
                     }, onLongPress = {

@@ -15,6 +15,7 @@ class CountryViewModel(private val repository: CountryRepository) : ViewModel() 
     val allCountries: MutableState<List<Country>> = mutableStateOf(emptyList())
     val isLoading: MutableState<Boolean> = mutableStateOf(true)
     val showDeleteAlertDialog: MutableState<Boolean> = mutableStateOf(false)
+    val showUpdateCapitalDialog: MutableState<Boolean> = mutableStateOf(false)
 
     //country selected for deletion
     var selectedCountryForDeletion: MutableState<Country?> = mutableStateOf(null)
