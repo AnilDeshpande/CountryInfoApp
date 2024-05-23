@@ -52,12 +52,12 @@ class CountryRepository(private val context: Context, private val countryDao: Co
         Log.i("Room", "deleteCountry Countries Size after Deletion: ${allCountries.size}")
     }
 
-    suspend fun updateCapital(updateCountryInfo: UpdateCountryInfo) = withContext(Dispatchers.IO) {
-        val parsedString = "[\"${updateCountryInfo.newCapital}\"]"
+    suspend fun updateCapital(country: Country, newCapital: String) = withContext(Dispatchers.IO) {
+        val parsedString = "[\"${newCapital}\"]"
         val parsedArray = Json.decodeFromString<List<String>>(parsedString)
         Log.i("Room", " updateCapital count: $parsedArray")
-        //val count = countryDao.updateCapital(parsedArray, updateCountryInfo.currentCountry?.id!!)
-        val country = updateCountryInfo.currentCountry?.copy(capital = parsedArray)
+        //val count = countryDao.updateCapital(parsedArray, country?.id!!)
+        val country = country?.copy(capital = parsedArray)
         countryDao.updateCountry(country!!)
         allCountries = countryDao.getAllCountries()
 

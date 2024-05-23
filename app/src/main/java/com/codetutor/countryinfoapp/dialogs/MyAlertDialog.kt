@@ -1,4 +1,4 @@
-package com.codetutor.countryinfoapp
+package com.codetutor.countryinfoapp.dialogs
 
 import android.os.Bundle
 import androidx.compose.material3.AlertDialog

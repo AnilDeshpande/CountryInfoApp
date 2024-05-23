@@ -23,7 +23,9 @@ import com.codetutor.countryinfoapp.viewmodel.CountryViewModel
 import androidx.compose.ui.Alignment
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.codetutor.countryinfoapp.MyAlertDialog
+import com.codetutor.countryinfoapp.database.UpdateCountryInfo
+import com.codetutor.countryinfoapp.dialogs.MyAlertDialog
+import com.codetutor.countryinfoapp.dialogs.MyNewAlertDialog
 import kotlinx.coroutines.launch
 
 
@@ -39,12 +41,9 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
     val isLoading = viewModel.isLoading.value
 
     val showDeleteAlertDialog = viewModel.showDeleteAlertDialog
+    val showUpdateCapitalDialog = viewModel.showUpdateCapitalDialog
     val selectedCountry = viewModel.selectedCountryForDeletion
     val updateCountryInfo = viewModel.updateCountryInfo.value
-
-    LaunchedEffect(key1 = updateCountryInfo) {
-        viewModel.updateCapital()
-    }
 
     CountryInfoAppTheme {
         Surface(
@@ -81,8 +80,17 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
             viewModel.viewModelScope.launch {
                 viewModel.deleteCountry()
                 selectedCountry.value = null
-            }
+        }
+    })
 
+    MyNewAlertDialog(showDialog = showUpdateCapitalDialog,
+        title = "Update Capital",
+        message = "Enter new capital",
+        currentCapital = updateCountryInfo?.capital?.get(0) ?: "",
+        positiveAction = {  newCapital ->
+            viewModel.viewModelScope.launch {
+                viewModel.updateCapital(newCapital)
+            }
         })
 }
 
