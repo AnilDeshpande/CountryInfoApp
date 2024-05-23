@@ -20,7 +20,7 @@ class CountryViewModel(private val repository: CountryRepository) : ViewModel() 
     //country selected for deletion
     var selectedCountryForDeletion: MutableState<Country?> = mutableStateOf(null)
 
-    var updateCountryInfo: MutableState<UpdateCountryInfo?> = mutableStateOf(null)
+    var updateCountryInfo: MutableState<Country?> = mutableStateOf(null)
 
     init {
         viewModelScope.launch {
@@ -52,12 +52,16 @@ class CountryViewModel(private val repository: CountryRepository) : ViewModel() 
         isLoading.value = false
     }
 
-    suspend fun updateCapital() {
+    suspend fun updateCapital(newCapital: String) {
         Log.i("CountryViewModel", "updateCapital: ${updateCountryInfo.value}")
         updateCountryInfo.value?.let {
-            repository.updateCapital(updateCountryInfo.value!!)
+            it?.let {
+                repository.updateCapital(it, newCapital)
+            }
+
         }
         getAllCountries()
         updateCountryInfo.value = null
+        showUpdateCapitalDialog.value = false
     }
 }

@@ -45,10 +45,6 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
     val selectedCountry = viewModel.selectedCountryForDeletion
     val updateCountryInfo = viewModel.updateCountryInfo.value
 
-    LaunchedEffect(key1 = updateCountryInfo) {
-        viewModel.updateCapital()
-    }
-
     CountryInfoAppTheme {
         Surface(
             modifier = Modifier
@@ -85,18 +81,17 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
                 viewModel.deleteCountry()
                 selectedCountry.value = null
         }
-
     })
 
-    MyNewAlertDialog(
-        showDialog = showUpdateCapitalDialog,
-        title = "Update Country Capital",
-        message = "Please enter the name of the new Capital",
-        positiveAction = (newCapital)->{
-
-    },
-        currentCapital = viewModel.updateCountryInfo.value?.currentCountry?.capital?.get(0) ?: ""
-    )
+    MyNewAlertDialog(showDialog = showUpdateCapitalDialog,
+        title = "Update Capital",
+        message = "Enter new capital",
+        currentCapital = updateCountryInfo?.capital?.get(0) ?: "",
+        positiveAction = {  newCapital ->
+            viewModel.viewModelScope.launch {
+                viewModel.updateCapital(newCapital)
+            }
+        })
 }
 
 class CountryViewModelFactory(private val repository: CountryRepository) : ViewModelProvider.Factory {

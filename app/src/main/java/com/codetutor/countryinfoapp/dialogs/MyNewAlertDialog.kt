@@ -19,8 +19,8 @@ fun MyNewAlertDialog(
     showDialog: MutableState<Boolean>,
     title: String,
     message: String,
-    positiveAction: (String) -> Unit,
-    currentCapital: String
+    currentCapital: String,
+    positiveAction: (String) -> Unit
 ) {
     var newCapital by remember { mutableStateOf("") }
 
