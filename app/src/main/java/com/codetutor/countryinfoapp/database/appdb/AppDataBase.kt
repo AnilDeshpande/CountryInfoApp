@@ -1,4 +1,4 @@
-package com.codetutor.countryinfoapp.database
+package com.codetutor.countryinfoapp.database.appdb
 
 import android.content.Context
 import androidx.room.Database
@@ -6,10 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.codetutor.countryinfoapp.data.Country
-
-interface DatabaseProvider {
-    fun countryDao(): CountryDao
-}
+import com.codetutor.countryinfoapp.database.Converters
+import com.codetutor.countryinfoapp.database.dao.CountryDao
 
 @Database(entities = [Country::class], version = 1)
 @TypeConverters(Converters::class)

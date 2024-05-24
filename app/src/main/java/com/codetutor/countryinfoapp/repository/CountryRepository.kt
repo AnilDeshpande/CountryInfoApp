@@ -1,13 +1,10 @@
 package com.codetutor.countryinfoapp.repository
 
-import CountryEntity
 import android.content.Context
 import android.util.Log
 import com.codetutor.countryinfoapp.data.Country
-import com.codetutor.countryinfoapp.database.CountryDao
-import com.codetutor.countryinfoapp.database.UpdateCountryInfo
+import com.codetutor.countryinfoapp.database.dao.CountryDao
 import com.codetutor.countryinfoapp.util.getCountryList
-import countryToEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
