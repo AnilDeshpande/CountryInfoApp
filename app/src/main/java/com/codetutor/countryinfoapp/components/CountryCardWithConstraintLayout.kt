@@ -22,10 +22,8 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.viewModelScope
 import coil.compose.AsyncImage
 import com.codetutor.countryinfoapp.data.Country
-import com.codetutor.countryinfoapp.database.UpdateCountryInfo
 import com.codetutor.countryinfoapp.viewmodel.CountryViewModel
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.Json
 
 @Composable
 fun CountryCardWithConstraintLayout(country: Country,

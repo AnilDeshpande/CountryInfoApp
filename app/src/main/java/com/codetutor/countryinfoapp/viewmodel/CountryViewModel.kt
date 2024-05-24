@@ -6,7 +6,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codetutor.countryinfoapp.data.Country
-import com.codetutor.countryinfoapp.database.UpdateCountryInfo
 import com.codetutor.countryinfoapp.repository.CountryRepository
 import kotlinx.coroutines.launch
 
