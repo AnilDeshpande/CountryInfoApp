@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.codetutor.countryinfoapp.data.Country
-import com.codetutor.countryinfoapp.database.Converters
+import com.codetutor.countryinfoapp.database.converters.Converters
 import com.codetutor.countryinfoapp.database.dao.CountryDao
 
 @Database(entities = [Country::class], version = 1)

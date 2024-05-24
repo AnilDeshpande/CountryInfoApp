@@ -1,8 +1,6 @@
 package com.codetutor.countryinfoapp
 
-import com.codetutor.countryinfoapp.database.Converters
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
+import com.codetutor.countryinfoapp.database.converters.Converters
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
