@@ -133,15 +133,4 @@ fun getCountryList(): MutableList<CountryInfo> {
     return countryList
 }
 
-fun getJsonString(context: Context): String {
-    val inputStream = context.resources.openRawResource(R.raw.countries)
-    return inputStream.bufferedReader().use { it.readText() }
-}
-
-suspend fun getCountryList(context: Context): MutableList<Country> {
-    val jsonStringFromRaw = getJsonString(context = context)
-    delay(2000)
-    return Json{ignoreUnknownKeys = true}.decodeFromString<MutableList<Country>>(jsonStringFromRaw)
-}
-
 
