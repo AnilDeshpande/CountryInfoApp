@@ -24,6 +24,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.codetutor.countryinfoapp.dialogs.MyAlertDialog
 import com.codetutor.countryinfoapp.dialogs.MyNewAlertDialog
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
@@ -32,7 +33,7 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
 
     val context = LocalContext.current
     val countryDao = AppDatabase.getDatabase(context.applicationContext).countryDao()
-    val repository = CountryRepository(context,countryDao)
+    val repository = CountryRepository(context,countryDao, Dispatchers.IO)
     val viewModel: CountryViewModel = viewModel(factory = CountryViewModelFactory(repository))
 
     val countryList = viewModel.allCountries.value

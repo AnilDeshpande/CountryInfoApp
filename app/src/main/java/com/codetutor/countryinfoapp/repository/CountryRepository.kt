@@ -1,24 +1,24 @@
 package com.codetutor.countryinfoapp.repository
 
 import android.content.Context
-import android.util.Log
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.database.dao.CountryDao
 import com.codetutor.countryinfoapp.util.getCountryList
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 
-class CountryRepository(private val context: Context, private val countryDao: CountryDao) {
+
+class CountryRepository(private val context: Context,
+                        private val countryDao: CountryDao,
+                        private val dispatcher: CoroutineDispatcher): ICountryRepository {
 
     private val contextForRepo: Context = context
-
     private var allCountries: List<Country> = emptyList()
 
-    suspend fun fetchAndInsertAll() = withContext(Dispatchers.IO) {
-        if(getAllCountries() != null && getAllCountries().isNotEmpty()) {
+    override suspend fun fetchAndInsertAll() = withContext(dispatcher) {
+        if(getAllCountries().isNotEmpty()) {
             return@withContext
-
         } else {
             val mutableCountryList: MutableList<Country> = getCountryList(contextForRepo)
             val countryList: List<Country> = mutableCountryList.toList()
@@ -27,7 +27,7 @@ class CountryRepository(private val context: Context, private val countryDao: Co
         }
     }
 
-    suspend fun getAllCountries(): List<Country> = withContext(Dispatchers.IO) {
+    override suspend fun getAllCountries(): List<Country> = withContext(dispatcher) {
         if(allCountries.isNotEmpty()) {
             return@withContext allCountries
         } else {
@@ -36,17 +36,17 @@ class CountryRepository(private val context: Context, private val countryDao: Co
         }
     }
 
-    suspend fun deleteCountry(country: Country) = withContext(Dispatchers.IO) {
+    override suspend fun deleteCountry(country: Country) = withContext(dispatcher) {
         countryDao.delete(country)
         allCountries = countryDao.getAllCountries()
     }
 
-    suspend fun updateCapital(country: Country, newCapital: String) = withContext(Dispatchers.IO) {
+    override suspend fun updateCapital(country: Country, newCapital: String) = withContext(dispatcher) {
         val parsedString = "[\"${newCapital}\"]"
         val parsedArray = Json.decodeFromString<List<String>>(parsedString)
         //val count = countryDao.updateCapital(parsedArray, country?.id!!)
-        val country = country?.copy(capital = parsedArray)
-        countryDao.updateCountry(country!!)
+        val countryWithNewCapital = country?.copy(capital = parsedArray)
+        countryDao.updateCountry(countryWithNewCapital!!)
         allCountries = countryDao.getAllCountries()
     }
 }
