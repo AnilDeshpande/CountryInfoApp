@@ -1,4 +1,4 @@
-package com.codetutor.countryinfoapp.database
+package com.codetutor.countryinfoapp.database.converters
 
 import androidx.room.TypeConverter
 import com.codetutor.countryinfoapp.data.CapitalInfo
@@ -10,13 +10,8 @@ import com.codetutor.countryinfoapp.data.Languages
 import com.codetutor.countryinfoapp.data.Maps
 import com.codetutor.countryinfoapp.data.Name
 import com.codetutor.countryinfoapp.data.NativeName
-import com.codetutor.countryinfoapp.data.Translations
-import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.encodeToString
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.serializer
-import org.intellij.lang.annotations.Language
 
 class Converters {
     private val jsonFormat = Json { ignoreUnknownKeys = true }

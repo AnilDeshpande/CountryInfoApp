@@ -1,4 +1,4 @@
-package com.codetutor.countryinfoapp.database
+package com.codetutor.countryinfoapp.database.converters
 
 import androidx.room.TypeConverter
 import com.codetutor.countryinfoapp.data.Translations
