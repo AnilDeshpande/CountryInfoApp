@@ -7,31 +7,31 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.repository.CountryRepository
+import com.codetutor.countryinfoapp.repository.ICountryRepository
 import kotlinx.coroutines.launch
 
-class CountryViewModel(private val repository: CountryRepository) : ViewModel() {
+
+class CountryViewModel(private val repository: ICountryRepository) : ViewModel() {
 
     val allCountries: MutableState<List<Country>> = mutableStateOf(emptyList())
     val isLoading: MutableState<Boolean> = mutableStateOf(true)
-    val showDeleteAlertDialog: MutableState<Boolean> = mutableStateOf(false)
-    val showUpdateCapitalDialog: MutableState<Boolean> = mutableStateOf(false)
 
-    //country selected for deletion
+    //Delete Related Functionality
+    val showDeleteAlertDialog: MutableState<Boolean> = mutableStateOf(false)
     var selectedCountryForDeletion: MutableState<Country?> = mutableStateOf(null)
 
+    //Update related functionality
+    val showUpdateCapitalDialog: MutableState<Boolean> = mutableStateOf(false)
     var updateCountryInfo: MutableState<Country?> = mutableStateOf(null)
 
     init {
         viewModelScope.launch {
-            Log.i("CountryViewModel", "CountryViewModel init before fetched: ${allCountries.value.size}")
             fetchAndInsertAll()
-            Log.i("CountryViewModel", "CountryViewModel init after fetched: ${allCountries.value.size}")
         }
     }
 
     private suspend fun getAllCountries() {
         allCountries.value = repository.getAllCountries()
-        Log.i("CountryViewModel", "getAllCountries init after fetched: ${allCountries.value.size}")
     }
 
     suspend fun deleteCountry() {
@@ -52,12 +52,10 @@ class CountryViewModel(private val repository: CountryRepository) : ViewModel() 
     }
 
     suspend fun updateCapital(newCapital: String) {
-        Log.i("CountryViewModel", "updateCapital: ${updateCountryInfo.value}")
         updateCountryInfo.value?.let {
             it?.let {
                 repository.updateCapital(it, newCapital)
             }
-
         }
         getAllCountries()
         updateCountryInfo.value = null
