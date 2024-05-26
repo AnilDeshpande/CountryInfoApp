@@ -12,8 +12,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.codetutor.countryinfoapp.components.CountryCard
 import com.codetutor.countryinfoapp.database.appdb.AppDatabase
 import com.codetutor.countryinfoapp.repository.CountryRepository
@@ -22,8 +20,8 @@ import com.codetutor.countryinfoapp.viewmodel.CountryViewModel
 import androidx.compose.ui.Alignment
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.codetutor.countryinfoapp.dialogs.MyAlertDialog
-import com.codetutor.countryinfoapp.dialogs.MyNewAlertDialog
+import com.codetutor.countryinfoapp.dialogs.DialogDeleteCountry
+import com.codetutor.countryinfoapp.dialogs.DialogUpdateCountry
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProviderImpl
 import com.codetutor.countryinfoapp.viewmodel.CountryViewModelFactory
 import kotlinx.coroutines.Dispatchers
@@ -76,16 +74,18 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
         }
     }
 
-    MyAlertDialog(showDialog = showDeleteAlertDialog,
+    DialogDeleteCountry(showDialog = showDeleteAlertDialog,
         title = "Delete confirmation",
-        message = "Do you want to delete this country?", positiveAction = {
+        message = "Do you want to delete this country?",
+        positiveAction = {
             viewModel.viewModelScope.launch {
                 viewModel.deleteCountry()
                 selectedCountry.value = null
+            }
         }
-    })
+    )
 
-    MyNewAlertDialog(showDialog = showUpdateCapitalDialog,
+    DialogUpdateCountry(showDialog = showUpdateCapitalDialog,
         title = "Update Capital",
         message = "Enter new capital",
         currentCapital = updateCountryInfo?.capital?.get(0) ?: "",
@@ -93,5 +93,6 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
             viewModel.viewModelScope.launch {
                 viewModel.updateCapital(newCapital)
             }
-        })
+        }
+    )
 }

@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyNewAlertDialog(
+fun DialogUpdateCountry(
     showDialog: MutableState<Boolean>,
     title: String,
     message: String,
