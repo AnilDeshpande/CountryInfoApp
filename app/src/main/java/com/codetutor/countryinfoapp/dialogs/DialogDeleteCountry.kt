@@ -7,7 +7,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 
 @Composable
-fun DialogDeleteCountry(showDialog: MutableState<Boolean>, title: String, message: String, positiveAction: () -> Unit) {
+fun DialogDeleteCountry(showDialog: MutableState<Boolean>,
+                        title: String,
+                        message: String,
+                        positiveAction: () -> Unit) {
     if (showDialog.value) {
         AlertDialog(
             onDismissRequest = {
