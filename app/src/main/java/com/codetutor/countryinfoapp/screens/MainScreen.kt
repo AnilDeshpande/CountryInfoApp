@@ -25,6 +25,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.codetutor.countryinfoapp.dialogs.MyAlertDialog
 import com.codetutor.countryinfoapp.dialogs.MyNewAlertDialog
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProviderImpl
+import com.codetutor.countryinfoapp.viewmodel.CountryViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -93,14 +94,4 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
                 viewModel.updateCapital(newCapital)
             }
         })
-}
-
-class CountryViewModelFactory(private val repository: CountryRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(CountryViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return CountryViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
 }
