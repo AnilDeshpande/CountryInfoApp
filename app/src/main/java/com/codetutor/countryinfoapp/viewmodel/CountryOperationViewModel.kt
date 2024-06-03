@@ -1,28 +1,19 @@
 package com.codetutor.countryinfoapp.viewmodel
 
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codetutor.countryinfoapp.data.Country
-import com.codetutor.countryinfoapp.repository.CountryRepository
 import com.codetutor.countryinfoapp.repository.ICountryRepository
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 
-class CountryViewModel(private val repository: ICountryRepository) : ViewModel() {
+class CountryOperationViewModel(private val repository: ICountryRepository) : ViewModel() {
 
     val allCountries: MutableState<List<Country>> = mutableStateOf(emptyList())
-    val isLoading: MutableState<Boolean> = mutableStateOf(true)
-
-    //Delete Related Functionality
-    val showDeleteAlertDialog: MutableState<Boolean> = mutableStateOf(false)
-    var selectedCountryForDeletion: MutableState<Country?> = mutableStateOf(null)
-
-    //Update related functionality
-    val showUpdateCapitalDialog: MutableState<Boolean> = mutableStateOf(false)
-    var updateCountryInfo: MutableState<Country?> = mutableStateOf(null)
+    val countriesLoaded: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
     init {
         viewModelScope.launch {
@@ -32,14 +23,14 @@ class CountryViewModel(private val repository: ICountryRepository) : ViewModel()
 
     private suspend fun getAllCountries() {
         allCountries.value = repository.getAllCountries()
+        countriesLoaded.value = true
     }
 
-    suspend fun deleteCountry() {
-        selectedCountryForDeletion.value?.let {
+    suspend fun deleteCountry(country: Country) {
+        country.let {
             repository.deleteCountry(it)
         }
         getAllCountries()
-        selectedCountryForDeletion.value = null
     }
 
     private suspend fun fetchAndInsertAll() {
@@ -48,17 +39,14 @@ class CountryViewModel(private val repository: ICountryRepository) : ViewModel()
         }
         job.join()
         getAllCountries()
-        isLoading.value = false
     }
 
-    suspend fun updateCapital(newCapital: String) {
-        updateCountryInfo.value?.let {
-            it?.let {
+    suspend fun updateCapital(country: Country, newCapital: String) {
+        country.let {
+            it.let {
                 repository.updateCapital(it, newCapital)
             }
         }
         getAllCountries()
-        updateCountryInfo.value = null
-        showUpdateCapitalDialog.value = false
     }
 }
