@@ -37,7 +37,7 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
     val countryListProvider = CountryListServiceProviderImpl(context)
     val repository = CountryRepository(countryDao,countryListProvider, Dispatchers.IO)
     val viewModelCountryOps: CountryOperationViewModel = viewModel(factory = CountryViewModelFactory(repository))
-    val viewModelUI: CountryUIViewModel = viewModel { CountryUIViewModel() }
+    val viewModelUI: CountryUIViewModel = viewModel { CountryUIViewModel(viewModelCountryOps) }
 
     val countryList = viewModelCountryOps.allCountries.value
     val isLoading = viewModelUI.isLoading.value

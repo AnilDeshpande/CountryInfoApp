@@ -6,12 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.repository.ICountryRepository
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 
 class CountryOperationViewModel(private val repository: ICountryRepository) : ViewModel() {
 
     val allCountries: MutableState<List<Country>> = mutableStateOf(emptyList())
+    val countriesLoaded: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
     init {
         viewModelScope.launch {
@@ -21,6 +23,7 @@ class CountryOperationViewModel(private val repository: ICountryRepository) : Vi
 
     private suspend fun getAllCountries() {
         allCountries.value = repository.getAllCountries()
+        countriesLoaded.value = true
     }
 
     suspend fun deleteCountry(country: Country) {

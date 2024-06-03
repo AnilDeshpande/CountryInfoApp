@@ -3,9 +3,11 @@ package com.codetutor.countryinfoapp.viewmodel
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.codetutor.countryinfoapp.data.Country
+import kotlinx.coroutines.launch
 
-class CountryUIViewModel: ViewModel() {
+class CountryUIViewModel(private val countryOperationViewModel: CountryOperationViewModel): ViewModel() {
     val isLoading: MutableState<Boolean> = mutableStateOf(true)
 
     //Delete Related Functionality
@@ -16,5 +18,12 @@ class CountryUIViewModel: ViewModel() {
     val showUpdateCapitalDialog: MutableState<Boolean> = mutableStateOf(false)
     var updateCountryInfo: MutableState<Country?> = mutableStateOf(null)
 
+    init {
+        viewModelScope.launch {
+            countryOperationViewModel.countriesLoaded.collect { loaded ->
+                isLoading.value = !loaded
+            }
+        }
+    }
 
 }
