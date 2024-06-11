@@ -22,6 +22,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.codetutor.countryinfoapp.dialogs.DialogDeleteCountry
 import com.codetutor.countryinfoapp.dialogs.DialogUpdateCountry
+import com.codetutor.countryinfoapp.repository.FilterByContinent
+import com.codetutor.countryinfoapp.repository.FilterByLanguage
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProviderImpl
 import com.codetutor.countryinfoapp.viewmodel.CountryUIViewModel
 import com.codetutor.countryinfoapp.viewmodel.CountryViewModelFactory
@@ -30,14 +32,7 @@ import kotlinx.coroutines.launch
 
 
 @Composable
-fun MainScreen( innerPaddingValues: PaddingValues) {
-
-    val context = LocalContext.current
-    val countryDao = AppDatabase.getDatabase(context.applicationContext).countryDao()
-    val countryListProvider = CountryListServiceProviderImpl(context)
-    val repository = CountryRepository(countryDao,countryListProvider, Dispatchers.IO)
-    val viewModelCountryOps: CountryOperationViewModel = viewModel(factory = CountryViewModelFactory(repository))
-    val viewModelUI: CountryUIViewModel = viewModel { CountryUIViewModel(viewModelCountryOps) }
+fun MainScreen( innerPaddingValues: PaddingValues, viewModelCountryOps: CountryOperationViewModel, viewModelUI: CountryUIViewModel ) {
 
     val countryList = viewModelCountryOps.allCountries.value
     val isLoading = viewModelUI.isLoading.value
@@ -59,8 +54,7 @@ fun MainScreen( innerPaddingValues: PaddingValues) {
                     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                         CircularProgressIndicator()
                     }
-                }
-                else -> {
+                } else -> {
                     LazyColumn {
                         items(items = countryList, key = { country -> country.id ?: 0 }) { country ->
                             CountryCard(

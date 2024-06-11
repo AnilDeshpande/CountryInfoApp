@@ -14,9 +14,15 @@ class CountryUIViewModel(private val countryOperationViewModel: CountryOperation
     val showDeleteAlertDialog: MutableState<Boolean> = mutableStateOf(false)
     var selectedCountryForDeletion: MutableState<Country?> = mutableStateOf(null)
 
+
+    var selectedFilter: MutableState<String?> =  mutableStateOf(null)
+    var filterByKey : MutableState<String> =  mutableStateOf("")
+
     //Update related functionality
     val showUpdateCapitalDialog: MutableState<Boolean> = mutableStateOf(false)
     var updateCountryInfo: MutableState<Country?> = mutableStateOf(null)
+
+    var selectedCountry: MutableState<Country?> = mutableStateOf(null)
 
     init {
         viewModelScope.launch {

@@ -3,12 +3,13 @@ package com.codetutor.countryinfoapp.repository
 import android.content.Context
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.database.dao.CountryDao
+import com.codetutor.countryinfoapp.database.dao.ICountryDao
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 
-class CountryRepository(private val countryDao: CountryDao,
+class CountryRepository(private val countryDao: ICountryDao,
                         private val countryListServiceProvider: CountryListServiceProvider,
                         private val dispatcher: CoroutineDispatcher): ICountryRepository {
 
@@ -40,11 +41,12 @@ class CountryRepository(private val countryDao: CountryDao,
     }
 
     override suspend fun updateCapital(country: Country, newCapital: String) = withContext(dispatcher) {
-        val parsedString = "[\"${newCapital}\"]"
-        val parsedArray = Json.decodeFromString<List<String>>(parsedString)
-        //val count = countryDao.updateCapital(parsedArray, country?.id!!)
-        val countryWithNewCapital = country?.copy(capital = parsedArray)
+        val countryWithNewCapital = country?.copy(capital = listOf(newCapital))
         countryDao.updateCountry(countryWithNewCapital!!)
         allCountries = countryDao.getAllCountries()
+    }
+
+    override suspend fun filterCountries(filterCriteria: FilterCriteria): List<Country> = withContext(dispatcher) {
+        return@withContext filterCriteria.filter(allCountries)
     }
 }

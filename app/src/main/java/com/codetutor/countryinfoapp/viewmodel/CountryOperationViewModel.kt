@@ -5,6 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codetutor.countryinfoapp.data.Country
+import com.codetutor.countryinfoapp.repository.FilterByContinent
+import com.codetutor.countryinfoapp.repository.FilterByLanguage
+import com.codetutor.countryinfoapp.repository.FilterCriteria
 import com.codetutor.countryinfoapp.repository.ICountryRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -21,7 +24,7 @@ class CountryOperationViewModel(private val repository: ICountryRepository) : Vi
         }
     }
 
-    private suspend fun getAllCountries() {
+    suspend fun getAllCountries() {
         allCountries.value = repository.getAllCountries()
         countriesLoaded.value = true
     }
@@ -48,5 +51,11 @@ class CountryOperationViewModel(private val repository: ICountryRepository) : Vi
             }
         }
         getAllCountries()
+    }
+
+    suspend fun filterCountries(filterCriteria: FilterCriteria) {
+        filterCriteria?.let { criteria ->
+            allCountries.value = repository.filterCountries(criteria)
+        }
     }
 }
