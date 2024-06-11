@@ -20,10 +20,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -37,6 +39,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.codetutor.countryinfoapp.database.appdb.AppDatabase
 import com.codetutor.countryinfoapp.repository.CountryRepository
+import com.codetutor.countryinfoapp.repository.FilterByContinent
+import com.codetutor.countryinfoapp.repository.FilterByDriveSide
+import com.codetutor.countryinfoapp.repository.FilterByLanguage
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProviderImpl
 import com.codetutor.countryinfoapp.viewmodel.CountryOperationViewModel
 import com.codetutor.countryinfoapp.viewmodel.CountryUIViewModel
@@ -56,7 +61,10 @@ fun CountryInfoAppScaffold(){
     val viewModelCountryOps: CountryOperationViewModel = viewModel(factory = CountryViewModelFactory(repository))
     val viewModelUI: CountryUIViewModel = viewModel { CountryUIViewModel(viewModelCountryOps) }
 
-    var selectedFilter = viewModelUI.selectedFilter
+    val selectedFilter = viewModelUI.selectedFilter
+    val filterByKey = viewModelUI.filterByKey
+
+    ObserveFilterKeyChanges(filterByKey, selectedFilter, viewModelCountryOps)
 
     Scaffold (
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -89,11 +97,20 @@ fun CountryInfoAppScaffold(){
         },
         bottomBar = {
             BottomAppBar {
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(imageVector = Icons.Filled.Filter, contentDescription = "filter")
-                }
                 FilterChipExample("Continent", selectedFilter)
-                FilterChipExample("Language", selectedFilter)
+                FilterChipExample("Drive Side", selectedFilter)
+
+                if (selectedFilter.value != null) {
+                    TextField(
+                        value = filterByKey.value,
+                        onValueChange = { newValue ->
+                            filterByKey.value = newValue
+                        },
+                        modifier = Modifier.padding(3.dp),
+                        label = { Text("") },
+                        singleLine = true,
+                    )
+                }
             }
         },
         floatingActionButton = {
@@ -106,6 +123,38 @@ fun CountryInfoAppScaffold(){
 
     ) { innerPaddingValues ->
         MainScreen(innerPaddingValues, viewModelCountryOps, viewModelUI)
+    }
+}
+
+
+@Composable
+fun ObserveFilterKeyChanges(filterByKey: MutableState<String>,
+                            selectedFilter: MutableState<String?>,
+                            viewModelCountryOps: CountryOperationViewModel) {
+    val filterKey by filterByKey
+    val selectedFilterValue by selectedFilter
+
+    LaunchedEffect(filterKey, selectedFilterValue) {
+        if (selectedFilterValue != null) {
+            if(filterKey.isNotEmpty()){
+                val filterCriteria = when(selectedFilterValue) {
+                    "Continent" -> {
+                        FilterByContinent(filterKey)
+                    }
+                    "Drive Side" -> {
+                        FilterByDriveSide(filterKey)
+                    }
+                    else -> {
+                        null
+                    }
+                }
+                filterCriteria?.let {
+                    viewModelCountryOps.filterCountries(it)
+                }
+            } else {
+                viewModelCountryOps.getAllCountries()
+            }
+        }
     }
 }
 
@@ -129,7 +178,7 @@ fun FilterChipExample(filterBy: String, selectedFilter: MutableState<String?>) {
         label = {
             Text(filterBy)
         },
-        modifier = Modifier.padding(5.dp),
+        modifier = Modifier.padding(2.dp),
         selected = selected,
         leadingIcon = if (selected) {
             {

@@ -22,6 +22,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.codetutor.countryinfoapp.dialogs.DialogDeleteCountry
 import com.codetutor.countryinfoapp.dialogs.DialogUpdateCountry
+import com.codetutor.countryinfoapp.repository.FilterByContinent
+import com.codetutor.countryinfoapp.repository.FilterByLanguage
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProviderImpl
 import com.codetutor.countryinfoapp.viewmodel.CountryUIViewModel
 import com.codetutor.countryinfoapp.viewmodel.CountryViewModelFactory
@@ -52,8 +54,7 @@ fun MainScreen( innerPaddingValues: PaddingValues, viewModelCountryOps: CountryO
                     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                         CircularProgressIndicator()
                     }
-                }
-                else -> {
+                } else -> {
                     LazyColumn {
                         items(items = countryList, key = { country -> country.id ?: 0 }) { country ->
                             CountryCard(
