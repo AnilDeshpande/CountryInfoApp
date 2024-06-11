@@ -54,11 +54,8 @@ class CountryOperationViewModel(private val repository: ICountryRepository) : Vi
     }
 
     suspend fun filterCountries(filterCriteria: FilterCriteria) {
-        if(filterCriteria!=null){
-            allCountries.value = repository.filterCountries(filterCriteria)
-        }else{
-            getAllCountries()
+        filterCriteria?.let { criteria ->
+            allCountries.value = repository.filterCountries(criteria)
         }
-
     }
 }

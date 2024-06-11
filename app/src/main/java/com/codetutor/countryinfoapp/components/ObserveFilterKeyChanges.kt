@@ -18,24 +18,35 @@ fun ObserveFilterKeyChanges(filterByKey: MutableState<String>,
 
     LaunchedEffect(filterKey, selectedFilterValue) {
         if (selectedFilterValue != null) {
-            if(filterKey.isNotEmpty()){
-                val filterCriteria = when(selectedFilterValue) {
-                    "Continent" -> {
-                        FilterByContinent(filterKey)
-                    }
-                    "Drive Side" -> {
-                        FilterByDriveSide(filterKey)
-                    }
-                    else -> {
-                        null
-                    }
-                }
-                filterCriteria?.let {
-                    viewModelCountryOps.filterCountries(it)
-                }
-            } else {
-                viewModelCountryOps.getAllCountries()
-            }
+            filterBy(filterKey, selectedFilterValue, viewModelCountryOps)
         }
     }
 }
+
+suspend fun filterBy(
+    filterKey: String,
+    selectedFilterValue: String?,
+    viewModelCountryOps: CountryOperationViewModel
+) {
+    if (filterKey.isNotEmpty()) {
+        val filterCriteria = determineFilterCriteria(selectedFilterValue!!, filterKey)
+        filterCriteria?.let {
+            viewModelCountryOps.filterCountries(it)
+        }
+    } else {
+        viewModelCountryOps.getAllCountries()
+    }
+}
+
+fun determineFilterCriteria(selectedFilterValue: String, filterKey: String) = when(selectedFilterValue) {
+    "Continent" -> {
+        FilterByContinent(filterKey)
+    }
+    "Drive Side" -> {
+        FilterByDriveSide(filterKey)
+    }
+    else -> {
+        null
+    }
+}
+
