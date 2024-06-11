@@ -18,6 +18,8 @@ class CountryUIViewModel(private val countryOperationViewModel: CountryOperation
     val showUpdateCapitalDialog: MutableState<Boolean> = mutableStateOf(false)
     var updateCountryInfo: MutableState<Country?> = mutableStateOf(null)
 
+    var selectedCountry: MutableState<Country?> = mutableStateOf(null)
+
     init {
         viewModelScope.launch {
             countryOperationViewModel.countriesLoaded.collect { loaded ->

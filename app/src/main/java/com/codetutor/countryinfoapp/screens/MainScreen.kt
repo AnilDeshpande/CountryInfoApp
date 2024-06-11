@@ -30,15 +30,8 @@ import kotlinx.coroutines.launch
 
 
 @Composable
-fun MainScreen( innerPaddingValues: PaddingValues) {
-
-    val context = LocalContext.current
-    val countryDao = AppDatabase.getDatabase(context.applicationContext).countryDao()
-    val countryListProvider = CountryListServiceProviderImpl(context)
-    val repository = CountryRepository(countryDao,countryListProvider, Dispatchers.IO)
-    val viewModelCountryOps: CountryOperationViewModel = viewModel(factory = CountryViewModelFactory(repository))
-    val viewModelUI: CountryUIViewModel = viewModel { CountryUIViewModel(viewModelCountryOps) }
-
+fun MainScreen( innerPaddingValues: PaddingValues, viewModelCountryOps: CountryOperationViewModel, viewModelUI: CountryUIViewModel ) {
+    
     val countryList = viewModelCountryOps.allCountries.value
     val isLoading = viewModelUI.isLoading.value
 
