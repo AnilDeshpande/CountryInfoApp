@@ -56,7 +56,7 @@ fun CountryInfoAppScaffold(){
     val viewModelCountryOps: CountryOperationViewModel = viewModel(factory = CountryViewModelFactory(repository))
     val viewModelUI: CountryUIViewModel = viewModel { CountryUIViewModel(viewModelCountryOps) }
 
-    var selectedFilter = remember { mutableStateOf("") }
+    var selectedFilter = viewModelUI.selectedFilter
 
     Scaffold (
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -111,15 +111,20 @@ fun CountryInfoAppScaffold(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FilterChipExample(filterBy: String, selectedFilter: MutableState<String>) {
+fun FilterChipExample(filterBy: String, selectedFilter: MutableState<String?>) {
     var selected by remember { mutableStateOf(false) }
 
     selected = selectedFilter.value == filterBy
 
     FilterChip(
         onClick = {
-            selectedFilter.value = filterBy
-            selected = !selected
+            if (selectedFilter.value == filterBy) {
+                selectedFilter.value = null
+                selected = false
+            } else {
+                selectedFilter.value = filterBy
+                selected = true
+            }
           },
         label = {
             Text(filterBy)

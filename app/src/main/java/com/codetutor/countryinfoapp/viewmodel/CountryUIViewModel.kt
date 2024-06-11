@@ -2,6 +2,7 @@ package com.codetutor.countryinfoapp.viewmodel
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codetutor.countryinfoapp.data.Country
@@ -13,6 +14,9 @@ class CountryUIViewModel(private val countryOperationViewModel: CountryOperation
     //Delete Related Functionality
     val showDeleteAlertDialog: MutableState<Boolean> = mutableStateOf(false)
     var selectedCountryForDeletion: MutableState<Country?> = mutableStateOf(null)
+
+
+    var selectedFilter: MutableState<String?> =  mutableStateOf(null)
 
     //Update related functionality
     val showUpdateCapitalDialog: MutableState<Boolean> = mutableStateOf(false)

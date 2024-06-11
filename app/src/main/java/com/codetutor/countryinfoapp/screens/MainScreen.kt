@@ -31,7 +31,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun MainScreen( innerPaddingValues: PaddingValues, viewModelCountryOps: CountryOperationViewModel, viewModelUI: CountryUIViewModel ) {
-    
+
     val countryList = viewModelCountryOps.allCountries.value
     val isLoading = viewModelUI.isLoading.value
 
