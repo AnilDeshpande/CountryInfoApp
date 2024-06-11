@@ -7,7 +7,6 @@ import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Filter
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Sort
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -41,7 +40,6 @@ import com.codetutor.countryinfoapp.database.appdb.AppDatabase
 import com.codetutor.countryinfoapp.repository.CountryRepository
 import com.codetutor.countryinfoapp.repository.FilterByContinent
 import com.codetutor.countryinfoapp.repository.FilterByDriveSide
-import com.codetutor.countryinfoapp.repository.FilterByLanguage
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProviderImpl
 import com.codetutor.countryinfoapp.viewmodel.CountryOperationViewModel
 import com.codetutor.countryinfoapp.viewmodel.CountryUIViewModel
@@ -97,8 +95,8 @@ fun CountryInfoAppScaffold(){
         },
         bottomBar = {
             BottomAppBar {
-                FilterChipExample("Continent", selectedFilter)
-                FilterChipExample("Drive Side", selectedFilter)
+                FilterCountryChips("Continent", selectedFilter)
+                FilterCountryChips("Drive Side", selectedFilter)
 
                 if (selectedFilter.value != null) {
                     TextField(
@@ -124,72 +122,4 @@ fun CountryInfoAppScaffold(){
     ) { innerPaddingValues ->
         MainScreen(innerPaddingValues, viewModelCountryOps, viewModelUI)
     }
-}
-
-
-@Composable
-fun ObserveFilterKeyChanges(filterByKey: MutableState<String>,
-                            selectedFilter: MutableState<String?>,
-                            viewModelCountryOps: CountryOperationViewModel) {
-    val filterKey by filterByKey
-    val selectedFilterValue by selectedFilter
-
-    LaunchedEffect(filterKey, selectedFilterValue) {
-        if (selectedFilterValue != null) {
-            if(filterKey.isNotEmpty()){
-                val filterCriteria = when(selectedFilterValue) {
-                    "Continent" -> {
-                        FilterByContinent(filterKey)
-                    }
-                    "Drive Side" -> {
-                        FilterByDriveSide(filterKey)
-                    }
-                    else -> {
-                        null
-                    }
-                }
-                filterCriteria?.let {
-                    viewModelCountryOps.filterCountries(it)
-                }
-            } else {
-                viewModelCountryOps.getAllCountries()
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun FilterChipExample(filterBy: String, selectedFilter: MutableState<String?>) {
-    var selected by remember { mutableStateOf(false) }
-
-    selected = selectedFilter.value == filterBy
-
-    FilterChip(
-        onClick = {
-            if (selectedFilter.value == filterBy) {
-                selectedFilter.value = null
-                selected = false
-            } else {
-                selectedFilter.value = filterBy
-                selected = true
-            }
-          },
-        label = {
-            Text(filterBy)
-        },
-        modifier = Modifier.padding(2.dp),
-        selected = selected,
-        leadingIcon = if (selected) {
-            {
-                Icon(
-                    imageVector = Icons.Filled.Done,
-                    contentDescription = "Done icon",
-                    modifier = Modifier.size(FilterChipDefaults.IconSize)
-                )
-            }
-        } else {
-            null
-        },
-    )
 }
