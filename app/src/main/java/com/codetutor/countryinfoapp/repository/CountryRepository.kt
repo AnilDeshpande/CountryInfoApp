@@ -52,7 +52,7 @@ class CountryRepository(private val countryDao: ICountryDao,
         allCountries = countryDao.getAllCountries()
     }
 
-    suspend fun filterCountries(filterCriteria: FilterCriteria): List<Country> = withContext(dispatcher) {
+    override suspend fun filterCountries(filterCriteria: FilterCriteria): List<Country> = withContext(dispatcher) {
         return@withContext filterCriteria.filter(allCountries)
     }
 }
