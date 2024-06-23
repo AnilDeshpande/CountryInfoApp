@@ -8,8 +8,9 @@ import com.codetutor.countryinfoapp.repository.service.CountryListServiceProvide
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
+import javax.inject.Inject
 
-class CountryRepository(private val countryDao: ICountryDao,
+class CountryRepository @Inject constructor (private val countryDao: ICountryDao,
                         private val countryListServiceProvider: CountryListServiceProvider,
                         private val dispatcher: CoroutineDispatcher): ICountryRepository {
 

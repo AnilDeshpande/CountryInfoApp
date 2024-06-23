@@ -6,8 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codetutor.countryinfoapp.data.Country
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CountryUIViewModel(private val countryOperationViewModel: CountryOperationViewModel): ViewModel() {
+class CountryUIViewModel @Inject constructor (private val countryOperationViewModel: CountryOperationViewModel): ViewModel() {
     val isLoading: MutableState<Boolean> = mutableStateOf(true)
 
     //Delete Related Functionality

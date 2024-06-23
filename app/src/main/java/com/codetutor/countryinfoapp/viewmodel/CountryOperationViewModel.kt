@@ -11,9 +11,10 @@ import com.codetutor.countryinfoapp.repository.FilterCriteria
 import com.codetutor.countryinfoapp.repository.ICountryRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-class CountryOperationViewModel(private val repository: ICountryRepository) : ViewModel() {
+class CountryOperationViewModel @Inject constructor (private val repository: ICountryRepository) : ViewModel() {
 
     val allCountries: MutableState<List<Country>> = mutableStateOf(emptyList())
     val countriesLoaded: MutableStateFlow<Boolean> = MutableStateFlow(false)
