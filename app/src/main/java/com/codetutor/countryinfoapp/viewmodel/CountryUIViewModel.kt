@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CountryUIViewModel @Inject constructor(private val repository: ICountryRepository): ViewModel() {
 
-    private val countryOperationViewModel: CountryOperationViewModel = CountryOperationViewModel(repository) // Injecting the ViewModel - This need to be fixed
+    //private val countryOperationViewModel: CountryOperationViewModel = CountryOperationViewModel(repository) // Injecting the ViewModel - This need to be fixed
 
     val isLoading: MutableState<Boolean> = mutableStateOf(true)
 
@@ -34,12 +34,12 @@ class CountryUIViewModel @Inject constructor(private val repository: ICountryRep
 
     var selectedCountry: MutableState<Country?> = mutableStateOf(null)
 
-    init {
+    /*init {
         viewModelScope.launch {
             countryOperationViewModel.countriesLoaded.collect { loaded ->
                 isLoading.value = !loaded
             }
         }
-    }
+    }*/
 
 }
