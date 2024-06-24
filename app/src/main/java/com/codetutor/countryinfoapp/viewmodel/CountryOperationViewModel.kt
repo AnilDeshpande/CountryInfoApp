@@ -9,11 +9,13 @@ import com.codetutor.countryinfoapp.repository.FilterByContinent
 import com.codetutor.countryinfoapp.repository.FilterByLanguage
 import com.codetutor.countryinfoapp.repository.FilterCriteria
 import com.codetutor.countryinfoapp.repository.ICountryRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
+@HiltViewModel
 class CountryOperationViewModel @Inject constructor (private val repository: ICountryRepository) : ViewModel() {
 
     val allCountries: MutableState<List<Country>> = mutableStateOf(emptyList())

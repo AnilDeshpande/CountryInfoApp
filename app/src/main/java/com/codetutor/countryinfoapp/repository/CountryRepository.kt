@@ -9,7 +9,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class CountryRepository @Inject constructor (private val countryDao: ICountryDao,
                         private val countryListServiceProvider: CountryListServiceProvider,
                         private val dispatcher: CoroutineDispatcher): ICountryRepository {

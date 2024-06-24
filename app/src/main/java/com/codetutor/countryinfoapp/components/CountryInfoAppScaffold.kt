@@ -52,12 +52,12 @@ import kotlinx.coroutines.Dispatchers
 fun CountryInfoAppScaffold(){
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
-    val context = LocalContext.current
+    /*val context = LocalContext.current
     val countryDao = AppDatabase.getDatabase(context.applicationContext).countryDao()
     val countryListProvider = CountryListServiceProviderImpl(context)
-    val repository = CountryRepository(countryDao,countryListProvider, Dispatchers.IO)
-    val viewModelCountryOps: CountryOperationViewModel = viewModel(factory = CountryViewModelFactory(repository))
-    val viewModelUI: CountryUIViewModel = viewModel { CountryUIViewModel(viewModelCountryOps) }
+    val repository = CountryRepository(countryDao,countryListProvider, Dispatchers.IO)*/
+    val viewModelCountryOps: CountryOperationViewModel = viewModel()
+    val viewModelUI: CountryUIViewModel = viewModel()
 
     val selectedFilter = viewModelUI.selectedFilter
     val filterByKey = viewModelUI.filterByKey

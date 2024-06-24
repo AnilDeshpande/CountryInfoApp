@@ -6,7 +6,9 @@ import com.codetutor.countryinfoapp.data.Country
 import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class CountryListServiceProviderImpl @Inject constructor(context: Context) : CountryListServiceProvider {
 
     private val contextForProvider: Context = context

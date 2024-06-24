@@ -1,14 +1,23 @@
 package com.codetutor.countryinfoapp.viewmodel
 
+import android.app.Application
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.viewModelScope
 import com.codetutor.countryinfoapp.data.Country
+import com.codetutor.countryinfoapp.repository.ICountryRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class CountryUIViewModel @Inject constructor (private val countryOperationViewModel: CountryOperationViewModel): ViewModel() {
+@HiltViewModel
+class CountryUIViewModel @Inject constructor(private val repository: ICountryRepository): ViewModel() {
+
+    private val countryOperationViewModel: CountryOperationViewModel = CountryOperationViewModel(repository) // Injecting the ViewModel - This need to be fixed
+
     val isLoading: MutableState<Boolean> = mutableStateOf(true)
 
     //Delete Related Functionality

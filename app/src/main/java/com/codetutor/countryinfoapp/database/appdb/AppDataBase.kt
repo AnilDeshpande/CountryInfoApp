@@ -8,9 +8,11 @@ import androidx.room.TypeConverters
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.database.converters.Converters
 import com.codetutor.countryinfoapp.database.dao.CountryDao
+import javax.inject.Singleton
 
 @Database(entities = [Country::class], version = 1)
 @TypeConverters(Converters::class)
+@Singleton
 abstract class AppDatabase : RoomDatabase(), DatabaseProvider {
     abstract override fun countryDao(): CountryDao
 
