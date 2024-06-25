@@ -27,19 +27,6 @@ fun ObserveFilterKeyChanges(filterByKey: MutableState<String>,
     }
 }
 
-@Composable
-fun ObserveIsLoadingChanges(isLoading: MutableState<Boolean>, uiViewModel: CountryUIViewModel, operationViewModel: CountryOperationViewModel) {
-
-    LaunchedEffect(isLoading) {
-        isLoading.value = operationViewModel.allCountries.value.isEmpty()
-    }
-
-    SideEffect {
-        isLoading.value = operationViewModel.allCountries.value.isEmpty()
-    }
-
-}
-
 suspend fun filterBy(
     filterKey: String,
     selectedFilterValue: String?,
