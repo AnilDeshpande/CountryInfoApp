@@ -8,7 +8,6 @@ import com.codetutor.countryinfoapp.data.Country
 import kotlinx.coroutines.launch
 
 class CountryUIViewModel(private val countryOperationViewModel: CountryOperationViewModel): ViewModel() {
-    val isLoading: MutableState<Boolean> = mutableStateOf(true)
 
     //Delete Related Functionality
     val showDeleteAlertDialog: MutableState<Boolean> = mutableStateOf(false)
@@ -23,13 +22,5 @@ class CountryUIViewModel(private val countryOperationViewModel: CountryOperation
     var updateCountryInfo: MutableState<Country?> = mutableStateOf(null)
 
     var selectedCountry: MutableState<Country?> = mutableStateOf(null)
-
-    init {
-        viewModelScope.launch {
-            countryOperationViewModel.countriesLoaded.collect { loaded ->
-                isLoading.value = !loaded
-            }
-        }
-    }
 
 }

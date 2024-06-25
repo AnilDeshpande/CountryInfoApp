@@ -16,7 +16,6 @@ import kotlinx.coroutines.launch
 class CountryOperationViewModel(private val repository: ICountryRepository) : ViewModel() {
 
     val allCountries: MutableState<List<Country>> = mutableStateOf(emptyList())
-    val countriesLoaded: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
     init {
         viewModelScope.launch {
@@ -26,7 +25,6 @@ class CountryOperationViewModel(private val repository: ICountryRepository) : Vi
 
     suspend fun getAllCountries() {
         allCountries.value = repository.getAllCountries()
-        countriesLoaded.value = true
     }
 
     suspend fun deleteCountry(country: Country) {

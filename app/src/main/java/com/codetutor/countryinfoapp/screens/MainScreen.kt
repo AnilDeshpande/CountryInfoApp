@@ -10,6 +10,8 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.codetutor.countryinfoapp.components.CountryCard
@@ -20,6 +22,7 @@ import com.codetutor.countryinfoapp.viewmodel.CountryOperationViewModel
 import androidx.compose.ui.Alignment
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.codetutor.countryinfoapp.components.ObserveIsLoadingChanges
 import com.codetutor.countryinfoapp.dialogs.DialogDeleteCountry
 import com.codetutor.countryinfoapp.dialogs.DialogUpdateCountry
 import com.codetutor.countryinfoapp.repository.FilterByContinent
@@ -35,12 +38,16 @@ import kotlinx.coroutines.launch
 fun MainScreen( innerPaddingValues: PaddingValues, viewModelCountryOps: CountryOperationViewModel, viewModelUI: CountryUIViewModel ) {
 
     val countryList = viewModelCountryOps.allCountries.value
-    val isLoading = viewModelUI.isLoading.value
+    val isLoading = remember {
+        mutableStateOf(value = true)
+    }
 
     val showDeleteAlertDialog = viewModelUI.showDeleteAlertDialog
     val showUpdateCapitalDialog = viewModelUI.showUpdateCapitalDialog
     val selectedCountry = viewModelUI.selectedCountryForDeletion
     val updateCountryInfo = viewModelUI.updateCountryInfo.value
+
+    ObserveIsLoadingChanges(isLoading = isLoading, uiViewModel = viewModelUI, operationViewModel = viewModelCountryOps)
 
     CountryInfoAppTheme {
         Surface(
@@ -50,7 +57,7 @@ fun MainScreen( innerPaddingValues: PaddingValues, viewModelCountryOps: CountryO
             color = MaterialTheme.colorScheme.surface
         ) {
             when {
-                isLoading -> {
+                isLoading.value -> {
                     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                         CircularProgressIndicator()
                     }
