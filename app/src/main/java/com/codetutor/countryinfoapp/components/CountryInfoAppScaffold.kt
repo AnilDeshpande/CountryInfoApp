@@ -40,6 +40,7 @@ import com.codetutor.countryinfoapp.database.appdb.AppDatabase
 import com.codetutor.countryinfoapp.repository.CountryRepository
 import com.codetutor.countryinfoapp.repository.FilterByContinent
 import com.codetutor.countryinfoapp.repository.FilterByDriveSide
+import com.codetutor.countryinfoapp.repository.service.CountryListProviderViaNetwork
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProviderImpl
 import com.codetutor.countryinfoapp.viewmodel.CountryOperationViewModel
 import com.codetutor.countryinfoapp.viewmodel.CountryUIViewModel
@@ -54,7 +55,8 @@ fun CountryInfoAppScaffold(){
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val context = LocalContext.current
     val countryDao = AppDatabase.getDatabase(context.applicationContext).countryDao()
-    val countryListProvider = CountryListServiceProviderImpl(context)
+    /*val countryListProvider = CountryListServiceProviderImpl(context)*/
+    val countryListProvider = CountryListProviderViaNetwork()
     val repository = CountryRepository(countryDao,countryListProvider, Dispatchers.IO)
     val viewModelCountryOps: CountryOperationViewModel = viewModel(factory = CountryViewModelFactory(repository))
     val viewModelUI: CountryUIViewModel = viewModel { CountryUIViewModel(viewModelCountryOps) }
