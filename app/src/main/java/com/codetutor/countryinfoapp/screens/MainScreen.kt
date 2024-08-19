@@ -39,7 +39,7 @@ fun MainScreen( innerPaddingValues: PaddingValues, viewModelCountryOps: CountryO
 
     val countryList = viewModelCountryOps.allCountries.value
     val isLoading = remember {
-        mutableStateOf(value = true)
+        mutableStateOf(value = false)
     }
 
     val showDeleteAlertDialog = viewModelUI.showDeleteAlertDialog
