@@ -47,7 +47,7 @@ fun MainScreen( innerPaddingValues: PaddingValues, viewModelCountryOps: CountryO
     val selectedCountry = viewModelUI.selectedCountryForDeletion
     val updateCountryInfo = viewModelUI.updateCountryInfo.value
 
-    ObserveIsLoadingChanges(isLoading = isLoading, uiViewModel = viewModelUI, operationViewModel = viewModelCountryOps)
+    ObserveIsLoadingChanges(isLoading = isLoading, operationViewModel = viewModelCountryOps)
 
     CountryInfoAppTheme {
         Surface(
