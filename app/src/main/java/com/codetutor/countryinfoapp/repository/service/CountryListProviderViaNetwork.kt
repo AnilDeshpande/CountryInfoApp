@@ -4,15 +4,14 @@ import android.content.Context
 import androidx.compose.foundation.text2.input.rememberTextFieldState
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.repository.service.network.ApiService
+import com.codetutor.countryinfoapp.repository.service.network.RetrofitInstance
 
-class CountryListProviderViaNetwork(private val apiService: ApiService) : CountryListServiceProvider {
+class CountryListProviderViaNetwork() : CountryListServiceProvider{
+   private val apiService: ApiService by lazy {
+        RetrofitInstance.retrofit.create(ApiService::class.java)
+    }
 
     override suspend fun getCountryList(): MutableList<Country> {
-        val response = apiService.getAllCountries()
-        return if (response.isSuccessful) {
-            response.body() ?: mutableListOf()
-        } else {
-            mutableListOf()
-        }
+        return apiService.getAllCountries().body()!!
     }
 }
