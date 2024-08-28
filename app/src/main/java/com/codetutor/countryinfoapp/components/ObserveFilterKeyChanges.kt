@@ -6,7 +6,11 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import com.codetutor.countryinfoapp.repository.FilterByContinent
 import com.codetutor.countryinfoapp.repository.FilterByDriveSide
+import com.codetutor.countryinfoapp.repository.FilterCriteria
+import com.codetutor.countryinfoapp.util.FilterCriteriaFactory
+import com.codetutor.countryinfoapp.util.FilterCriteriaFactoryProvider
 import com.codetutor.countryinfoapp.viewmodel.CountryOperationViewModel
+
 
 @Composable
 fun ObserveFilterKeyChanges(filterByKey: MutableState<String>,
@@ -29,7 +33,8 @@ suspend fun filterBy(
     viewModelCountryOps: CountryOperationViewModel
 ) {
     if (filterKey.isNotEmpty()) {
-        val filterCriteria = determineFilterCriteria(selectedFilterValue!!, filterKey)
+        val factory = FilterCriteriaFactoryProvider.getFactory(selectedFilterValue!!)
+        val filterCriteria = factory?.createFilterCriteria(filterKey)
         filterCriteria?.let {
             viewModelCountryOps.filterCountries(it)
         }
@@ -38,15 +43,4 @@ suspend fun filterBy(
     }
 }
 
-fun determineFilterCriteria(selectedFilterValue: String, filterKey: String) = when(selectedFilterValue) {
-    "Continent" -> {
-        FilterByContinent(filterKey)
-    }
-    "Drive Side" -> {
-        FilterByDriveSide(filterKey)
-    }
-    else -> {
-        null
-    }
-}
 
