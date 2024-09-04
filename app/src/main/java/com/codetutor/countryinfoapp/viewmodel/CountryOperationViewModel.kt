@@ -13,9 +13,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 
-class CountryOperationViewModel(private val repository: ICountryRepository) : ViewModel() {
+class CountryOperationViewModel(private val repository: ICountryRepository) : ViewModel(), ICountryOperationViewModel {
 
-    val allCountries: MutableState<List<Country>> = mutableStateOf(emptyList())
+    override val allCountries: MutableState<List<Country>> = mutableStateOf(emptyList())
 
     init {
         viewModelScope.launch {
@@ -23,11 +23,11 @@ class CountryOperationViewModel(private val repository: ICountryRepository) : Vi
         }
     }
 
-    suspend fun getAllCountries() {
+    override suspend fun getAllCountries() {
         allCountries.value = repository.getAllCountries()
     }
 
-    suspend fun deleteCountry(country: Country) {
+    override suspend fun deleteCountry(country: Country) {
         country.let {
             repository.deleteCountry(it)
         }
@@ -42,7 +42,7 @@ class CountryOperationViewModel(private val repository: ICountryRepository) : Vi
         getAllCountries()
     }
 
-    suspend fun updateCapital(country: Country, newCapital: String) {
+    override suspend fun updateCapital(country: Country, newCapital: String) {
         country.let {
             it.let {
                 repository.updateCapital(it, newCapital)
@@ -51,7 +51,7 @@ class CountryOperationViewModel(private val repository: ICountryRepository) : Vi
         getAllCountries()
     }
 
-    suspend fun filterCountries(filterCriteria: FilterCriteria) {
+    override suspend fun filterCountries(filterCriteria: FilterCriteria) {
         filterCriteria?.let { criteria ->
             allCountries.value = repository.filterCountries(criteria)
         }
