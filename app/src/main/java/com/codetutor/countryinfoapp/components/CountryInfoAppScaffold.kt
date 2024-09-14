@@ -60,7 +60,7 @@ fun CountryInfoAppScaffold(){
     val countryListProvider: CountryListServiceProvider = CountryListProviderViaNetwork()
     val repository = CountryRepository(countryDao,countryListProvider, Dispatchers.IO)
     val viewModelCountryOps: CountryOperationViewModel = viewModel(factory = CountryViewModelFactory(repository))
-    val viewModelUI: CountryUIViewModel = viewModel { CountryUIViewModel(viewModelCountryOps) }
+    val viewModelUI: CountryUIViewModel = viewModel { CountryUIViewModel() }
 
     val selectedFilter = viewModelUI.selectedFilter
     val filterByKey = viewModelUI.filterByKey
