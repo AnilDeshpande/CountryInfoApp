@@ -18,7 +18,7 @@ class CountryRepository(private val countryListServiceProvider: CountryListServi
     private var allCountries: List<Country> = emptyList()
 
     //fetchAndInsertAll
-    override suspend fun fetchAndInsertAll() = withContext(Dispatchers.IO){
+    override suspend fun fetchAndInsertAll() = withContext(dispatcher){
         val allCountries = getAllCountries()
         if(allCountries.isNotEmpty()){
             return@withContext
