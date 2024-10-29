@@ -46,7 +46,9 @@ fun CountryInfoAppScaffold(){
     val countryDao = AppDataBase.getDataBase(context.applicationContext)?.countryDao()
     //Initialise the Repository
     val serviceProvider: CountryListServiceProvider = CountryListProviderViaNetwork()
-    val countryRepository = countryDao?.let { CountryRepository(serviceProvider, it, Dispatchers.IO) }
+    val countryRepository = countryDao?.let {
+        CountryRepository(serviceProvider, it, Dispatchers.IO)
+    }
     //Initialise the ViewModel
     val uiViewModel: CountryUIViewModel = CountryUIViewModel()
     val viewModel: CountryOperationViewModel = viewModel(factory = countryRepository?.let { CountryViewModelFactory(repository = it) })

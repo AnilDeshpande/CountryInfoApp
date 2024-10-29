@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 
-class CountryRepository(private val countryListServiceProvider: CountryListServiceProvider,
+class CountryRepository(private var countryListServiceProvider: CountryListServiceProvider,
                         private val countryDao: ICountryDao,
                         private val dispatcher: CoroutineDispatcher
 ): ICountryRepository {
@@ -55,5 +55,9 @@ class CountryRepository(private val countryListServiceProvider: CountryListServi
 
     override suspend fun filterCountries(filterCriteria: FilterCriteria): List<Country> = withContext(dispatcher) {
         return@withContext filterCriteria.filter(allCountries)
+    }
+
+    fun setCountryListServiceProvider(countryListServiceProvider: CountryListServiceProvider){
+        this.countryListServiceProvider = countryListServiceProvider
     }
 }
