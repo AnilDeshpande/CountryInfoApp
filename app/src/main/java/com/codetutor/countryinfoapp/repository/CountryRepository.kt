@@ -1,6 +1,7 @@
 package com.codetutor.countryinfoapp.repository
 
 import android.content.Context
+import com.codetutor.countryinfoapp.components.CountryListServiceProviderInjector
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.database.dao.CountryDao
 import com.codetutor.countryinfoapp.database.dao.ICountryDao
@@ -11,11 +12,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 
-class CountryRepository(private var countryListServiceProvider: CountryListServiceProvider,
+class CountryRepository(private val countryServiceInjector: CountryListServiceProviderInjector,
                         private val countryDao: ICountryDao,
                         private val dispatcher: CoroutineDispatcher
 ): ICountryRepository {
     private var allCountries: List<Country> = emptyList()
+
+    private var countryListServiceProvider: CountryListServiceProvider
+
+    init {
+        countryListServiceProvider = countryServiceInjector.injectServiceProvider()
+    }
 
     //fetchAndInsertAll
     override suspend fun fetchAndInsertAll() = withContext(dispatcher){

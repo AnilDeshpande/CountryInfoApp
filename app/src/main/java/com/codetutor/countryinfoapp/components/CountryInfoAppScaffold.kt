@@ -1,5 +1,6 @@
 package com.codetutor.countryinfoapp.components
 
+import android.content.Context
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Filter
@@ -20,6 +21,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionContext
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
@@ -29,25 +31,59 @@ import com.codetutor.countryinfoapp.database.appdb.AppDataBase
 import com.codetutor.countryinfoapp.repository.CountryRepository
 import com.codetutor.countryinfoapp.repository.service.CountryListProviderViaNetwork
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProvider
+import com.codetutor.countryinfoapp.repository.service.CountryListServiceProviderImpl
 import com.codetutor.countryinfoapp.screens.MainScreen
 import com.codetutor.countryinfoapp.viewmodel.CountryOperationViewModel
 import com.codetutor.countryinfoapp.viewmodel.CountryUIViewModel
 import com.codetutor.countryinfoapp.viewmodel.CountryViewModelFactory
 import kotlinx.coroutines.Dispatchers
 
+interface CountryListServiceProviderInjector {
+    fun injectServiceProvider(): CountryListServiceProvider
+}
+
+class CountryListProviderViaNetworkInjector : CountryListServiceProviderInjector {
+    override fun injectServiceProvider(): CountryListServiceProvider {
+        return CountryListProviderViaNetwork()
+    }
+}
+
+class CountryListServiceProviderImplInjector(private val context: Context) : CountryListServiceProviderInjector {
+    override fun injectServiceProvider(): CountryListServiceProvider {
+        return CountryListServiceProviderImpl(context)
+    }
+}
+
+class CountryListServiceProviderInjectorFactory(private val context: Context) {
+    fun createInjector(condition: Boolean): CountryListServiceProviderInjector {
+        return if (condition) {
+            CountryListProviderViaNetworkInjector()
+        } else {
+            CountryListServiceProviderImplInjector(context)
+        }
+    }
+}
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CountryInfoAppScaffold(){
 
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
+    val useNetwork:  Boolean = true
+
     val context = LocalContext.current
+
+    val injectorFactory = CountryListServiceProviderInjectorFactory(context)
+    val injector = injectorFactory.createInjector(useNetwork)
+
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
+
     //Initialise Dao
     val countryDao = AppDataBase.getDataBase(context.applicationContext)?.countryDao()
-    //Initialise the Repository
-    val serviceProvider: CountryListServiceProvider = CountryListProviderViaNetwork()
-    val countryRepository = countryDao?.let {
-        CountryRepository(serviceProvider, it, Dispatchers.IO)
+
+    var countryRepository = countryDao?.let {
+        CountryRepository(injector, it, Dispatchers.IO)
     }
     //Initialise the ViewModel
     val uiViewModel: CountryUIViewModel = CountryUIViewModel()
