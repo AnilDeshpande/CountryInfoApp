@@ -46,6 +46,7 @@ class CountryOperationViewModel (private val countryRepository: ICountryReposito
                 countryRepository.updateCapital(it,newCapital)
             }
         }
+        getAllCountries()
     }
 
     override suspend fun filterCountries(filterCriteria: FilterCriteria) {

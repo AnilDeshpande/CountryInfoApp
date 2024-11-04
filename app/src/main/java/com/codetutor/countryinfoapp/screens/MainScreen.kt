@@ -70,7 +70,7 @@ fun MainScreen(innerPaddingValues: PaddingValues,
                                 countryInfo = country,
                                 showDeleteAlertDialog = showDeleteAlertDialog,
                                 showUpdateAlertDialog = showUpdateDiloag,
-                                viewModel = viewModel
+                                viewModel = viewModelUI
                             )
                         }
                     }

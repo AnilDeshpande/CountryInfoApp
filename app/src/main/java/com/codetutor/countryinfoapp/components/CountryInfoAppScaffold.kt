@@ -86,7 +86,7 @@ fun CountryInfoAppScaffold(){
         CountryRepository(injector, it, Dispatchers.IO)
     }
     //Initialise the ViewModel
-    val uiViewModel: CountryUIViewModel = CountryUIViewModel()
+    val uiViewModel: CountryUIViewModel = viewModel { CountryUIViewModel() }
     val viewModel: CountryOperationViewModel = viewModel(factory = countryRepository?.let { CountryViewModelFactory(repository = it) })
 
 
