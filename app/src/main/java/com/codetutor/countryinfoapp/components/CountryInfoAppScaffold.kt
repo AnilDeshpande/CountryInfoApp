@@ -21,7 +21,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionContext
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
@@ -69,15 +68,12 @@ class CountryListServiceProviderInjectorFactory(private val context: Context) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CountryInfoAppScaffold(){
-
-    val useNetwork:  Boolean = true
-
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val context = LocalContext.current
 
+    val useNetwork:  Boolean = true
     val injectorFactory = CountryListServiceProviderInjectorFactory(context)
     val injector = injectorFactory.createInjector(useNetwork)
-
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
 
     //Initialise Dao
     val countryDao = AppDataBase.getDataBase(context.applicationContext)?.countryDao()
