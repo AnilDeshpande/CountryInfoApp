@@ -13,12 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.viewmodel.CountryOperationViewModel
+import com.codetutor.countryinfoapp.viewmodel.CountryUIViewModel
 
 @Composable
 fun CountryCard(countryInfo: Country,
                 showDeleteAlertDialog: MutableState<Boolean>,
                 showUpdateAlertDialog: MutableState<Boolean>,
-                viewModel: CountryOperationViewModel) {
+                viewModel: CountryUIViewModel) {
     Surface(
         modifier = Modifier
             .fillMaxWidth(1.0f)
