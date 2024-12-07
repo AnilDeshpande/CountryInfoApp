@@ -34,4 +34,9 @@ package "com.codetutor.countryinfoapp.database" {
     [AppDataBase] --> "TypeConverters\n(e.g., Converters)"
 }
 
+package "com.codetutor.countryinfoapp.dialogs" {
+    [MyAlertDialog] --> [MutableState]
+    [MyNewAlertDialog] --> [MutableState]
+}
+
 @enduml
