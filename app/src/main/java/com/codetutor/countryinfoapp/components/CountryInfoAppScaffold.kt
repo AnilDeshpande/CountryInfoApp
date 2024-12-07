@@ -59,7 +59,8 @@ fun CountryInfoAppScaffold(){
 
     //Using the AppContainer to inject the dependencies
     val appContainer = (context.applicationContext as CountryInfoApplication).applicationContainer
-    val viewModelCountryOps: CountryOperationViewModel = viewModel { appContainer.viewModelFactory.create(CountryOperationViewModel::class.java) }
+
+    val viewModelCountryOps = viewModel { appContainer.viewModelFactory.create(CountryOperationViewModel::class.java) }
     val viewModelUI: CountryUIViewModel = viewModel { appContainer.viewModelFactory.create(CountryUIViewModel::class.java) }
 
     val selectedFilter = viewModelUI.selectedFilter
