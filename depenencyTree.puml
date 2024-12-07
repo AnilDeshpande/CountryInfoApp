@@ -1,0 +1,37 @@
+@startuml
+skinparam componentStyle rectangle
+
+package "com.codetutor.countryinfoapp" {
+    [MainActivity] --> [CountryInfoAppScaffold]
+    [CountryInfoAppScaffold] --> [CountryOperationViewModel]
+    [CountryInfoAppScaffold] --> [CountryUIViewModel]
+}
+
+package "com.codetutor.countryinfoapp.viewmodel" {
+    [CountryOperationViewModel] --> [CountryRepository]
+    [CountryOperationViewModel] --> [Dispatchers.IO]
+    [CountryOperationViewModel] --> [MutableState]
+    [CountryUIViewModel] --> [MutableState]
+    [CountryUIViewModel] --> "Dialog Management\n(e.g., showDeleteAlertDialog)"
+}
+
+package "com.codetutor.countryinfoapp.repository" {
+    [CountryRepository] --> [CountryDao]
+    [CountryRepository] --> [CountryListServiceProvider]
+    [CountryRepository] --> [Dispatchers.IO]
+    [CountryListServiceProvider] --> [CountryListProviderViaNetwork]
+    [CountryListServiceProvider] --> [CountryListServiceProviderImpl]
+    [CountryListProviderViaNetwork] --> [RetrofitInstance]
+    [RetrofitInstance] --> [ApiService]
+    [CountryListServiceProviderImpl] --> [Context]
+    [CountryListServiceProviderImpl] --> "Raw Resources\n(R.raw.countries)"
+    [CountryListServiceProviderImpl] --> [Json]
+}
+
+package "com.codetutor.countryinfoapp.database" {
+    [CountryDao] --> [AppDataBase]
+    [AppDataBase] --> "Entities\n(e.g., Country)"
+    [AppDataBase] --> "TypeConverters\n(e.g., Converters)"
+}
+
+@enduml
