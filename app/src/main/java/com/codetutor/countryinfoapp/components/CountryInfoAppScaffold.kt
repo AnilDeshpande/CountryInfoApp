@@ -36,6 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.codetutor.countryinfoapp.CountryInfoApplication
 import com.codetutor.countryinfoapp.database.appdb.AppDatabase
 import com.codetutor.countryinfoapp.repository.CountryRepository
 import com.codetutor.countryinfoapp.repository.FilterByContinent
@@ -55,12 +56,11 @@ fun CountryInfoAppScaffold(){
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val context = LocalContext.current
-    val countryDao = AppDatabase.getDatabase(context.applicationContext).countryDao()
-    /*val countryListProvider = CountryListServiceProviderImpl(context)*/
-    val countryListProvider: CountryListServiceProvider = CountryListProviderViaNetwork()
-    val repository = CountryRepository(countryDao,countryListProvider, Dispatchers.IO)
-    val viewModelCountryOps: CountryOperationViewModel = viewModel(factory = CountryViewModelFactory(repository))
-    val viewModelUI: CountryUIViewModel = viewModel { CountryUIViewModel() }
+
+    //Using the AppContainer to inject the dependencies
+    val appContainer = (context.applicationContext as CountryInfoApplication).applicationContainer
+    val viewModelCountryOps: CountryOperationViewModel = viewModel { appContainer.viewModelFactory.create(CountryOperationViewModel::class.java) }
+    val viewModelUI: CountryUIViewModel = viewModel { appContainer.viewModelFactory.create(CountryUIViewModel::class.java) }
 
     val selectedFilter = viewModelUI.selectedFilter
     val filterByKey = viewModelUI.filterByKey
