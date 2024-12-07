@@ -1,0 +1,31 @@
+@startuml
+
+package "com.codetutor.countryinfoapp" {
+    [CountryInfoApplication] --> [AppDatabase]
+    [CountryInfoApplication] --> [CountryRepository]
+    [CountryInfoApplication] --> [CountryListServiceProvider]
+    [CountryInfoApplication] --> [CountryViewModelFactory]
+
+    [AppDatabase] --> [DatabaseProvider]
+    [AppDatabase] --> [CountryDao]
+
+    [CountryRepository] --> [CountryListProviderViaNetwork]
+    [CountryRepository] --> [CountryListServiceProvider]
+    [CountryRepository] --> [AppDatabase]
+
+    [CountryViewModelFactory] --> [CountryOperationViewModel]
+    [CountryViewModelFactory] --> [CountryUIViewModel]
+
+    [CountryInfoAppScaffold] --> [MainScreen]
+    [CountryInfoAppScaffold] --> [CountryOperationViewModel]
+    [CountryInfoAppScaffold] --> [CountryUIViewModel]
+    [CountryInfoAppScaffold] --> [CountryInfoApplication]
+    [CountryInfoAppScaffold] --> [AppDatabase]
+    [CountryInfoAppScaffold] --> [CountryRepository]
+    [CountryInfoAppScaffold] --> [CountryListProviderViaNetwork]
+    [CountryInfoAppScaffold] --> [CountryListServiceProvider]
+    [CountryInfoAppScaffold] --> [CountryListServiceProviderImpl]
+    [CountryInfoAppScaffold] --> [CountryViewModelFactory]
+}
+
+@enduml
