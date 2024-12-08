@@ -15,6 +15,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val appContainer = (application as CountryInfoApplication).applicationContainer
         setContent {
             MyCustomAppTheme {
                 CountryInfoAppScaffold()

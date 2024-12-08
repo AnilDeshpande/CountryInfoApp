@@ -25,10 +25,12 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.codetutor.countryinfoapp.CountryInfoApplication
 import com.codetutor.countryinfoapp.database.appdb.AppDataBase
 import com.codetutor.countryinfoapp.repository.CountryRepository
 import com.codetutor.countryinfoapp.repository.service.CountryListProviderViaNetwork
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProvider
+import com.codetutor.countryinfoapp.repository.service.CountryListServiceProviderImpl
 import com.codetutor.countryinfoapp.screens.MainScreen
 import com.codetutor.countryinfoapp.viewmodel.CountryOperationViewModel
 import com.codetutor.countryinfoapp.viewmodel.CountryUIViewModel
@@ -42,14 +44,12 @@ fun CountryInfoAppScaffold(){
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val context = LocalContext.current
-    //Initialise Dao
-    val countryDao = AppDataBase.getDataBase(context.applicationContext)?.countryDao()
-    //Initialise the Repository
-    val serviceProvider: CountryListServiceProvider = CountryListProviderViaNetwork()
-    val countryRepository = countryDao?.let { CountryRepository(serviceProvider, it, Dispatchers.IO) }
+
+    val appContainer = (context.applicationContext as CountryInfoApplication).applicationContainer
+
     //Initialise the ViewModel
-    val uiViewModel: CountryUIViewModel = CountryUIViewModel()
-    val viewModel: CountryOperationViewModel = viewModel(factory = countryRepository?.let { CountryViewModelFactory(repository = it) })
+    val uiViewModel: CountryUIViewModel = viewModel {appContainer.viewModelFactory.create(CountryUIViewModel::class.java)}
+    val viewModel: CountryOperationViewModel = viewModel {appContainer.viewModelFactory.create(CountryOperationViewModel::class.java)}
 
 
     ObserveFilterKeyChanges(uiViewModel.filterByKey, uiViewModel.selectedFilter, viewModel)
