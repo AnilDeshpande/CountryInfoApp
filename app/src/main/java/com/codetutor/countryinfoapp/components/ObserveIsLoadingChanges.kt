@@ -9,9 +9,10 @@ import com.codetutor.countryinfoapp.viewmodel.CountryOperationViewModel
 @Composable
 fun ObserveIsLoadingChanges(isLoading: MutableState<Boolean>,
                             operationViewModel: CountryOperationViewModel) {
+    val allCountries = operationViewModel.allCountries.value
 
-    SideEffect {
-        isLoading.value = operationViewModel.allCountries.value.isEmpty()
+    LaunchedEffect(allCountries) {
+        isLoading.value = allCountries.isEmpty()
     }
 
 }
