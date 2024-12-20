@@ -1,13 +1,7 @@
 package com.codetutor.countryinfoapp
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-class CountryInfoApplication: Application() {
-    val applicationContainer by lazy {
-        AppContainer(this)
-    }
-
-    /*val applicationContainer by lazy {
-        SingletonAppContainer.getInstance(this)
-    }*/
-}
+@HiltAndroidApp
+class CountryInfoApplication: Application()
