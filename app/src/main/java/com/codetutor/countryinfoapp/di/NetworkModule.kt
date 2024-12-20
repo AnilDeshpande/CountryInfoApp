@@ -5,6 +5,7 @@ import com.codetutor.countryinfoapp.repository.service.CountryListProviderViaNet
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProvider
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProviderImpl
 import com.codetutor.countryinfoapp.repository.service.network.ApiService
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,27 +16,30 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetworkModule {
-
-    @Provides
-    @Singleton
-    fun provideApiService(retrofit: Retrofit): ApiService {
-        return retrofit.create(ApiService::class.java)
-    }
-
-    @Provides
-    @Singleton
-    fun provideRetrofit(): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl("https://restcountries.com")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
+abstract class NetworkModule {
 
     @NetworkProvider
-    @Provides
+    @Binds
     @Singleton
-    fun provideCountryListServiceProvider(apiService: ApiService): CountryListServiceProvider {
-        return CountryListProviderViaNetwork(apiService)
+    abstract fun bindCountryListServiceProvider(
+        countryListProviderViaNetwork: CountryListProviderViaNetwork
+    ): CountryListServiceProvider
+
+
+    companion object {
+        @Provides
+        @Singleton
+        fun provideApiService(retrofit: Retrofit): ApiService {
+            return retrofit.create(ApiService::class.java)
+        }
+
+        @Provides
+        @Singleton
+        fun provideRetrofit(): Retrofit {
+            return Retrofit.Builder()
+                .baseUrl("https://restcountries.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        }
     }
 }
