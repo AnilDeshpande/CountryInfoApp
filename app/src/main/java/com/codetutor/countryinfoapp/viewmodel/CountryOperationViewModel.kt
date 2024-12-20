@@ -5,15 +5,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codetutor.countryinfoapp.data.Country
-import com.codetutor.countryinfoapp.repository.FilterByContinent
-import com.codetutor.countryinfoapp.repository.FilterByLanguage
 import com.codetutor.countryinfoapp.repository.FilterCriteria
 import com.codetutor.countryinfoapp.repository.ICountryRepository
-import kotlinx.coroutines.flow.MutableStateFlow
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class CountryOperationViewModel(private val repository: ICountryRepository) : ViewModel(), ICountryOperationViewModel {
+@HiltViewModel
+class CountryOperationViewModel @Inject constructor(private val repository: ICountryRepository) : ViewModel(), ICountryOperationViewModel {
 
     override val allCountries: MutableState<List<Country>> = mutableStateOf(emptyList())
 

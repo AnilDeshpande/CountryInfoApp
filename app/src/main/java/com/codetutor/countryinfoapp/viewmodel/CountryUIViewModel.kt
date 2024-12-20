@@ -5,9 +5,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codetutor.countryinfoapp.data.Country
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CountryUIViewModel(): ViewModel() {
+@HiltViewModel
+class CountryUIViewModel @Inject constructor(): ViewModel() {
     //Delete Related Functionality
     val showDeleteAlertDialog: MutableState<Boolean> = mutableStateOf(false)
     var selectedCountryForDeletion: MutableState<Country?> = mutableStateOf(null)
