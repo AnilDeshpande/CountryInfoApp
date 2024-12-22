@@ -28,14 +28,19 @@ import com.codetutor.countryinfoapp.dialogs.DialogUpdateCountry
 import com.codetutor.countryinfoapp.repository.FilterByContinent
 import com.codetutor.countryinfoapp.repository.FilterByLanguage
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProviderImpl
+import com.codetutor.countryinfoapp.util.Logger
 import com.codetutor.countryinfoapp.viewmodel.CountryUIViewModel
 import com.codetutor.countryinfoapp.viewmodel.CountryViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.math.log
 
 
 @Composable
-fun MainScreen( innerPaddingValues: PaddingValues, viewModelCountryOps: CountryOperationViewModel, viewModelUI: CountryUIViewModel ) {
+fun MainScreen( innerPaddingValues: PaddingValues,
+                viewModelCountryOps: CountryOperationViewModel,
+                viewModelUI: CountryUIViewModel,
+                logger: Logger) {
 
     val countryList = viewModelCountryOps.allCountries.value
     val isLoading = remember {
@@ -58,10 +63,12 @@ fun MainScreen( innerPaddingValues: PaddingValues, viewModelCountryOps: CountryO
         ) {
             when {
                 isLoading.value -> {
+                    logger.info("Loading Data")
                     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                         CircularProgressIndicator()
                     }
                 } else -> {
+                logger.info("Data loaded Data")
                     LazyColumn {
                         items(items = countryList, key = { country -> country.id ?: 0 }) { country ->
                             CountryCard(

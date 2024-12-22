@@ -44,6 +44,7 @@ import com.codetutor.countryinfoapp.repository.FilterByDriveSide
 import com.codetutor.countryinfoapp.repository.service.CountryListProviderViaNetwork
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProvider
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProviderImpl
+import com.codetutor.countryinfoapp.util.Logger
 import com.codetutor.countryinfoapp.viewmodel.CountryOperationViewModel
 import com.codetutor.countryinfoapp.viewmodel.CountryUIViewModel
 import com.codetutor.countryinfoapp.viewmodel.CountryViewModelFactory
@@ -53,7 +54,8 @@ import kotlinx.coroutines.Dispatchers
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CountryInfoAppScaffold(operationViewModel: CountryOperationViewModel,
-                           uiViewModel: CountryUIViewModel){
+                           uiViewModel: CountryUIViewModel,
+                           logger: Logger){
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val context = LocalContext.current
@@ -121,6 +123,6 @@ fun CountryInfoAppScaffold(operationViewModel: CountryOperationViewModel,
         }
 
     ) { innerPaddingValues ->
-        MainScreen(innerPaddingValues, operationViewModel, uiViewModel)
+        MainScreen(innerPaddingValues, operationViewModel, uiViewModel, logger)
     }
 }
