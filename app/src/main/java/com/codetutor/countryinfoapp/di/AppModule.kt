@@ -1,5 +1,6 @@
 package com.codetutor.countryinfoapp.di
 
+import android.app.Application
 import android.content.Context
 import com.codetutor.countryinfoapp.database.appdb.AppDatabase
 import com.codetutor.countryinfoapp.database.dao.ICountryDao
@@ -31,13 +32,6 @@ object AppModule {
     @Provides
     fun provideCountryDao(database: AppDatabase): ICountryDao = database.countryDao()
 
-
-    @Provides
-    @Singleton
-    fun provideCountryListServiceProvider(apiService: ApiService): CountryListServiceProvider {
-        return CountryListProviderViaNetwork(apiService)
-    }
-
     @Provides
     fun provideDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
@@ -45,7 +39,7 @@ object AppModule {
     @Singleton
     fun provideCountryRepository(
         countryDao: ICountryDao,
-        countryListServiceProvider: CountryListServiceProvider,
+        @NetworkProvider countryListServiceProvider: CountryListServiceProvider,
         dispatcher: CoroutineDispatcher
     ): ICountryRepository {
         return CountryRepository(countryDao, countryListServiceProvider, dispatcher)
@@ -56,5 +50,11 @@ object AppModule {
     @Singleton
     fun provideCountryListServiceProviderImpl(context: Context): CountryListServiceProvider {
         return CountryListServiceProviderImpl(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideApplicationContext(application: Application): Context {
+        return application.applicationContext
     }
 }
