@@ -29,7 +29,6 @@ import com.codetutor.countryinfoapp.repository.FilterByContinent
 import com.codetutor.countryinfoapp.repository.FilterByLanguage
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProviderImpl
 import com.codetutor.countryinfoapp.viewmodel.CountryUIViewModel
-import com.codetutor.countryinfoapp.viewmodel.CountryViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
