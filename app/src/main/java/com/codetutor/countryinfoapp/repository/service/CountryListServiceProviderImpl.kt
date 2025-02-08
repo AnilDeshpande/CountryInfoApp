@@ -5,13 +5,12 @@ import com.codetutor.countryinfoapp.R
 import com.codetutor.countryinfoapp.data.Country
 import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
+import javax.inject.Inject
 
-class CountryListServiceProviderImpl (context: Context) : CountryListServiceProvider {
-
-    private val contextForProvider: Context = context
+class CountryListServiceProviderImpl @Inject constructor (private val context: Context) : CountryListServiceProvider {
 
     private fun getJsonString(): String {
-        val inputStream = contextForProvider.resources.openRawResource(R.raw.countries)
+        val inputStream = context.resources.openRawResource(R.raw.countries)
         return inputStream.bufferedReader().use { it.readText() }
     }
 
