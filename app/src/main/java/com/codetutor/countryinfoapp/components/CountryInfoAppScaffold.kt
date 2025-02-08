@@ -35,6 +35,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.codetutor.countryinfoapp.CountryInfoApplication
 import com.codetutor.countryinfoapp.database.appdb.AppDatabase
@@ -49,10 +50,14 @@ import com.codetutor.countryinfoapp.viewmodel.CountryUIViewModel
 import kotlinx.coroutines.Dispatchers
 
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CountryInfoAppScaffold(operationViewModel: CountryOperationViewModel,
-                           uiViewModel: CountryUIViewModel){
+fun CountryInfoAppScaffold(){
+
+    val operationViewModel: CountryOperationViewModel = hiltViewModel()
+    val uiViewModel: CountryUIViewModel = hiltViewModel()
+
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val context = LocalContext.current

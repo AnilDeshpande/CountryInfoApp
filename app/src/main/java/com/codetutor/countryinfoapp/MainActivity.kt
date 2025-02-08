@@ -13,16 +13,13 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val operationViewModel: CountryOperationViewModel by viewModels()
-    private val uiViewModel: CountryUIViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //AppContainer is accessible any where in the app
 
         setContent {
             MyCustomAppTheme {
-                CountryInfoAppScaffold(operationViewModel, uiViewModel)
+                CountryInfoAppScaffold()
             }
         }
     }
