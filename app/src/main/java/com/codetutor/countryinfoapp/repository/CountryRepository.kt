@@ -4,14 +4,17 @@ import android.content.Context
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.database.dao.CountryDao
 import com.codetutor.countryinfoapp.database.dao.ICountryDao
+import com.codetutor.countryinfoapp.di.NetworkProvider
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProvider
 import com.codetutor.countryinfoapp.util.getCountryList
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
+import javax.inject.Inject
 
-class CountryRepository(private val countryListServiceProvider: CountryListServiceProvider,
+class CountryRepository @Inject constructor (
+                        @NetworkProvider private val countryListServiceProvider: CountryListServiceProvider,
                         private val countryDao: ICountryDao,
                         private val dispatcher: CoroutineDispatcher
 ): ICountryRepository {

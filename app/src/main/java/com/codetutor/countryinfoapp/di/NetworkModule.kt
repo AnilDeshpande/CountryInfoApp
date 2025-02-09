@@ -1,11 +1,15 @@
 package com.codetutor.countryinfoapp.di
 
+import com.codetutor.countryinfoapp.repository.network.ApiService
 import com.codetutor.countryinfoapp.repository.service.CountryListProviderViaNetwork
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProvider
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -18,4 +22,23 @@ abstract class NetworkModule {
     abstract fun bindCountryListServiceProvider(
         countryListProviderViaNetwork: CountryListProviderViaNetwork
     ):CountryListServiceProvider
+
+    companion object {
+        @Provides
+        @Singleton
+        fun provideApiService(retrofit: Retrofit): ApiService {
+            return retrofit.create(ApiService::class.java)
+        }
+
+        @Provides
+        @Singleton
+        fun provideRetrofit(): Retrofit {
+            return Retrofit.Builder()
+                .baseUrl("https://restcountries.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        }
+
+    }
+
 }

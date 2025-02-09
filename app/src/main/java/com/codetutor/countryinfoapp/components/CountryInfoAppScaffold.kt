@@ -40,17 +40,14 @@ import kotlinx.coroutines.Dispatchers
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CountryInfoAppScaffold(){
+fun CountryInfoAppScaffold(uiViewModel: CountryUIViewModel, viewModel: CountryOperationViewModel){
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val context = LocalContext.current
 
-    val appContainer = (context.applicationContext as CountryInfoApplication).applicationContainer
-
     //Initialise the ViewModel
-    val uiViewModel: CountryUIViewModel = viewModel {appContainer.viewModelFactory.create(CountryUIViewModel::class.java)}
-    val viewModel: CountryOperationViewModel = viewModel {appContainer.viewModelFactory.create(CountryOperationViewModel::class.java)}
-
+    /*val uiViewModel: CountryUIViewModel =
+    val viewModel: CountryOperationViewModel =*/
 
     ObserveFilterKeyChanges(uiViewModel.filterByKey, uiViewModel.selectedFilter, viewModel)
 
