@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.codetutor.countryinfoapp.CountryInfoApplication
 import com.codetutor.countryinfoapp.database.appdb.AppDataBase
@@ -40,14 +41,14 @@ import kotlinx.coroutines.Dispatchers
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CountryInfoAppScaffold(uiViewModel: CountryUIViewModel, viewModel: CountryOperationViewModel){
+fun CountryInfoAppScaffold(){
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val context = LocalContext.current
 
     //Initialise the ViewModel
-    /*val uiViewModel: CountryUIViewModel =
-    val viewModel: CountryOperationViewModel =*/
+    val uiViewModel: CountryUIViewModel = hiltViewModel()
+    val viewModel: CountryOperationViewModel = hiltViewModel()
 
     ObserveFilterKeyChanges(uiViewModel.filterByKey, uiViewModel.selectedFilter, viewModel)
 

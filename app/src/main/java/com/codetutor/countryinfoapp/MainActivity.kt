@@ -9,17 +9,13 @@ import com.codetutor.countryinfoapp.components.CountryInfoAppScaffold
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.ui.theme.MyCustomAppTheme
 import com.codetutor.countryinfoapp.util.getCountryList
+import com.codetutor.countryinfoapp.viewmodel.CountryOperationViewModel
 import com.codetutor.countryinfoapp.viewmodel.CountryUIViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-
-    private var uiViewModel: CountryUIViewModel by viewModels()
-
-    private lateinit var countryList: MutableList<Country>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,4 +27,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
