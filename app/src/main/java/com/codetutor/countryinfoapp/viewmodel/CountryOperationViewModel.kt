@@ -12,7 +12,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CountryOperationViewModel @Inject constructor (private val countryRepository: ICountryRepository):
+class CountryOperationViewModel @Inject constructor
+    (private val countryRepository: ICountryRepository):
     ViewModel(), ICountryOperationViewModel {
 
     override val allCountries: MutableState<List<Country>> = mutableStateOf(emptyList())

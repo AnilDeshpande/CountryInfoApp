@@ -8,7 +8,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class CountryUIViewModel @Inject constructor (): ViewModel() {
+class CountryUIViewModel
+      @Inject constructor (): ViewModel() {
+
     val showDeleteAlertDialog: MutableState<Boolean> = mutableStateOf(false)
     val showUpdateDialogAlert: MutableState<Boolean> = mutableStateOf(false)
 

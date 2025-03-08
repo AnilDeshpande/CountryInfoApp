@@ -47,7 +47,7 @@ object AppModule{
     @Provides
     @Singleton
     fun provideCountryRepository(
-        countryDao: CountryDao,
+        countryDao: ICountryDao,
         @NetworkProvider countryListServiceProvider: CountryListServiceProvider,
         dispatcher: CoroutineDispatcher
     ): ICountryRepository {
@@ -57,7 +57,8 @@ object AppModule{
     @LocalProvider
     @Provides
     @Singleton
-    fun provideCountryListServiceProviderImpl(context: Context): CountryListServiceProvider{
+    fun provideCountryListServiceProviderImpl(context: Context):
+            CountryListServiceProvider{
         return CountryListServiceProviderImpl(context)
     }
 
