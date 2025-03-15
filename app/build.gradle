@@ -93,4 +93,18 @@ dependencies {
     
     // OkHttp for logging (optional)
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
+
+    // Coroutines testing - needed for testing suspend functions
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1"
+
+    // MockK - for mocking CountryDao and CountryListServiceProvider
+    testImplementation "io.mockk:mockk:1.13.5"
+
+    // Architecture Components testing
+    testImplementation "androidx.arch.core:core-testing:2.2.0"
+
+    // Truth for more readable assertions
+    testImplementation "com.google.truth:truth:1.1.5"
+
+    testImplementation 'com.google.code.gson:gson:2.10.1'
 }
