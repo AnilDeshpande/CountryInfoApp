@@ -1,4 +1,4 @@
-package com.codetutor.countryinfoapp.util
+package com.codetutor.countryinfoapp.utility
 
 import com.codetutor.countryinfoapp.data.Country
 import com.google.gson.Gson
