@@ -1,8 +1,7 @@
-package com.codetutor.countryinfoapp
+package com.codetutor.countryinfoapp.repository
 
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.data.Name
-import com.codetutor.countryinfoapp.repository.FilterByContinent
 import com.codetutor.countryinfoapp.util.TestDataLoader
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
