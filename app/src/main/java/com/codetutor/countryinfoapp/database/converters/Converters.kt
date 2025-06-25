@@ -9,10 +9,14 @@ import com.codetutor.countryinfoapp.data.Idd
 import com.codetutor.countryinfoapp.data.Languages
 import com.codetutor.countryinfoapp.data.Maps
 import com.codetutor.countryinfoapp.data.Name
-import com.codetutor.countryinfoapp.data.NativeName
+import com.codetutor.countryinfoapp.data.NameTranslation
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.encodeToString
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.InternalSerializationApi
+import kotlinx.serialization.ExperimentalSerializationApi
 
+@OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
 class Converters {
     private val jsonFormat = Json { ignoreUnknownKeys = true }
 
@@ -36,7 +40,6 @@ class Converters {
         return json?.let { jsonFormat.decodeFromString(it) }
     }
 
-    // Example converters for other complex types like List<Double>, Map<String, Currency>, etc.
     @TypeConverter
     fun fromDoubleListToJson(value: List<Double>?): String? {
         return value?.let { jsonFormat.encodeToString(it) }
@@ -103,12 +106,12 @@ class Converters {
     }
 
     @TypeConverter
-    fun fromNativeNameToJson(nativeName: NativeName?): String? {
-        return nativeName?.let { jsonFormat.encodeToString(it) }
+    fun fromNameTranslationMapToJson(map: Map<String, NameTranslation>?): String? {
+        return map?.let { jsonFormat.encodeToString(it) }
     }
 
     @TypeConverter
-    fun fromJsonToNativeName(json: String?): NativeName? {
+    fun fromJsonToNameTranslationMap(json: String?): Map<String, NameTranslation>? {
         return json?.let { jsonFormat.decodeFromString(it) }
     }
 
@@ -117,7 +120,6 @@ class Converters {
         return value?.let { jsonFormat.decodeFromString(it) }
     }
 
-    // Add similar converters for Map and other custom objects
     @TypeConverter
     fun fromCurrencyMapToJson(value: Map<String, Currency>?): String? {
         return value?.let { jsonFormat.encodeToString(it) }
@@ -125,6 +127,16 @@ class Converters {
 
     @TypeConverter
     fun fromJsonToCurrencyMap(value: String?): Map<String, Currency>? {
+        return value?.let { jsonFormat.decodeFromString(it) }
+    }
+
+    @TypeConverter
+    fun fromLanguageMapToJson(value: Map<String, String>?): String? {
+        return value?.let { jsonFormat.encodeToString(it) }
+    }
+
+    @TypeConverter
+    fun fromJsonToLanguageMap(value: String?): Map<String, String>? {
         return value?.let { jsonFormat.decodeFromString(it) }
     }
 }
