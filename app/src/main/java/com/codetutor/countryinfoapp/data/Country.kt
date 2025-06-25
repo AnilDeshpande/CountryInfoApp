@@ -4,9 +4,11 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
-
+import kotlinx.serialization.InternalSerializationApi
+import kotlinx.serialization.ExperimentalSerializationApi
 
 @Entity
+@OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
 @Serializable
 data class Country(
     @PrimaryKey(autoGenerate = true)
@@ -42,4 +44,3 @@ data class Country(
     @Ignore var translations: Translations? = null,
     var unMember: Boolean? = null
 )
-

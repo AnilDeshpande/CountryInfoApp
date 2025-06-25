@@ -13,7 +13,7 @@ interface CountryDao: ICountryDao {
     @Query("SELECT * FROM Country")
     override suspend fun getAllCountries(): List<Country>
 
-    @Query("SELECT * FROM Country WHERE continents LIKE :continent")
+    @Query("SELECT * FROM Country WHERE region LIKE :continent")
     override suspend fun getCountriesByContinent(continent: String): List<Country>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
