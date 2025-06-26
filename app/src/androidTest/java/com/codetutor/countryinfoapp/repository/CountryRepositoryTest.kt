@@ -26,14 +26,14 @@ class CountryRepositoryTest {
             id = 1,
             name = Name("Country1"),
             continents = listOf("Europe"),
-            languages = Languages(nor = "English"),
+            languages = Languages(languages = mapOf("nor" to "English")),
             capital = listOf("City1")
         ),
         Country(
             id = 2,
             name = Name("Country2"),
             continents = listOf("Asia"),
-            languages = Languages(nor = "Japanese"),
+            languages = Languages(languages = mapOf("nor" to "English")),
             capital = listOf("City2")
         )
     )
