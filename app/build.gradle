@@ -40,7 +40,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.3.2'
+        kotlinCompilerExtensionVersion '1.5.1'
     }
     packagingOptions {
         resources {
@@ -73,7 +73,7 @@ dependencies {
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0'
     implementation("io.coil-kt:coil-compose:2.4.0")
     // LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
@@ -95,7 +95,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
 
     // Coroutines testing - needed for testing suspend functions
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3"
 
     // MockK - for mocking CountryDao and CountryListServiceProvider
     testImplementation "io.mockk:mockk:1.13.5"
@@ -107,4 +107,7 @@ dependencies {
     testImplementation "com.google.truth:truth:1.1.5"
 
     testImplementation 'com.google.code.gson:gson:2.10.1'
+
+    testImplementation "org.mockito:mockito-core:5.11.0"        // or newer, e.g. 5.18.0
+    testImplementation "org.mockito.kotlin:mockito-kotlin:5.2.1" // optional Kotlin DSL
 }
