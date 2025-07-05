@@ -1,14 +1,13 @@
 package com.codetutor.countryinfoapp.repository
 
+import com.codetutor.countryinfoapp.repository.doubles.FakeCountryDao
+import com.codetutor.countryinfoapp.repository.doubles.FakeCountryListServiceProvider
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.data.Languages
 import com.codetutor.countryinfoapp.data.Name
-import com.codetutor.countryinfoapp.repository.service.CountryListServiceProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertTrue
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
@@ -50,9 +49,9 @@ class CountryRepositoryTest {
         repository.fetchAndInsertAll()
         val countries = repository.getAllCountries()
         // Verify that all countries are inserted.
-        assertEquals(testCountries.size, countries.size)
+        Assert.assertEquals(testCountries.size, countries.size)
         // For example, compare the first country's name.
-        assertEquals("Country1", countries[0].name?.common)
+        Assert.assertEquals("Country1", countries[0].name?.common)
     }
 
     @Test
@@ -63,7 +62,7 @@ class CountryRepositoryTest {
         // Delete first country.
         repository.deleteCountry(testCountries[0])
         val countriesAfterDelete = repository.getAllCountries()
-        assertEquals(initialCount - 1, countriesAfterDelete.size)
+        Assert.assertEquals(initialCount - 1, countriesAfterDelete.size)
     }
 
     @Test
@@ -76,8 +75,8 @@ class CountryRepositoryTest {
         repository.updateCapital(country, newCapital)
         val countriesAfterUpdate = repository.getAllCountries()
         val updatedCountry = countriesAfterUpdate.find { it.id == country.id }
-        assertNotNull(updatedCountry)
-        assertEquals(listOf(newCapital), updatedCountry?.capital)
+        Assert.assertNotNull(updatedCountry)
+        Assert.assertEquals(listOf(newCapital), updatedCountry?.capital)
     }
 
     @Test
@@ -87,6 +86,6 @@ class CountryRepositoryTest {
         val filter = FilterByContinent("Europe")
         val filteredCountries = repository.filterCountries(filter)
         // Verify that the filtered list returns only countries that have Europe as a continent.
-        assertTrue(filteredCountries.all { it.continents?.contains("Europe") == true })
+        Assert.assertTrue(filteredCountries.all { it.continents?.contains("Europe") == true })
     }
 }

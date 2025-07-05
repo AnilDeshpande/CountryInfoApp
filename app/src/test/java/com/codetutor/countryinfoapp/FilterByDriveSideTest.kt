@@ -1,4 +1,4 @@
-package com.codetutor.countryinfoapp.repository
+package com.codetutor.countryinfoapp
 
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.data.Car

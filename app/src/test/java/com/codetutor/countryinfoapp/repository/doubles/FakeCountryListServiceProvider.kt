@@ -1,4 +1,4 @@
-package com.codetutor.countryinfoapp.repository
+package com.codetutor.countryinfoapp.repository.doubles
 
 import com.codetutor.countryinfoapp.data.Country
 import com.codetutor.countryinfoapp.repository.service.CountryListServiceProvider

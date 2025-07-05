@@ -1,8 +1,8 @@
-package com.codetutor.countryinfoapp.util
+package com.codetutor.countryinfoapp
 
 import com.codetutor.countryinfoapp.repository.FilterByContinent
 import com.codetutor.countryinfoapp.repository.FilterByDriveSide
-import kotlinx.coroutines.runBlocking
+import com.codetutor.countryinfoapp.util.FilterCriteriaFactoryProvider
 import org.junit.Assert.assertTrue
 import org.junit.Test
 

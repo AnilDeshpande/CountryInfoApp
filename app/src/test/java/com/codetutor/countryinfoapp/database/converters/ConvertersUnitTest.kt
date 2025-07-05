@@ -1,6 +1,5 @@
-package com.codetutor.countryinfoapp
+package com.codetutor.countryinfoapp.database.converters
 
-import com.codetutor.countryinfoapp.database.converters.Converters
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before

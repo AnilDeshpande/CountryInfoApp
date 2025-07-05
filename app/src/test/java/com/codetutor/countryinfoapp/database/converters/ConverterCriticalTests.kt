@@ -1,6 +1,5 @@
 package com.codetutor.countryinfoapp.database.converters
 
-import com.codetutor.countryinfoapp.database.converters.Converters
 import com.codetutor.countryinfoapp.data.Car
 import com.codetutor.countryinfoapp.data.CapitalInfo
 import org.junit.Assert
