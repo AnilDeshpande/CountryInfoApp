@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.res.Resources
 import com.codetutor.countryinfoapp.R
 import com.codetutor.countryinfoapp.data.Country
+import io.mockk.every
+import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import org.junit.Assert.assertEquals
@@ -11,9 +13,6 @@ import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.MockitoAnnotations
 import java.io.ByteArrayInputStream
 import java.io.InputStream
 
@@ -21,19 +20,19 @@ import java.io.InputStream
  * Unit tests for the CountryListServiceProviderImpl class
  *
  * This test class demonstrates:
- * 1. How to mock Android dependencies (Context, Resources) using Mockito
+ * 1. How to mock Android dependencies (Context, Resources) using MockK
  * 2. How to test private methods using reflection
  * 3. How to test suspend functions with runBlocking
  * 4. How to test JSON deserialization
  * 5. How to handle and test error cases
+ *
+ * Note: MockK is a mocking library designed specifically for Kotlin, providing
+ * idiomatic Kotlin syntax for mocking and verification.
  */
 class CountryListServiceProviderImplTest {
 
-    // Declare mock objects using Mockito annotations
-    @Mock
+    // Declare mock objects using MockK
     private lateinit var mockContext: Context
-
-    @Mock
     private lateinit var mockResources: Resources
 
     // Class under test
@@ -81,18 +80,18 @@ class CountryListServiceProviderImplTest {
 
     @Before
     fun setup() {
-        // Initialize Mockito annotations
-        MockitoAnnotations.openMocks(this)
+        // Initialize MockK mocks
+        mockContext = mockk<Context>()
+        mockResources = mockk<Resources>()
 
-        // Configure the mock behavior using Mockito syntax
+        // Configure the mock behavior using MockK syntax
         // When context.resources is called, return our mockResources
-        `when`(mockContext.resources).thenReturn(mockResources)
+        every { mockContext.resources } returns mockResources
 
         // When resources.openRawResource() is called with R.raw.countries,
         // return an InputStream containing our sample JSON
-        `when`(mockResources.openRawResource(R.raw.countries)).thenReturn(
+        every { mockResources.openRawResource(R.raw.countries) } returns
             ByteArrayInputStream(sampleCountriesJson.toByteArray())
-        )
 
         // Create the instance of the class under test with the mocked context
         serviceProvider = CountryListServiceProviderImpl(mockContext)
@@ -160,9 +159,8 @@ class CountryListServiceProviderImplTest {
     fun testGetCountryList_handlesEmptyList() = runBlocking {
         // Override the mock to return an empty JSON array
         val emptyJson = "[]"
-        `when`(mockResources.openRawResource(R.raw.countries)).thenReturn(
+        every { mockResources.openRawResource(R.raw.countries) } returns
             ByteArrayInputStream(emptyJson.toByteArray())
-        )
 
         // Recreate service provider with the updated mock
         val emptyServiceProvider = CountryListServiceProviderImpl(mockContext)
@@ -192,7 +190,7 @@ class CountryListServiceProviderImplTest {
         }
 
         // Override the mock to return our error-throwing stream
-        `when`(mockResources.openRawResource(R.raw.countries)).thenReturn(errorStream)
+        every { mockResources.openRawResource(R.raw.countries) } returns errorStream
 
         // Recreate service provider with the updated mock
         val errorServiceProvider = CountryListServiceProviderImpl(mockContext)
@@ -231,9 +229,8 @@ class CountryListServiceProviderImplTest {
         """.trimIndent()
 
         // Override the mock to return our invalid JSON
-        `when`(mockResources.openRawResource(R.raw.countries)).thenReturn(
+        every { mockResources.openRawResource(R.raw.countries) } returns
             ByteArrayInputStream(invalidJson.toByteArray())
-        )
 
         // Recreate service provider with the updated mock
         val invalidJsonProvider = CountryListServiceProviderImpl(mockContext)
@@ -272,9 +269,8 @@ class CountryListServiceProviderImplTest {
         """.trimIndent()
 
         // Override the mock to return our incomplete JSON
-        `when`(mockResources.openRawResource(R.raw.countries)).thenReturn(
+        every { mockResources.openRawResource(R.raw.countries) } returns
             ByteArrayInputStream(incompleteJson.toByteArray())
-        )
 
         // Recreate service provider with the updated mock
         val incompleteJsonProvider = CountryListServiceProviderImpl(mockContext)

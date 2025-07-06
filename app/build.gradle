@@ -108,6 +108,5 @@ dependencies {
 
     testImplementation 'com.google.code.gson:gson:2.10.1'
 
-    testImplementation "org.mockito:mockito-core:5.11.0"        // or newer, e.g. 5.18.0
-    testImplementation "org.mockito.kotlin:mockito-kotlin:5.2.1" // optional Kotlin DSL
+    // Removed Mockito dependencies as we're using MockK
 }
