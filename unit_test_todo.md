@@ -45,9 +45,9 @@ debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
 | Task | Class | Scenarios |
 |------|-------|-----------|
-| [ ] `FilterByContinentTest` | `FilterByContinent` | match list, no match, empty input, null/blank key |
-| [ ] `FilterByLanguageTest` | `FilterByLanguage` | Same 4 scenarios |
-| [ ] `FilterByDriveSideTest` (already exists) | `FilterByDriveSide` | Verify existing test coverage |
+| [x] `FilterByContinentTest` | `FilterByContinent` | match list, no match, empty input, null/blank key |
+| [x] `FilterByLanguageTest` | `FilterByLanguage` | Same 4 scenarios |
+| [x] `FilterByDriveSideTest` (already exists) | `FilterByDriveSide` | Verify existing test coverage |
 
 > Expected files: `FilterByContinentTest.kt`, `FilterByLanguageTest.kt`  
 > Use `runBlocking { … }` with `UnconfinedTestDispatcher()`.
