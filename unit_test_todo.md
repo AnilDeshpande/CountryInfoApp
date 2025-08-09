@@ -8,6 +8,7 @@
 > 4. Commit tests to `app/src/test/...` (unit) or `app/src/androidTest/...` (instrumentation) **with the naming convention** `ClassNameTest.kt`.
 > 5. Keep PRs small: **one phase per PR**.
 > 6. After pushing, run `./gradlew testDebugUnitTest jacocoTestReport` and update the coverage badge at the end of this doc.
+> 7. The application has already dependency of Mocck framework added, but use it when it is absolutely necessary and makes sense to use it
 
 ---
 
@@ -15,8 +16,8 @@
 
 | Task                                                                                                                  | Details |
 | --------------------------------------------------------------------------------------------------------------------- | ------- |
-| [ ] Add **JaCoCo** to `build.gradle` (`plugins { id "jacoco" }`) and `testCoverageEnabled true` in *debug* buildType. |         |
-| [ ] Append these test dependencies to `build.gradle` (Module: app):                                                  |         |
+| [x] Add **JaCoCo** to `build.gradle` (`plugins { id "jacoco" }`) and `testCoverageEnabled true` in *debug* buildType. |         |
+| [x] Append these test dependencies to `build.gradle` (Module: app):                                                  |         |
 
 ```groovy
 testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3"
@@ -33,9 +34,9 @@ androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
 debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 ```
 
-| [ ] Create `TestCoroutineRule.kt` with `MainDispatcherRule` pattern to set `Dispatchers.setMain(UnconfinedTestDispatcher())`. |         |
-| [ ] Create helper `TestDataFactory.kt` with builders for minimal `Country`, `Car`, `CapitalInfo`, `Name`, etc.              |         |  
-| [ ] Prepare **in‑memory Room** provider util (`InMemoryDbHelper.kt`).                                                       |         |
+| [x] Create `TestCoroutineRule.kt` with `MainDispatcherRule` pattern to set `Dispatchers.setMain(UnconfinedTestDispatcher())`. |         |
+| [x] Create helper `TestDataFactory.kt` with builders for minimal `Country`, `Car`, `CapitalInfo`, `Name`, etc.              |         |  
+| [x] Prepare **in‑memory Room** provider util (`InMemoryDbHelper.kt`).                                                       |         |
 
 > Commit tag: `test/infra-setup`
 
