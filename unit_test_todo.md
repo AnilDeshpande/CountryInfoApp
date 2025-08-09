@@ -58,9 +58,9 @@ debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
 | Task | Goal |
 |------|------|
-| [ ] `ContinentFilterFactoryTest` ensures `createFilterCriteria()` returns `FilterByContinent` | Verify factory pattern |
-| [ ] `DriveSideFilterFactoryTest` ensures correct return type | Verify factory pattern |  
-| [ ] `FilterCriteriaFactoryProviderTest` for unknown key returns `null` | Test error handling |
+| [x] `ContinentFilterFactoryTest` ensures `createFilterCriteria()` returns `FilterByContinent` | Verify factory pattern |
+| [x] `DriveSideFilterFactoryTest` ensures correct return type | Verify factory pattern |  
+| [x] `FilterCriteriaFactoryProviderTest` for unknown key returns `null` | Test error handling |
 
 ---
 
