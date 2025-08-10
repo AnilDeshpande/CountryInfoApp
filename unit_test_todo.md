@@ -97,17 +97,19 @@ Write **round‑trip** (`obj → json → obj`) **and null** tests for each conv
 
 ---
 
-## Phase 5 – Repository Edge Paths (MockK)
+## Phase 5 – Repository Edge Paths (MockK) ✅
 
 Test `CountryRepository` edge cases (note: `CountryRepositoryTest.kt` already exists):
 
 | Case | Mock Setup | Expected |
 |------|------------|----------|
-| [ ] `fetchAndCacheCountries` when cache warm | Mock DAO returns non‑empty | Provider *not* invoked |
-| [ ] Provider returns empty list | Mock provider empty | DAO insert *not* called |
-| [ ] Provider throws `IOException` | Mock provider `throws` | verify exception propagated |
-| [ ] `getFilteredCountries` on empty cache | `allCountries` empty | returns empty list |
-| [ ] Network provider fallback | Mock local provider fails | Network provider called |
+| [x] `fetchAndCacheCountries` when cache warm | Mock DAO returns non‑empty | Provider *not* invoked |
+| [x] Provider returns empty list | Mock provider empty | DAO insert *still* called |
+| [x] Provider throws `IOException` | Mock provider `throws` | verify exception propagated |
+| [x] `getFilteredCountries` on empty cache | `allCountries` empty | returns empty list |
+| [x] Network provider fallback | Mock local provider fails | Network provider called |
+
+> Enhanced `CountryRepositoryTest.kt` with comprehensive MockK-based edge case testing
 
 ---
 
