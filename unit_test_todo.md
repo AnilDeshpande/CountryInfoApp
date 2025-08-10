@@ -65,19 +65,19 @@ debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
 ---
 
-## Phase 3 – Room TypeConverters
+## Phase 3 – Room TypeConverters ✅
 
 Write **round‑trip** (`obj → json → obj`) **and null** tests for each converter in `Converters.kt`:
 
-- [ ] `CapitalInfo` converter
-- [ ] `Car` converter
-- [ ] `Currency` converter
-- [ ] `Flags` converter
-- [ ] `Idd` converter
-- [ ] `Languages` converter
-- [ ] `Maps` converter
-- [ ] `Name` converter
-- [ ] `NameTranslation` converter
+- [x] `CapitalInfo` converter
+- [x] `Car` converter
+- [x] `Currency` converter
+- [x] `Flags` converter
+- [x] `Idd` converter
+- [x] `Languages` converter
+- [x] `Maps` converter
+- [x] `Name` converter
+- [x] `NameTranslation` converter
 
 > Tips: reuse a singleton `Json { ignoreUnknownKeys = true }` in tests.
 > Create `ConvertersTest.kt` (note: `ConverterCriticalTests.kt` and `ConvertersUnitTest.kt` already exist)
