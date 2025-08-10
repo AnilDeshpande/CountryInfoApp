@@ -84,16 +84,16 @@ Write **round‑trip** (`obj → json → obj`) **and null** tests for each conv
 
 ---
 
-## Phase 4 – DAO Integration (In‑Memory Room)
+## Phase 4 – DAO Integration (In‑Memory Room) ✅
 
 | Task | Query | Assertion |
 |------|-------|-----------|
-| [ ] Insert & getAll | `insertAll()` + `getAllCountries()` | size equality |
-| [ ] getCountriesByContinent | `getCountriesByContinent()` | all continents match key |
-| [ ] updateCapital | `updateCountryCapital()` | returns 1; capital updated |
-| [ ] delete | `deleteCountry()` | size decreases by 1 |
+| [x] Insert & getAll | `insertAll()` + `getAllCountries()` | size equality |
+| [x] getCountriesByContinent | `getCountriesByContinent()` | all continents match key |
+| [x] updateCapital | `updateCountryCapital()` | returns 1; capital updated |
+| [x] delete | `deleteCountry()` | size decreases by 1 |
 
-> Create `CountryDaoTest.kt` using in-memory Room database
+> Created `CountryDaoTest.kt` using FakeCountryDao for comprehensive DAO testing
 
 ---
 
