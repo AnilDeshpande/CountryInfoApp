@@ -113,16 +113,16 @@ Test `CountryRepository` edge cases (note: `CountryRepositoryTest.kt` already ex
 
 ---
 
-## Phase 6 – ViewModel Behaviour
+## Phase 6 – ViewModel Behaviour ✅
 
-- [ ] `CountryOperationViewModelTest`
+- [x] `CountryOperationViewModelTest`
     1. `init` triggers repository fetch once *(use MockK verify)*
     2. `deleteCountry` reduces `allCountries` size
     3. `updateCountryCapital` mutates capital data
     4. `applyFilter` delegates to repo and updates state
     5. `loadCountries` updates loading state correctly
 
-- [ ] `CountryUIViewModelTest`
+- [x] `CountryUIViewModelTest`
     1. Dialog state management
     2. Selected country state updates
 
