@@ -128,18 +128,18 @@ Test `CountryRepository` edge cases (note: `CountryRepositoryTest.kt` already ex
 
 ---
 
-## Phase 7 – Network Provider (MockWebServer)
+## Phase 7 – Network Provider (MockWebServer) ✅
 
 Test `CountryListProviderViaNetwork` and `ApiService`:
 
 | Task | Server Response | Expectation |
 |------|-----------------|-------------|
-| [ ] Happy path | 200 + valid JSON array | `getCountryList()` returns non-empty list |
-| [ ] Error path | 500 server error | function throws appropriate exception |
-| [ ] Malformed JSON | 200 + invalid JSON | parsing error handled gracefully |
-| [ ] Network timeout | Delayed response | timeout exception handled |
+| [x] Happy path | 200 + valid JSON array | `getCountryList()` returns non-empty list |
+| [x] Error path | 500 server error | function throws appropriate exception |
+| [x] Malformed JSON | 200 + invalid JSON | parsing error handled gracefully |
+| [x] Network timeout | Delayed response | timeout exception handled |
 
-> Create `CountryListProviderViaNetworkTest.kt` and `ApiServiceTest.kt`
+> ✅ Created `CountryListProviderViaNetworkTest.kt` and `ApiServiceTest.kt`
 
 ---
 
