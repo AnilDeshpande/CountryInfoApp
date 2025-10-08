@@ -289,4 +289,146 @@ class CountryListServiceProviderImplTest {
         assertEquals(null, countries[0].region)
         assertEquals(null, countries[0].subregion)
     }
+
+    /**
+     * Phase 8 Enhancement - Test that getCountryList handles missing resource file correctly.
+     *
+     * This test:
+     * 1. Mocks Resources.NotFoundException when trying to access the resource
+     * 2. Verifies that the exception is properly propagated
+     */
+    @Test
+    fun testGetCountryList_handlesMissingResource() = runBlocking {
+        // Mock the resources to throw NotFoundException when trying to access the raw resource
+        every { mockResources.openRawResource(R.raw.countries) } throws 
+            android.content.res.Resources.NotFoundException("Resource not found")
+
+        // Recreate service provider with the updated mock
+        val missingResourceProvider = CountryListServiceProviderImpl(mockContext)
+
+        // The test will pass if an exception is thrown
+        var exceptionThrown = false
+        var correctExceptionType = false
+
+        try {
+            missingResourceProvider.getCountryList()
+        } catch (e: android.content.res.Resources.NotFoundException) {
+            exceptionThrown = true
+            correctExceptionType = true
+        } catch (e: Exception) {
+            exceptionThrown = true
+        }
+
+        // Verify that the correct exception was thrown
+        assertTrue("Expected a Resources.NotFoundException to be thrown", exceptionThrown)
+        assertTrue("Expected Resources.NotFoundException specifically", correctExceptionType)
+    }
+
+    /**
+     * Phase 8 Enhancement - Test parsing error handling with completely invalid JSON.
+     *
+     * This test:
+     * 1. Provides completely invalid JSON (not even valid JSON format)
+     * 2. Verifies that a parsing exception is thrown
+     */
+    @Test
+    fun testGetCountryList_handlesInvalidJsonResource() = runBlocking {
+        // Create completely invalid JSON (not valid JSON at all)
+        val invalidJson = "This is not JSON at all! {[}]"
+
+        // Override the mock to return our invalid JSON
+        every { mockResources.openRawResource(R.raw.countries) } returns
+            ByteArrayInputStream(invalidJson.toByteArray())
+
+        // Recreate service provider with the updated mock
+        val invalidJsonProvider = CountryListServiceProviderImpl(mockContext)
+
+        // The test will pass if a serialization exception is thrown
+        var exceptionThrown = false
+        var isSerializationException = false
+
+        try {
+            invalidJsonProvider.getCountryList()
+        } catch (e: kotlinx.serialization.SerializationException) {
+            exceptionThrown = true
+            isSerializationException = true
+        } catch (e: Exception) {
+            exceptionThrown = true
+        }
+
+        // Verify that an exception was thrown
+        assertTrue("Expected a SerializationException to be thrown for invalid JSON", exceptionThrown)
+        assertTrue("Expected SerializationException specifically", isSerializationException)
+    }
+
+    /**
+     * Phase 8 Enhancement - Test valid JSON parsing from resources (comprehensive).
+     *
+     * This test:
+     * 1. Uses a more comprehensive valid JSON sample
+     * 2. Verifies all important fields are parsed correctly
+     * 3. Tests the complete happy path scenario
+     */
+    @Test
+    fun testGetCountryList_validJsonFromResources() = runBlocking {
+        // Comprehensive valid JSON with more fields
+        val comprehensiveJson = """
+            [
+                {
+                    "name": {
+                        "common": "Germany",
+                        "official": "Federal Republic of Germany"
+                    },
+                    "capital": ["Berlin"],
+                    "region": "Europe",
+                    "subregion": "Western Europe",
+                    "flag": "🇩🇪",
+                    "continents": ["Europe"],
+                    "languages": {
+                        "languages": {
+                            "deu": "German"
+                        }
+                    },
+                    "currencies": {
+                        "EUR": {
+                            "name": "Euro",
+                            "symbol": "€"
+                        }
+                    },
+                    "car": {
+                        "signs": ["D"],
+                        "side": "right"
+                    }
+                }
+            ]
+        """.trimIndent()
+
+        // Override the mock to return our comprehensive JSON
+        every { mockResources.openRawResource(R.raw.countries) } returns
+            ByteArrayInputStream(comprehensiveJson.toByteArray())
+
+        // Recreate service provider with the updated mock
+        val validJsonProvider = CountryListServiceProviderImpl(mockContext)
+
+        // Call the method under test
+        val countries = validJsonProvider.getCountryList()
+
+        // Verify we got the expected result
+        assertNotNull("Country list should not be null", countries)
+        assertEquals("Should have exactly one country", 1, countries.size)
+
+        val germany = countries[0]
+        
+        // Verify all important fields are correctly parsed
+        assertEquals("Germany", germany.name?.common)
+        assertEquals("Federal Republic of Germany", germany.name?.official)
+        assertEquals("Berlin", germany.capital?.get(0))
+        assertEquals("Europe", germany.region)
+        assertEquals("Western Europe", germany.subregion)
+        assertEquals("🇩🇪", germany.flag)
+        assertNotNull("Continents should not be null", germany.continents)
+        assertEquals("Europe", germany.continents?.get(0))
+        assertNotNull("Languages should not be null", germany.languages)
+        assertTrue("Should contain German language", germany.languages?.languages?.isNotEmpty() == true)
+    }
 }

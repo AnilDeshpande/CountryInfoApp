@@ -26,7 +26,7 @@ android {
 
     buildTypes {
         debug {
-            testCoverageEnabled true
+            testCoverageEnabled false // Disable to avoid conflicts with JaCoCo
         }
         release {
             minifyEnabled false
