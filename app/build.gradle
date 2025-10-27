@@ -125,6 +125,9 @@ dependencies {
     testImplementation "com.google.truth:truth:1.1.5"
 
     testImplementation 'com.google.code.gson:gson:2.10.1'
+
+    // Robolectric for Android unit tests with Context
+    testImplementation "org.robolectric:robolectric:4.10.3"
 }
 
 // JaCoCo configuration
