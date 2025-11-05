@@ -20,11 +20,12 @@ abstract class AppDatabase : RoomDatabase(), DatabaseProvider {
 
         fun getDatabase(context: Context): DatabaseProvider {
             return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
-                    "country_database"
-                ).build()
+                val instance =
+                    Room.databaseBuilder(
+                        context.applicationContext,
+                        AppDatabase::class.java,
+                        "country_database",
+                    ).build()
                 INSTANCE = instance
                 instance
             }

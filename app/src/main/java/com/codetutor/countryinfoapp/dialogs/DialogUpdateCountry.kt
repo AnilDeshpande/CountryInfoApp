@@ -21,7 +21,7 @@ fun DialogUpdateCountry(
     title: String,
     message: String,
     currentCapital: String,
-    positiveAction: (String) -> Unit
+    positiveAction: (String) -> Unit,
 ) {
     var newCapital by remember { mutableStateOf("") }
 
@@ -35,12 +35,12 @@ fun DialogUpdateCountry(
             },
             text = {
                 Column {
-                    Text(message,fontSize = 25.sp)
+                    Text(message, fontSize = 25.sp)
                     Text("Current Country Capital: $currentCapital", fontSize = 20.sp)
                     OutlinedTextField(
                         value = newCapital,
                         onValueChange = { newCapital = it },
-                        label = { Text("New Capital") }
+                        label = { Text("New Capital") },
                     )
                 }
             },
@@ -49,7 +49,7 @@ fun DialogUpdateCountry(
                     onClick = {
                         positiveAction(newCapital)
                         showDialog.value = false
-                    }
+                    },
                 ) {
                     Text("Confirm")
                 }
@@ -58,11 +58,11 @@ fun DialogUpdateCountry(
                 Button(
                     onClick = {
                         showDialog.value = false
-                    }
+                    },
                 ) {
                     Text("Dismiss")
                 }
-            }
+            },
         )
     }
 }

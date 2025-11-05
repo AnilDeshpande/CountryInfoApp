@@ -5,16 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.codetutor.countryinfoapp.data.Country
-import com.codetutor.countryinfoapp.repository.FilterByContinent
-import com.codetutor.countryinfoapp.repository.FilterByLanguage
 import com.codetutor.countryinfoapp.repository.FilterCriteria
 import com.codetutor.countryinfoapp.repository.ICountryRepository
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-
 class CountryOperationViewModel(private val repository: ICountryRepository) : ViewModel(), ICountryOperationViewModel {
-
     override val allCountries: MutableState<List<Country>> = mutableStateOf(emptyList())
 
     init {
@@ -35,14 +30,18 @@ class CountryOperationViewModel(private val repository: ICountryRepository) : Vi
     }
 
     private suspend fun fetchAndInsertAll() {
-        val job = viewModelScope.launch {
-            repository.fetchAndInsertAll()
-        }
+        val job =
+            viewModelScope.launch {
+                repository.fetchAndInsertAll()
+            }
         job.join()
         getAllCountries()
     }
 
-    override suspend fun updateCapital(country: Country, newCapital: String) {
+    override suspend fun updateCapital(
+        country: Country,
+        newCapital: String,
+    ) {
         country.let {
             it.let {
                 repository.updateCapital(it, newCapital)

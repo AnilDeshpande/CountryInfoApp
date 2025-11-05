@@ -1,8 +1,5 @@
 package com.codetutor.countryinfoapp.data
 
-import com.codetutor.countryinfoapp.R
-
-
 /*
 fun getCountryList(context: Any?): MutableList<CountryInfo> {
     val countryList = mutableListOf<CountryInfo>()

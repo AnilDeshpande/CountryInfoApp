@@ -6,8 +6,7 @@ import com.codetutor.countryinfoapp.data.Country
 import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
 
-class CountryListServiceProviderImpl (context: Context) : CountryListServiceProvider {
-
+class CountryListServiceProviderImpl(context: Context) : CountryListServiceProvider {
     private val contextForProvider: Context = context
 
     private fun getJsonString(): String {
@@ -18,6 +17,6 @@ class CountryListServiceProviderImpl (context: Context) : CountryListServiceProv
     override suspend fun getCountryList(): MutableList<Country> {
         val jsonStringFromRaw = getJsonString()
         delay(2000)
-        return Json{ignoreUnknownKeys = true}.decodeFromString<MutableList<Country>>(jsonStringFromRaw)
+        return Json { ignoreUnknownKeys = true }.decodeFromString<MutableList<Country>>(jsonStringFromRaw)
     }
 }

@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class Flags(
     val png: String? = null,
     val svg: String? = null,
-    val alt: String? = null
+    val alt: String? = null,
 )

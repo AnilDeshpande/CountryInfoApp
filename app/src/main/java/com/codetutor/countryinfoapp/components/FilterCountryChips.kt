@@ -20,7 +20,10 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FilterCountryChips(filterBy: String, selectedFilter: MutableState<String?>) {
+fun FilterCountryChips(
+    filterBy: String,
+    selectedFilter: MutableState<String?>,
+) {
     var selected by remember { mutableStateOf(false) }
 
     selected = selectedFilter.value == filterBy
@@ -40,16 +43,17 @@ fun FilterCountryChips(filterBy: String, selectedFilter: MutableState<String?>) 
         },
         modifier = Modifier.padding(2.dp),
         selected = selected,
-        leadingIcon = if (selected) {
-            {
-                Icon(
-                    imageVector = Icons.Filled.Done,
-                    contentDescription = "Done icon",
-                    modifier = Modifier.size(FilterChipDefaults.IconSize)
-                )
-            }
-        } else {
-            null
-        },
+        leadingIcon =
+            if (selected) {
+                {
+                    Icon(
+                        imageVector = Icons.Filled.Done,
+                        contentDescription = "Done icon",
+                        modifier = Modifier.size(FilterChipDefaults.IconSize),
+                    )
+                }
+            } else {
+                null
+            },
     )
 }

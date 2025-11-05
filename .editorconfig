@@ -1,0 +1,31 @@
+[*.{kt,kts}]
+# Kotlin code style settings
+indent_style = space
+indent_size = 4
+continuation_indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = 120
+charset = utf-8
+
+# Android-specific settings
+ij_kotlin_allow_trailing_comma = true
+ij_kotlin_allow_trailing_comma_on_call_site = true
+
+# Import ordering
+ij_kotlin_imports_layout = *,java.**,javax.**,kotlin.**,^
+
+# Spacing
+ij_kotlin_space_after_comma = true
+ij_kotlin_space_before_comma = false
+ij_kotlin_spaces_around_assignment_operators = true
+
+# Blank lines
+ij_kotlin_blank_lines_around_block_when_branches = 0
+
+# Function signature
+ktlint_function_naming_ignore_when_annotated_with = Composable
+
+# Disable specific rules if needed
+ktlint_standard_no-wildcard-imports = disabled
+ktlint_standard_filename = disabled

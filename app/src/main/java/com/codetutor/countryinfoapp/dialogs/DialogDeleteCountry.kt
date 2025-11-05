@@ -7,10 +7,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 
 @Composable
-fun DialogDeleteCountry(showDialog: MutableState<Boolean>,
-                        title: String,
-                        message: String,
-                        positiveAction: () -> Unit) {
+fun DialogDeleteCountry(
+    showDialog: MutableState<Boolean>,
+    title: String,
+    message: String,
+    positiveAction: () -> Unit,
+) {
     if (showDialog.value) {
         AlertDialog(
             onDismissRequest = {
@@ -29,7 +31,7 @@ fun DialogDeleteCountry(showDialog: MutableState<Boolean>,
                         // Handle confirm button click
                         positiveAction()
                         showDialog.value = false
-                    }
+                    },
                 ) {
                     Text("Confirm")
                 }
@@ -39,11 +41,11 @@ fun DialogDeleteCountry(showDialog: MutableState<Boolean>,
                     onClick = {
                         // Handle dismiss button click
                         showDialog.value = false
-                    }
+                    },
                 ) {
                     Text("Dismiss")
                 }
-            }
+            },
         )
     }
 }

@@ -4,18 +4,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import com.codetutor.countryinfoapp.repository.FilterByContinent
-import com.codetutor.countryinfoapp.repository.FilterByDriveSide
-import com.codetutor.countryinfoapp.repository.FilterCriteria
-import com.codetutor.countryinfoapp.util.FilterCriteriaFactory
 import com.codetutor.countryinfoapp.util.FilterCriteriaFactoryProvider
 import com.codetutor.countryinfoapp.viewmodel.CountryOperationViewModel
 
-
 @Composable
-fun ObserveFilterKeyChanges(filterByKey: MutableState<String>,
-                            selectedFilter: MutableState<String?>,
-                            viewModelCountryOps: CountryOperationViewModel
+fun ObserveFilterKeyChanges(
+    filterByKey: MutableState<String>,
+    selectedFilter: MutableState<String?>,
+    viewModelCountryOps: CountryOperationViewModel,
 ) {
     val filterKey by filterByKey
     val selectedFilterValue by selectedFilter
@@ -30,7 +26,7 @@ fun ObserveFilterKeyChanges(filterByKey: MutableState<String>,
 suspend fun filterBy(
     filterKey: String,
     selectedFilterValue: String?,
-    viewModelCountryOps: CountryOperationViewModel
+    viewModelCountryOps: CountryOperationViewModel,
 ) {
     if (filterKey.isNotEmpty()) {
         val factory = FilterCriteriaFactoryProvider.getFactory(selectedFilterValue!!)
@@ -42,5 +38,3 @@ suspend fun filterBy(
         viewModelCountryOps.getAllCountries()
     }
 }
-
-

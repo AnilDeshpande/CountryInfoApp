@@ -3,9 +3,9 @@ package com.codetutor.countryinfoapp.data
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.InternalSerializationApi
+import kotlinx.serialization.Serializable
 
 @Entity
 @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
@@ -42,5 +42,5 @@ data class Country(
     var timezones: List<String>? = null,
     var tld: List<String>? = null,
     @Ignore var translations: Translations? = null,
-    var unMember: Boolean? = null
+    var unMember: Boolean? = null,
 )

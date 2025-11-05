@@ -9,16 +9,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun CircularText(text: String, modifier: Modifier){
+fun CircularText(
+    text: String,
+    modifier: Modifier,
+)  {
     Text(
-        modifier = modifier
-            .padding(2.dp)
-            .drawBehind {
-                drawCircle(
-                    color = Color.LightGray,
-                    radius = this.size.maxDimension
-                )
-            },
+        modifier =
+            modifier
+                .padding(2.dp)
+                .drawBehind {
+                    drawCircle(
+                        color = Color.LightGray,
+                        radius = this.size.maxDimension,
+                    )
+                },
         text = text,
     )
 }

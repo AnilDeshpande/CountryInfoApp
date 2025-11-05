@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Ita(
     val common: String? = null,
-    val official: String? = null
+    val official: String? = null,
 )

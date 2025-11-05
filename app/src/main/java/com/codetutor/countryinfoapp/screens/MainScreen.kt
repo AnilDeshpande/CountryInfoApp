@@ -12,35 +12,30 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import com.codetutor.countryinfoapp.components.CountryCard
-import com.codetutor.countryinfoapp.database.appdb.AppDatabase
-import com.codetutor.countryinfoapp.repository.CountryRepository
-import com.codetutor.countryinfoapp.ui.theme.CountryInfoAppTheme
-import com.codetutor.countryinfoapp.viewmodel.CountryOperationViewModel
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.codetutor.countryinfoapp.components.CountryCard
 import com.codetutor.countryinfoapp.components.ObserveIsLoadingChanges
 import com.codetutor.countryinfoapp.dialogs.DialogDeleteCountry
 import com.codetutor.countryinfoapp.dialogs.DialogUpdateCountry
-import com.codetutor.countryinfoapp.repository.FilterByContinent
-import com.codetutor.countryinfoapp.repository.FilterByLanguage
-import com.codetutor.countryinfoapp.repository.service.CountryListServiceProviderImpl
+import com.codetutor.countryinfoapp.ui.theme.CountryInfoAppTheme
+import com.codetutor.countryinfoapp.viewmodel.CountryOperationViewModel
 import com.codetutor.countryinfoapp.viewmodel.CountryUIViewModel
-import com.codetutor.countryinfoapp.viewmodel.CountryViewModelFactory
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
 @Composable
-fun MainScreen( innerPaddingValues: PaddingValues, viewModelCountryOps: CountryOperationViewModel, viewModelUI: CountryUIViewModel ) {
-
+fun MainScreen(
+    innerPaddingValues: PaddingValues,
+    viewModelCountryOps: CountryOperationViewModel,
+    viewModelUI: CountryUIViewModel,
+) {
     val countryList = viewModelCountryOps.allCountries.value
-    val isLoading = remember {
-        mutableStateOf(value = true)
-    }
+    val isLoading =
+        remember {
+            mutableStateOf(value = true)
+        }
 
     val showDeleteAlertDialog = viewModelUI.showDeleteAlertDialog
     val showUpdateCapitalDialog = viewModelUI.showUpdateCapitalDialog
@@ -51,10 +46,11 @@ fun MainScreen( innerPaddingValues: PaddingValues, viewModelCountryOps: CountryO
 
     CountryInfoAppTheme {
         Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues = innerPaddingValues),
-            color = MaterialTheme.colorScheme.surface
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues = innerPaddingValues),
+            color = MaterialTheme.colorScheme.surface,
         ) {
             when {
                 isLoading.value -> {
@@ -68,7 +64,7 @@ fun MainScreen( innerPaddingValues: PaddingValues, viewModelCountryOps: CountryO
                                 countryInfo = country,
                                 showDeleteAlertDialog = showDeleteAlertDialog,
                                 selectedCountry = selectedCountry,
-                                viewModel = viewModelUI
+                                viewModel = viewModelUI,
                             )
                         }
                     }
@@ -77,7 +73,8 @@ fun MainScreen( innerPaddingValues: PaddingValues, viewModelCountryOps: CountryO
         }
     }
 
-    DialogDeleteCountry(showDialog = showDeleteAlertDialog,
+    DialogDeleteCountry(
+        showDialog = showDeleteAlertDialog,
         title = "Delete confirmation",
         message = "Do you want to delete this country?",
         positiveAction = {
@@ -87,20 +84,20 @@ fun MainScreen( innerPaddingValues: PaddingValues, viewModelCountryOps: CountryO
                     selectedCountry.value = null
                 }
             }
-        }
+        },
     )
 
-    DialogUpdateCountry(showDialog = showUpdateCapitalDialog,
+    DialogUpdateCountry(
+        showDialog = showUpdateCapitalDialog,
         title = "Update Capital",
         message = "Enter new capital",
         currentCapital = updateCountryInfo?.capital?.get(0) ?: "",
-        positiveAction = {  newCapital ->
+        positiveAction = { newCapital ->
             viewModelCountryOps.viewModelScope.launch {
                 updateCountryInfo?.let {
-                    viewModelCountryOps.updateCapital( it ,newCapital)
+                    viewModelCountryOps.updateCapital(it, newCapital)
                 }
-
             }
-        }
+        },
     )
 }

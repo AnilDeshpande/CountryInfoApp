@@ -9,7 +9,7 @@ import androidx.room.Update
 import com.codetutor.countryinfoapp.data.Country
 
 @Dao
-interface CountryDao: ICountryDao {
+interface CountryDao : ICountryDao {
     @Query("SELECT * FROM Country")
     override suspend fun getAllCountries(): List<Country>
 
@@ -23,7 +23,10 @@ interface CountryDao: ICountryDao {
     override suspend fun delete(country: Country)
 
     @Query("Update Country set capital = :capital where id = :id")
-    override suspend fun updateCapital(capital: List<String>, id: Int): Int
+    override suspend fun updateCapital(
+        capital: List<String>,
+        id: Int,
+    ): Int
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     override suspend fun updateCountry(country: Country): Int

@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class Name(
     val common: String? = null,
     val official: String? = null,
-    val nativeName: Map<String, NameTranslation>? = null
+    val nativeName: Map<String, NameTranslation>? = null,
 )

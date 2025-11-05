@@ -6,7 +6,6 @@ import org.junit.Before
 import org.junit.Test
 
 class ConvertersTest {
-
     private lateinit var converters: Converters
 
     @Before
@@ -176,10 +175,11 @@ class ConvertersTest {
 
     @Test
     fun `test Currency map to JSON conversion`() {
-        val currencyMap = mapOf(
-            "USD" to Currency(name = "United States dollar", symbol = "$"),
-            "EUR" to Currency(name = "Euro", symbol = "€")
-        )
+        val currencyMap =
+            mapOf(
+                "USD" to Currency(name = "United States dollar", symbol = "$"),
+                "EUR" to Currency(name = "Euro", symbol = "€"),
+            )
         val json = converters.fromCurrencyMapToJson(currencyMap)
         assertNotNull(json)
         assertTrue(json!!.contains("USD"))
@@ -435,10 +435,11 @@ class ConvertersTest {
 
     @Test
     fun `test NameTranslation map to JSON conversion`() {
-        val nameTranslationMap = mapOf(
-            "eng" to NameTranslation(official = "United States", common = "USA"),
-            "spa" to NameTranslation(official = "Estados Unidos", common = "EE.UU.")
-        )
+        val nameTranslationMap =
+            mapOf(
+                "eng" to NameTranslation(official = "United States", common = "USA"),
+                "spa" to NameTranslation(official = "Estados Unidos", common = "EE.UU."),
+            )
         val json = converters.fromNameTranslationMapToJson(nameTranslationMap)
         assertNotNull(json)
         assertTrue(json!!.contains("United States"))
@@ -535,4 +536,3 @@ class ConvertersTest {
         assertEquals(original.signs, converted?.signs)
     }
 }
-

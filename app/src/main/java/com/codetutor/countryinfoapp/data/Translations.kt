@@ -28,5 +28,5 @@ data class Translations(
     val swe: Swe? = null,
     val tur: Tur? = null,
     val urd: Urd? = null,
-    val zho: Zho? = null
+    val zho: Zho? = null,
 )
