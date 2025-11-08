@@ -226,10 +226,25 @@ tasks.withType(io.gitlab.arturbosch.detekt.Detekt).configureEach {
     include("**/*.kt", "**/*.kts")
 
     reports {
-        html.required.set(true)
-        xml.required.set(true)
-        txt.required.set(true)
-        sarif.required.set(true)
-        md.required.set(true)
+        html {
+            required.set(true)
+            outputLocation.set(file("build/reports/detekt/detekt.html"))
+        }
+        xml {
+            required.set(true)
+            outputLocation.set(file("build/reports/detekt/detekt.xml"))
+        }
+        txt {
+            required.set(true)
+            outputLocation.set(file("build/reports/detekt/detekt.txt"))
+        }
+        sarif {
+            required.set(true)
+            outputLocation.set(file("build/reports/detekt/detekt.sarif"))
+        }
+        md {
+            required.set(true)
+            outputLocation.set(file("build/reports/detekt/detekt.md"))
+        }
     }
 }
