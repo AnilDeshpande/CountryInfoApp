@@ -1,0 +1,209 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>ArgumentListWrapping:CountryDaoTest.kt$CountryDaoTest$("Washington D.C.")</ID>
+    <ID>ArgumentListWrapping:CountryDaoTest.kt$CountryDaoTest$(name = "United States", region = "Americas", capital = listOf("Washington D.C."), population = 331000000)</ID>
+    <ID>DestructuringDeclarationWithTooManyEntries:CountryCardWithConstraintLayout.kt$val (flag, commonName, capital, officialName, region, subregion, currencySymbol, currencyName, mobileCode, tld) = createRefs()</ID>
+    <ID>EmptyDefaultConstructor:CountryListProviderViaNetwork.kt$CountryListProviderViaNetwork$()</ID>
+    <ID>EmptyDefaultConstructor:CountryUIViewModel.kt$CountryUIViewModel$()</ID>
+    <ID>Filename:AppDataBase.kt$com.codetutor.countryinfoapp.database.appdb.AppDataBase.kt</ID>
+    <ID>ForbiddenPublicDataClass:Ara.kt$Ara</ID>
+    <ID>ForbiddenPublicDataClass:Bre.kt$Bre</ID>
+    <ID>ForbiddenPublicDataClass:CapitalInfo.kt$CapitalInfo</ID>
+    <ID>ForbiddenPublicDataClass:Car.kt$Car</ID>
+    <ID>ForbiddenPublicDataClass:Ces.kt$Ces</ID>
+    <ID>ForbiddenPublicDataClass:Country.kt$Country</ID>
+    <ID>ForbiddenPublicDataClass:CountryInfo.kt$CountryInfo</ID>
+    <ID>ForbiddenPublicDataClass:Currency.kt$Currency</ID>
+    <ID>ForbiddenPublicDataClass:Cym.kt$Cym</ID>
+    <ID>ForbiddenPublicDataClass:Demonyms.kt$Demonyms</ID>
+    <ID>ForbiddenPublicDataClass:Deu.kt$Deu</ID>
+    <ID>ForbiddenPublicDataClass:Eng.kt$Eng</ID>
+    <ID>ForbiddenPublicDataClass:Est.kt$Est</ID>
+    <ID>ForbiddenPublicDataClass:Fin.kt$Fin</ID>
+    <ID>ForbiddenPublicDataClass:Flags.kt$Flags</ID>
+    <ID>ForbiddenPublicDataClass:Fra.kt$Fra</ID>
+    <ID>ForbiddenPublicDataClass:Hrv.kt$Hrv</ID>
+    <ID>ForbiddenPublicDataClass:Hun.kt$Hun</ID>
+    <ID>ForbiddenPublicDataClass:Idd.kt$Idd</ID>
+    <ID>ForbiddenPublicDataClass:Ita.kt$Ita</ID>
+    <ID>ForbiddenPublicDataClass:Jpn.kt$Jpn</ID>
+    <ID>ForbiddenPublicDataClass:Kor.kt$Kor</ID>
+    <ID>ForbiddenPublicDataClass:Languages.kt$Languages</ID>
+    <ID>ForbiddenPublicDataClass:Maps.kt$Maps</ID>
+    <ID>ForbiddenPublicDataClass:NOK.kt$NOK</ID>
+    <ID>ForbiddenPublicDataClass:Name.kt$Name</ID>
+    <ID>ForbiddenPublicDataClass:NativeName.kt$NameTranslation</ID>
+    <ID>ForbiddenPublicDataClass:NativeName.kt$NativeName</ID>
+    <ID>ForbiddenPublicDataClass:Nld.kt$Nld</ID>
+    <ID>ForbiddenPublicDataClass:Nor.kt$Nor</ID>
+    <ID>ForbiddenPublicDataClass:Per.kt$Per</ID>
+    <ID>ForbiddenPublicDataClass:Pol.kt$Pol</ID>
+    <ID>ForbiddenPublicDataClass:Por.kt$Por</ID>
+    <ID>ForbiddenPublicDataClass:Rus.kt$Rus</ID>
+    <ID>ForbiddenPublicDataClass:Slk.kt$Slk</ID>
+    <ID>ForbiddenPublicDataClass:Spa.kt$Spa</ID>
+    <ID>ForbiddenPublicDataClass:Srp.kt$Srp</ID>
+    <ID>ForbiddenPublicDataClass:Swe.kt$Swe</ID>
+    <ID>ForbiddenPublicDataClass:Translations.kt$Translations</ID>
+    <ID>ForbiddenPublicDataClass:Tur.kt$Tur</ID>
+    <ID>ForbiddenPublicDataClass:Urd.kt$Urd</ID>
+    <ID>ForbiddenPublicDataClass:Zho.kt$Zho</ID>
+    <ID>FunctionStartOfBodySpacing:CircularText.kt$@Composable fun CircularText( text: String, modifier: Modifier, )</ID>
+    <ID>FunctionStartOfBodySpacing:CountryCardWithConstraintLayout.kt$@Composable fun CountryCardWithConstraintLayout( country: Country, showDeleteAlertDialog: MutableState&lt;Boolean&gt;, selectedCountry: MutableState&lt;Country?&gt;, viewModel: CountryUIViewModel, )</ID>
+    <ID>FunctionStartOfBodySpacing:CountryInfoAppScaffold.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun CountryInfoAppScaffold()</ID>
+    <ID>FunctionStartOfBodySpacing:Theme.kt$@Composable fun MyCustomAppTheme( darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -&gt; Unit, )</ID>
+    <ID>Indentation:CircularText.kt$ </ID>
+    <ID>Indentation:CountryCard.kt$ </ID>
+    <ID>Indentation:CountryCardWithConstraintLayout.kt$ </ID>
+    <ID>Indentation:CountryDaoTest.kt$CountryDaoTest$ </ID>
+    <ID>Indentation:CountryInfoAppScaffold.kt$ </ID>
+    <ID>Indentation:FilterCountryChips.kt$ </ID>
+    <ID>Indentation:MainScreen.kt$ </ID>
+    <ID>Indentation:Type.kt$ </ID>
+    <ID>LibraryEntitiesShouldNotBePublic:ApiService.kt$ApiService</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:AppDataBase.kt$AppDatabase : RoomDatabaseDatabaseProvider</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Ara.kt$Ara</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Bre.kt$Bre</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:CapitalInfo.kt$CapitalInfo</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Car.kt$Car</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Ces.kt$Ces</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:CircularText.kt$@Composable fun CircularText( text: String, modifier: Modifier, )</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:CoatOfArms.kt$CoatOfArms</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:ContinentFilterFactory.kt$ContinentFilterFactory : FilterCriteriaFactory</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Converters.kt$Converters</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:ConvertersTest.kt$ConvertersTest</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Country.kt$Country</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:CountryCard.kt$@Composable fun CountryCard( countryInfo: Country, showDeleteAlertDialog: MutableState&lt;Boolean&gt;, selectedCountry: MutableState&lt;Country?&gt;, viewModel: CountryUIViewModel, )</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:CountryCardWithConstraintLayout.kt$@Composable fun CountryCardWithConstraintLayout( country: Country, showDeleteAlertDialog: MutableState&lt;Boolean&gt;, selectedCountry: MutableState&lt;Country?&gt;, viewModel: CountryUIViewModel, )</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:CountryDao.kt$CountryDao : ICountryDao</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:CountryDaoTest.kt$CountryDaoTest</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:CountryInfo.kt$CountryInfo</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:CountryInfoAppScaffold.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun CountryInfoAppScaffold()</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:CountryListProviderViaNetwork.kt$CountryListProviderViaNetwork : CountryListServiceProvider</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:CountryListServiceProvider.kt$CountryListServiceProvider</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:CountryListServiceProviderImpl.kt$CountryListServiceProviderImpl : CountryListServiceProvider</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:CountryOperationViewModel.kt$CountryOperationViewModel : ViewModelICountryOperationViewModel</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:CountryRepository.kt$CountryRepository : ICountryRepository</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:CountryUIViewModel.kt$CountryUIViewModel : ViewModel</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:CountryViewModelFactory.kt$CountryViewModelFactory : Factory</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Currency.kt$Currency</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Cym.kt$Cym</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:DatabaseProvider.kt$DatabaseProvider</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:DatabaseProviderTest.kt$DatabaseProviderTest</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Demonyms.kt$Demonyms</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Deu.kt$Deu</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:DialogDeleteCountry.kt$@Composable fun DialogDeleteCountry( showDialog: MutableState&lt;Boolean&gt;, title: String, message: String, positiveAction: () -&gt; Unit, )</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:DialogUpdateCountry.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun DialogUpdateCountry( showDialog: MutableState&lt;Boolean&gt;, title: String, message: String, currentCapital: String, positiveAction: (String) -&gt; Unit, )</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:DriveSideFilterFactory.kt$DriveSideFilterFactory : FilterCriteriaFactory</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Eng.kt$Eng</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Est.kt$Est</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:FilterByContinent.kt$FilterByContinent : FilterCriteria</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:FilterByDriveSide.kt$FilterByDriveSide : FilterCriteria</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:FilterByDriveSideTest.kt$FilterByDriveSideTest</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:FilterByLanguage.kt$FilterByLanguage : FilterCriteria</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:FilterCountryChips.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun FilterCountryChips( filterBy: String, selectedFilter: MutableState&lt;String?&gt;, )</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:FilterCriteria.kt$FilterCriteria</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:FilterCriteriaFactory.kt$FilterCriteriaFactory</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Fin.kt$Fin</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Flags.kt$Flags</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Fra.kt$Fra</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Helper.kt$fun getCountryList(): MutableList&lt;CountryInfo&gt;</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Hrv.kt$Hrv</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Hun.kt$Hun</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:ICountryDao.kt$ICountryDao</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:ICountryOperationViewModel.kt$ICountryOperationViewModel</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:ICountryRepository.kt$ICountryRepository</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Idd.kt$Idd</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Ita.kt$Ita</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Jpn.kt$Jpn</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Kor.kt$Kor</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Languages.kt$Languages</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:MainActivity.kt$MainActivity : ComponentActivity</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:MainScreen.kt$@Composable fun MainScreen( innerPaddingValues: PaddingValues, viewModelCountryOps: CountryOperationViewModel, viewModelUI: CountryUIViewModel, )</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Maps.kt$Maps</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:NOK.kt$NOK</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Name.kt$Name</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:NativeName.kt$NameTranslation</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:NativeName.kt$NativeName</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Nld.kt$Nld</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Nor.kt$Nor</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:ObserveFilterKeyChanges.kt$@Composable fun ObserveFilterKeyChanges( filterByKey: MutableState&lt;String&gt;, selectedFilter: MutableState&lt;String?&gt;, viewModelCountryOps: CountryOperationViewModel, )</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:ObserveFilterKeyChanges.kt$suspend fun filterBy( filterKey: String, selectedFilterValue: String?, viewModelCountryOps: CountryOperationViewModel, )</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:ObserveIsLoadingChanges.kt$@Composable fun ObserveIsLoadingChanges( isLoading: MutableState&lt;Boolean&gt;, operationViewModel: CountryOperationViewModel, )</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Per.kt$Per</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Pol.kt$Pol</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Por.kt$Por</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Rus.kt$Rus</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Slk.kt$Slk</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Spa.kt$Spa</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Srp.kt$Srp</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Swe.kt$Swe</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Theme.kt$@Composable fun CountryInfoAppTheme( darkTheme: Boolean = isSystemInDarkTheme(), // Dynamic color is available on Android 12+ dynamicColor: Boolean = false, content: @Composable () -&gt; Unit, )</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Theme.kt$@Composable fun MyCustomAppTheme( darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -&gt; Unit, )</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Translations.kt$Translations</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Tur.kt$Tur</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Urd.kt$Urd</ID>
+    <ID>LibraryEntitiesShouldNotBePublic:Zho.kt$Zho</ID>
+    <ID>LongMethod:CountryCardWithConstraintLayout.kt$@Composable fun CountryCardWithConstraintLayout( country: Country, showDeleteAlertDialog: MutableState&lt;Boolean&gt;, selectedCountry: MutableState&lt;Country?&gt;, viewModel: CountryUIViewModel, )</ID>
+    <ID>LongMethod:CountryInfoAppScaffold.kt$@OptIn(ExperimentalMaterial3Api::class) @Composable fun CountryInfoAppScaffold()</ID>
+    <ID>LongMethod:Helper.kt$fun getCountryList(): MutableList&lt;CountryInfo&gt;</ID>
+    <ID>LongMethod:MainScreen.kt$@Composable fun MainScreen( innerPaddingValues: PaddingValues, viewModelCountryOps: CountryOperationViewModel, viewModelUI: CountryUIViewModel, )</ID>
+    <ID>MagicNumber:CountryCardWithConstraintLayout.kt$0.35f</ID>
+    <ID>MagicNumber:CountryCardWithConstraintLayout.kt$0.65f</ID>
+    <ID>MagicNumber:CountryCardWithConstraintLayout.kt$0.8f</ID>
+    <ID>MagicNumber:CountryListServiceProviderImpl.kt$CountryListServiceProviderImpl$2000</ID>
+    <ID>MatchingDeclarationName:AppDataBase.kt$AppDatabase : RoomDatabaseDatabaseProvider</ID>
+    <ID>MaxLineLength:CountryCardWithConstraintLayout.kt$val (flag, commonName, capital, officialName, region, subregion, currencySymbol, currencyName, mobileCode, tld) = createRefs()</ID>
+    <ID>MaxLineLength:CountryDaoTest.kt$CountryDaoTest$createTestCountry(name = "United States", region = "Americas", capital = listOf("Washington D.C."), population = 331000000)</ID>
+    <ID>MaximumLineLength:CountryCardWithConstraintLayout.kt$ </ID>
+    <ID>MaximumLineLength:CountryDaoTest.kt$CountryDaoTest$ </ID>
+    <ID>ModifierMissing:CountryCard.kt$CountryCard</ID>
+    <ID>ModifierMissing:CountryCardWithConstraintLayout.kt$CountryCardWithConstraintLayout</ID>
+    <ID>ModifierMissing:CountryInfoAppScaffold.kt$CountryInfoAppScaffold</ID>
+    <ID>ModifierMissing:FilterCountryChips.kt$FilterCountryChips</ID>
+    <ID>ModifierMissing:MainScreen.kt$MainScreen</ID>
+    <ID>ModifierWithoutDefault:CircularText.kt$modifier</ID>
+    <ID>MutableParams:CountryCard.kt$selectedCountry</ID>
+    <ID>MutableParams:CountryCard.kt$showDeleteAlertDialog</ID>
+    <ID>MutableParams:CountryCardWithConstraintLayout.kt$selectedCountry</ID>
+    <ID>MutableParams:CountryCardWithConstraintLayout.kt$showDeleteAlertDialog</ID>
+    <ID>MutableParams:DialogDeleteCountry.kt$showDialog</ID>
+    <ID>MutableParams:DialogUpdateCountry.kt$showDialog</ID>
+    <ID>MutableParams:FilterCountryChips.kt$selectedFilter</ID>
+    <ID>MutableParams:ObserveFilterKeyChanges.kt$filterByKey</ID>
+    <ID>MutableParams:ObserveFilterKeyChanges.kt$selectedFilter</ID>
+    <ID>MutableParams:ObserveIsLoadingChanges.kt$isLoading</ID>
+    <ID>NoLineBreakAfterElse:Theme.kt$ </ID>
+    <ID>NoMultipleSpaces:CircularText.kt$ </ID>
+    <ID>NoMultipleSpaces:CountryCardWithConstraintLayout.kt$ </ID>
+    <ID>NoMultipleSpaces:CountryInfoAppScaffold.kt$ </ID>
+    <ID>NoMultipleSpaces:Theme.kt$ </ID>
+    <ID>NoWildcardImports:ConvertersTest.kt$import com.codetutor.countryinfoapp.data.*</ID>
+    <ID>NoWildcardImports:ConvertersTest.kt$import org.junit.Assert.*</ID>
+    <ID>NoWildcardImports:CountryDaoTest.kt$import com.codetutor.countryinfoapp.data.*</ID>
+    <ID>NoWildcardImports:CountryDaoTest.kt$import org.junit.Assert.*</ID>
+    <ID>NoWildcardImports:DatabaseProviderTest.kt$import org.junit.Assert.*</ID>
+    <ID>SpacingAroundCurly:Theme.kt${</ID>
+    <ID>SwallowedException:ConvertersTest.kt$ConvertersTest$e: Exception</ID>
+    <ID>SwallowedException:CountryDaoTest.kt$CountryDaoTest$e: Exception</ID>
+    <ID>SwallowedException:DatabaseProviderTest.kt$DatabaseProviderTest$e: Exception</ID>
+    <ID>TooManyFunctions:Converters.kt$Converters</ID>
+    <ID>TopLevelPropertyNaming:Color.kt$val Pink40 = Color(0xFF7D5260)</ID>
+    <ID>TopLevelPropertyNaming:Color.kt$val Pink80 = Color(0xFFEFB8C8)</ID>
+    <ID>TopLevelPropertyNaming:Color.kt$val Purple40 = Color(0xFF6650a4)</ID>
+    <ID>TopLevelPropertyNaming:Color.kt$val Purple80 = Color(0xFFD0BCFF)</ID>
+    <ID>TopLevelPropertyNaming:Color.kt$val PurpleGrey40 = Color(0xFF625b71)</ID>
+    <ID>TopLevelPropertyNaming:Color.kt$val PurpleGrey80 = Color(0xFFCCC2DC)</ID>
+    <ID>TopLevelPropertyNaming:Color.kt$val borderColorBlack = Color.Black</ID>
+    <ID>TopLevelPropertyNaming:Color.kt$val borderColorCyan = Color.Cyan</ID>
+    <ID>TopLevelPropertyNaming:Shape.kt$val customShapes = Shapes( extraLarge = RoundedCornerShape(30.dp), large = RoundedCornerShape(25.dp), medium = CutCornerShape(bottomEndPercent = 10), small = RoundedCornerShape(10.dp), extraSmall = RoundedCornerShape(5.dp), )</ID>
+    <ID>TopLevelPropertyNaming:Theme.kt$private val DarkColorScheme = darkColorScheme( primary = Purple80, secondary = PurpleGrey80, tertiary = Pink80, surface = Color.LightGray, outline = borderColorBlack, )</ID>
+    <ID>TopLevelPropertyNaming:Theme.kt$private val LightColorScheme = lightColorScheme( primary = Purple40, secondary = PurpleGrey40, tertiary = Pink40, surface = Color.LightGray, outline = borderColorBlack, /* Other default colors to override background = Color(0xFFFFFBFE), surface = Color(0xFFFFFBFE), onPrimary = Color.White, onSecondary = Color.White, onTertiary = Color.White, onBackground = Color(0xFF1C1B1F), onSurface = Color(0xFF1C1B1F), */ )</ID>
+    <ID>TopLevelPropertyNaming:Type.kt$// Set of Material typography styles to start with val Typography = Typography( bodyLarge = TextStyle( fontFamily = FontFamily.Default, fontWeight = FontWeight.Normal, fontSize = 16.sp, lineHeight = 24.sp, letterSpacing = 0.5.sp, ), titleLarge = TextStyle( fontFamily = FontFamily.Cursive, fontWeight = FontWeight.Normal, fontSize = 22.sp, lineHeight = 28.sp, letterSpacing = 0.sp, ), labelLarge = TextStyle( fontFamily = FontFamily( Font(R.font.roniswadi_architect, FontWeight.Normal), ), fontWeight = FontWeight.Normal, fontSize = 22.sp, lineHeight = 28.sp, letterSpacing = 0.sp, ), /* Other default text styles to override labelSmall = TextStyle( fontFamily = FontFamily.Default, fontWeight = FontWeight.Medium, fontSize = 11.sp, lineHeight = 16.sp, letterSpacing = 0.5.sp ) */ )</ID>
+    <ID>ViewModelForwarding:MainScreen.kt$ObserveIsLoadingChanges(isLoading = isLoading, operationViewModel = viewModelCountryOps)</ID>
+    <ID>ViewModelInjection:CountryInfoAppScaffold.kt$viewModelCountryOps</ID>
+    <ID>ViewModelInjection:CountryInfoAppScaffold.kt$viewModelUI</ID>
+  </CurrentIssues>
+</SmellBaseline>
