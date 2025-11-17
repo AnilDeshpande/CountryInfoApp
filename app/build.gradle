@@ -1,10 +1,10 @@
 plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'org.jetbrains.kotlin.plugin.serialization'
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.serialization)
     id 'jacoco'
-    id 'org.jlleitschuh.gradle.ktlint'
-    id 'io.gitlab.arturbosch.detekt'
+    alias(libs.plugins.ktlint)
+    alias(libs.plugins.detekt)
 }
 
 apply plugin: 'kotlin-kapt'
@@ -46,7 +46,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.5.1'
+        kotlinCompilerExtensionVersion libs.versions.compose.compiler.get()
     }
     packagingOptions {
         resources {
@@ -56,82 +56,63 @@ android {
     buildToolsVersion '34.0.0'
 }
 
+// Configure dependency locking
+dependencyLocking {
+    lockAllConfigurations()
+    lockMode = LockMode.STRICT
+}
+
 dependencies {
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'androidx.activity:activity-compose:1.5.1'
-    implementation platform('androidx.compose:compose-bom:2022.10.00')
-    implementation 'androidx.compose.ui:ui'
-    implementation 'androidx.compose.ui:ui-graphics'
-    implementation 'androidx.compose.ui:ui-tooling-preview'
-    implementation 'androidx.compose.material3:material3'
-    implementation "androidx.constraintlayout:constraintlayout:2.2.0-alpha12"
-    implementation "androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha12"
-    implementation "androidx.compose.material:material-icons-extended:1.0.0-alpha08"
-    implementation 'androidx.room:room-common:2.6.1'
-    kapt "androidx.room:room-compiler:2.6.1"
-    implementation 'androidx.room:room-ktx:2.6.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0'
-    testImplementation 'junit:junit:4.13.2'
-    // Additional dependencies for Compose testing
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.5.1"
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation platform('androidx.compose:compose-bom:2022.10.00')
-    debugImplementation "androidx.compose.ui:ui-test-manifest:1.5.1"
-    debugImplementation 'androidx.compose.ui:ui-tooling'
-    debugImplementation 'androidx.compose.ui:ui-test-manifest'
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0'
-    implementation("io.coil-kt:coil-compose:2.4.0")
-    // LiveData
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
-    // Lifecycles only (without ViewModel or LiveData)
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-    // Lifecycle utilities for Compose
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+    // AndroidX Core
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.activity.compose
 
-    // Saved state module for ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0")
-    implementation 'androidx.compose.runtime:runtime-livedata:1.0.0'
-    implementation 'androidx.compose.ui:ui:1.1.0'
+    // Lifecycle
+    implementation libs.bundles.lifecycle
 
-    //Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    
-    // OkHttp for logging (optional)
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.12.0'
+    // Compose BOM and UI
+    implementation platform(libs.androidx.compose.bom)
+    implementation libs.bundles.compose
+    implementation libs.androidx.compose.material.icons.extended
+    implementation libs.androidx.compose.runtime.livedata
+    implementation libs.androidx.compose.ui.legacy
 
-    // Coroutines testing - needed for testing suspend functions
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3"
+    // ConstraintLayout
+    implementation libs.androidx.constraintlayout
+    implementation libs.androidx.constraintlayout.compose
 
-    // MockK - for mocking CountryDao and CountryListServiceProvider
-    testImplementation "io.mockk:mockk:1.13.8"
+    // Room
+    implementation libs.bundles.room
+    kapt libs.androidx.room.compiler
 
-    // MockWebServer for testing network layer
-    testImplementation "com.squareup.okhttp3:mockwebserver:4.12.0"
-    
-    // OkHttp core for MockWebServer compatibility
-    testImplementation "com.squareup.okhttp3:okhttp:4.12.0"
+    // Networking
+    implementation libs.bundles.retrofit
+    implementation libs.coil.compose
 
-    // AndroidX Test Core
-    testImplementation "androidx.test:core:1.5.0"
+    // Serialization
+    implementation libs.kotlinx.serialization.json
+    implementation libs.gson
 
-    // Room testing utilities
-    testImplementation "androidx.room:room-testing:2.5.0"
+    // Testing
+    testImplementation libs.bundles.testing
+    testImplementation libs.okhttp
+    testImplementation libs.okhttp.mockwebserver
+    testImplementation libs.androidx.room.testing
 
-    // Architecture Components testing
-    testImplementation "androidx.arch.core:core-testing:2.2.0"
+    // Android Testing
+    androidTestImplementation libs.androidx.test.ext.junit
+    androidTestImplementation libs.androidx.test.espresso.core
+    androidTestImplementation libs.androidx.compose.ui.test.junit4
+    androidTestImplementation platform(libs.androidx.compose.bom)
 
-    // Truth for more readable assertions
-    testImplementation "com.google.truth:truth:1.1.5"
+    // Debug
+    debugImplementation libs.androidx.compose.ui.tooling
+    debugImplementation libs.androidx.compose.ui.test.manifest
 
-    testImplementation 'com.google.code.gson:gson:2.10.1'
-
-    // Detekt plugins for additional rules
-    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:1.23.7"
-    detektPlugins "io.gitlab.arturbosch.detekt:detekt-rules-libraries:1.23.7"
-    detektPlugins "com.twitter.compose.rules:detekt:0.0.26"
+    // Detekt plugins
+    detektPlugins libs.detekt.formatting
+    detektPlugins libs.detekt.rules.libraries
+    detektPlugins libs.detekt.compose.rules
 }
 
 // JaCoCo configuration

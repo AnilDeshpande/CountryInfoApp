@@ -1,10 +1,52 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id 'com.android.application' version '8.0.0' apply false
-    id 'com.android.library' version '8.0.0' apply false
-    id 'org.jetbrains.kotlin.android' version '1.9.0' apply false
-    id 'org.jetbrains.kotlin.jvm' version '1.9.0'
-    id 'org.jetbrains.kotlin.plugin.serialization' version '1.9.0'
-    id 'org.jlleitschuh.gradle.ktlint' version '12.1.1' apply false
-    id 'io.gitlab.arturbosch.detekt' version '1.23.7' apply false
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ktlint) apply false
+    alias(libs.plugins.detekt) apply false
+}
+
+// Configure Java/Kotlin Toolchains for all projects (JDK 11)
+allprojects {
+    // Java toolchain for projects applying the Java plugin
+    plugins.withType(JavaPlugin).configureEach {
+        java {
+            toolchain {
+                languageVersion = JavaLanguageVersion.of(11)
+            }
+        }
+    }
+
+    // Kotlin toolchain for JVM-only modules
+    plugins.withId('org.jetbrains.kotlin.jvm') {
+        kotlin {
+            jvmToolchain(11)
+        }
+    }
+
+    // Kotlin toolchain for Android modules
+    plugins.withId('org.jetbrains.kotlin.android') {
+        kotlin {
+            jvmToolchain(11)
+        }
+    }
+}
+
+// Configure dependency locking for reproducible builds
+subprojects {
+    // Enable dependency locking for all configurations
+    dependencyLocking {
+        lockAllConfigurations()
+        lockMode = LockMode.STRICT
+    }
+
+    // Task to update lock files (guarded by --write-locks)
+    tasks.register('updateLocks') {
+        doFirst {
+            assert gradle.startParameter.writeDependencyLocks : "Run with --write-locks flag"
+        }
+    }
 }
