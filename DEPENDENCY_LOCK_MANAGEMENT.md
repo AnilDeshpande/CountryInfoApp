@@ -60,6 +60,7 @@ find . -name "gradle.lockfile" -o -name "settings-gradle.lockfile" -delete
 
 # Generate lock files for all configurations
 ./gradlew dependencies --write-locks
+./gradlew :app:dependencies --write-locks
 
 # Verify build works with locked dependencies
 ./gradlew clean assembleDebug assembleRelease
