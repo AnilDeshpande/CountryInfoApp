@@ -113,6 +113,9 @@ dependencies {
     detektPlugins libs.detekt.formatting
     detektPlugins libs.detekt.rules.libraries
     detektPlugins libs.detekt.compose.rules
+
+    //lottie
+    implementation libs.bundles.animation
 }
 
 // JaCoCo configuration
